@@ -1,52 +1,59 @@
 <?php
 require_once "database.php";
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-	$sql = "SELECT * FROM accounts WHERE username = ?";
-	if ($stmt = mysqli_prepare($link, $sql)) {
-		mysqli_stmt_bind_param($stmt, "s", $Check_Usernam);
-		$Check_Username = $_POST["username"];
-		if(mysqli_stmt_execute($stmt)) {
-			mysqli_stmt_store_result($stmt);
 
-			if(!mysqli_stmt_num_rows($stmt) == 1) {
-				header("location: register.php");
-			}
-		}
-	}
+$username = $password = $confirm_password = "";
+$username_err = $password_err = $confirm_password_err = "";
+
+// Check to see if there is a current session and the user is logged in
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
+    header("location: index.html");
 }
-// // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-// if ($stmt = $link->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
-// 	// Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
-// 	$stmt->bind_param('s', $_POST['username']);
-// 	$stmt->execute();
-// 	// Store the result so we can check if the account exists in the database.
-// 	$stmt->store_result();
 
+//Only execute when the submit button is pressed
+if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-// 	$stmt->close();
-// }
+    //Display errors for password if not set 
+    if(empty(trim($_POST["password"]))){
+        $password_err = "Please enter a password.";
+    }
 
-// if ($stmt->num_rows > 0) {
-// 	$stmt->bind_result($id, $password);
-// 	$stmt->fetch();
-// 	// Account exists, now we verify the password.
-// 	// Note: remember to use password_hash in your registration file to store the hashed passwords.
-// 	if ($_POST['password'] === $password) {
-// 		// Verification success! User has logged-in!
-// 		// Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
-// 		session_regenerate_id();
-// 		$_SESSION['loggedin'] = TRUE;
-// 		$_SESSION['name'] = $_POST['username'];
-// 		$_SESSION['id'] = $id;
-// 		echo 'Welcome ' . $_SESSION['name'] . '!';
-// 	} else {
-// 		// Incorrect password
-// 		echo 'Incorrect username and/or password!';
-// 	}
-// } else {
-// 	// Incorrect username
-// 	echo 'Incorrect username and/or password!';
-// }
+    //Display errors if username is not set or username contains invalid characters
+    if(empty(trim($_POST["username"]))){
+        $username_err = "Please enter a username.";
+    } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))){
+        $username_err = "Username can only contain letters, numbers, and underscores.";
+    } else {
+        //Determine whether the username is in the database
+	    $sql = "SELECT id, password FROM accounts WHERE username = ?";
+	    if ($stmt = mysqli_prepare($link, $sql)) {
+		    mysqli_stmt_bind_param($stmt, "s", $Check_Username);
+		    $Check_Username = $_POST["username"];
+        
+		    if(mysqli_stmt_execute($stmt)) {
+			    mysqli_stmt_store_result($stmt);
+            
+                // If the user is not in the database go to register
+                // Else determine if their password is correct
+			    if(mysqli_stmt_num_rows($stmt) == 0) {
+				    header("location: register.php");
+                } else {
+                    mysqli_stmt_bind_result($stmt, $id, $confirm_password);
+                    mysqli_stmt_fetch($stmt);
+                    if(password_verify($_POST["password"], $confirm_password)) {
+                        $_SESSION["loggedin"] = TRUE;
+                        $_SESSION["name"] = $_POST["username"];
+                        header("location: index.html");
+                    } else {
+                        $password_err = "Incorrect Password";
+                    }
+                }
+		    }
+	    }
+    }
+
+    
+}
+
 ?>
 
 <!DOCTYPE html>
