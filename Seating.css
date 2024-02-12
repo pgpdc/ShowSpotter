@@ -83,8 +83,8 @@ aside{
     display: none;
 }
 .seating .seatReserve:hover{
-    color:blueviolet;
-    background:green;
+    color:white;
+    background:rgb(119, 169, 69);
 }
 .seating .seatReserve{
     background:white;
