@@ -6,30 +6,87 @@
 <link rel="stylesheet" href="Seating.css"/>
 
 </head>
-<title>ShowSpotter</title>
-<style>
-.grid-container{
-    display: grid;
-    grid-template-columns: auto;
-    background-color: blueviolet;
-    padding: 10px;
-}
-.grid-item{
-    background-color: aqua;
-    border: 1px solid blue;
-    padding: 20px;
-    font-size: 40px;
-    text-align: center;
-}
-</style>
+<title>ShowSpotter-Seating</title>
 <body>
-<h1>Seating</h1>
-<div class="grid-container"
-    <div class="grid-item">1</div>
-    <div class="grid-item">2</div>
-    <!--<input="image" id="image"
-    alt="Seat"
-    src=""-->
-</div>
+    <h1>Select your Seating</h1>
+    <h2>Screen</h2>
+    <aside>
+        <p>
+            Available Seat
+            <div class="seat"></div>
+            Selected Seat
+            <div class="noseat"></div>
+        </p>
+    </aside>
+    <div class="seating">
+        <label>
+            <input type="checkbox" id="A1"/>
+            <span class="seatReserve">A1</span>
+        </label>
+        <label>
+            <input type="checkbox" />
+            <span class="seatReserve">A2</span>
+        </label>
+        <label>
+            <input type="checkbox" />
+            <span class="seatReserve">A3</span>
+        </label>
+        <label>
+            <input type="checkbox"/>
+            <span class="seatReserve">A4</span>
+        </label>
+        <label>
+            <input type="checkbox" />
+            <span class="seatReserve">A5</span>
+        </label>
+    </div>
+    <div class="seating">
+        <label>
+            <input type="checkbox" id="B1"/>
+            <span class="seatReserve">B1</span>
+        </label>
+        <label>
+            <input type="checkbox" />
+            <span class="seatReserve">B2</span>
+        </label>
+        <label>
+            <input type="checkbox" />
+            <span class="seatReserve">B3</span>
+        </label>
+        <label>
+            <input type="checkbox"/>
+            <span class="seatReserve">B4</span>
+        </label>
+        <label>
+            <input type="checkbox" />
+            <span class="seatReserve">B5</span>
+        </label>
+    </div>
+    <div class="seating">
+        <label>
+            <input type="checkbox" id="C1"/>
+            <span class="seatReserve">C1</span>
+        </label>
+        <label>
+            <input type="checkbox" />
+            <span class="seatReserve">C2</span>
+        </label>
+        <label>
+            <input type="checkbox" />
+            <span class="seatReserve">C3</span>
+        </label>
+        <label>
+            <input type="checkbox"/>
+            <span class="seatReserve">C4</span>
+        </label>
+        <label>
+            <input type="checkbox" />
+            <span class="seatReserve">C5</span>
+        </label>
+    </div>
+<button class="checkoutButton button" onclick="window.location.href='checkout.html';">
+Checkout
+</button>
+
 </body>
 </html>
