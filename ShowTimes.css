@@ -11,6 +11,7 @@ title{
 
 /*For drop down menu*/
 ul{
+    color:white;
     background: purple;
     text-align: center;
     font-size: 30px;
@@ -19,7 +20,7 @@ ul{
 ul li a{
     display: block;
     padding: 30px;
-    color: black;
+    color: white;
     text-align: center;
     text-decoration: none;
     font-size: 30px;
