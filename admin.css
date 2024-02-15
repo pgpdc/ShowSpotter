@@ -1,0 +1,52 @@
+ul{
+    background: purple;
+    text-align: center;
+    font-size: 30px;
+    list-style:none;
+}
+
+li {
+    display: block;
+    padding: 30px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+}
+ul li a{
+    display: block;
+    padding: 5px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+}
+ul li ul.dropdown {
+    text-align: center;
+    width:5px;
+    position:absolute;
+    z-index: 150;
+    display:none;
+}
+ul li a:hover {
+    background:plum;
+}
+ul li:hover ul.dropdown{
+    font-display: 5px;
+    display:contents;
+}
+
+h1{
+    background: blueviolet;
+    font-size: 50pt;
+    font-family: 'Times New Roman', Times, serif ;
+    color: black;
+    text-align:center;
+}
+
+body{font-family: "Verdana", "Geneva", sans-serif;
+    background-image: url("PhotosForWebsite/Theatre.jpg");
+    align-content: center;
+    background-size: 100%;
+    font-size:30px;
+}
