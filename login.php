@@ -1,5 +1,5 @@
 <?php
-require_once "database.php";
+require_once "accounts_database.php";
 
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
