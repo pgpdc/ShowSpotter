@@ -98,18 +98,32 @@ $result = mysqli_stmt_get_result($stmt);
             $title = $movie['titleText']['text'];
             $imageUrl = $movie['primaryImage']['url'];
 
-            // Display the movie details
-            echo "<div class='movie-box'>";
-            echo "<h3>$title</h3>";
-            echo "<img src='$imageUrl' alt='$title'><br>";
-            echo "Room: $room_id<br>";
-            echo "Start Time: $timestart<br>";
-            echo "End Time: $timeend<br><br>";
-            echo "</div>";
+            // Add the movie to the array, or append the start time if it already exists
+            if (!isset($movies[$title])) {
+                $movies[$title] = ['imageUrl' => $imageUrl, 'startTimes' => [$timestart]];
+            } else {
+                $movies[$title]['startTimes'][] = $timestart;
+            }
         }
     }
 
+    // Sort the movies alphabetically
+    ksort($movies);
 
+    // Display the movie details
+    foreach ($movies as $title => $movie) {
+        echo "<div class='movie-box'>";
+        echo "<h3>$title</h3>";
+        echo "<img src='" . $movie['imageUrl'] . "' alt='$title'><br>";
+        foreach ($movie['startTimes'] as $startTime) {
+            // Convert the start time to 12-hour format with AM/PM
+            $startTimeIn12HourFormat = date("g:i A", strtotime($startTime));
+            
+            // Create a link to the room page for this start time
+            echo "<a href='room.php?id=$room_id&time=$startTime' style='color: darkblue; font-weight: bold;'>$startTimeIn12HourFormat</a><br>";
+        }
+        echo "<br></div>";
+    }
     ?>
 
 

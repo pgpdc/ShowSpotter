@@ -56,9 +56,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
     if (isset($data['results'])) {
         // Display the movie options to the admin
         foreach ($data['results'] as $movie) {
-            echo "<p><a href='addMovies.php?id=" . rawurlencode($movie['id']) . "'>" . $movie['titleText']['text'] . "</a></p>";
+            // Check if the movie has additional information
+            if (isset($movie['releaseYear']) || isset($movie['releaseDate']) || isset($movie['primaryImage'])) {
+                echo "<div style='border:1px solid #000; padding:10px; margin-bottom:10px;'>";
+                echo "<h2><a href='addMovies.php?id=" . rawurlencode($movie['id']) . "'>" . $movie['titleText']['text'] . "</a></h2>";
+                
+                // Display the movie details
+                if (isset($movie['releaseYear'])) {
+                    echo "<p><strong>Release Year:</strong> " . $movie['releaseYear']['year'] . "</p>";
+                }
+                if (isset($movie['releaseDate'])) {
+                    echo "<p><strong>Release Date:</strong> " . $movie['releaseDate']['day'] . "-" . $movie['releaseDate']['month'] . "-" . $movie['releaseDate']['year'] . "</p>";
+                }
+                if (isset($movie['primaryImage'])) {
+                    echo "<p><img src='" . $movie['primaryImage']['url'] . "' alt='" . $movie['primaryImage']['caption']['plainText'] . "' style='width:200px;'></p>";
+                }
+                echo "</div>";
+            }
         }
     }
+    
+    
+    
+    
 } else if (isset($_GET['id'])) {
     // The admin has selected a movie, display the form for date and start time
     echo "
