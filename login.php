@@ -1,8 +1,9 @@
 <?php
-require_once "database.php";
+require_once "accounts_database.php";
 
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
+$isAdmin = 0;
 
 // Check to see if there is a current session and the user is logged in
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
@@ -24,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $username_err = "Username can only contain letters, numbers, and underscores.";
     } else {
         //Determine whether the username is in the database
-	    $sql = "SELECT id, password FROM accounts WHERE username = ?";
+	    $sql = "SELECT id, password, isAdmin FROM accounts WHERE username = ?";
 	    if ($stmt = mysqli_prepare($link, $sql)) {
 		    mysqli_stmt_bind_param($stmt, "s", $Check_Username);
 		    $Check_Username = $_POST["username"];
@@ -37,11 +38,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			    if(mysqli_stmt_num_rows($stmt) == 0) {
 				    header("location: register.php");
                 } else {
-                    mysqli_stmt_bind_result($stmt, $id, $confirm_password);
+                    mysqli_stmt_bind_result($stmt, $id, $confirm_password, $isAdmin);
                     mysqli_stmt_fetch($stmt);
                     if(password_verify($_POST["password"], $confirm_password)) {
                         $_SESSION["loggedin"] = TRUE;
                         $_SESSION["name"] = $_POST["username"];
+                        if($isAdmin == 1) {
+                            $_SESSION["admin"] = TRUE;
+                        }
                         header("location: index.html");
                     } else {
                         $password_err = "Incorrect Password";
