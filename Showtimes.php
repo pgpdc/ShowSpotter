@@ -4,7 +4,12 @@ session_start();
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
-$DATABASE_NAME = 'indiana';
+if ($_GET["theater"] == "indiana") {
+    $DATABASE_NAME = 'indiana';
+}
+else if ($_GET["theater"] == "testing") {
+    $DATABASE_NAME = 'testing';
+}
 
 $link = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if (mysqli_connect_errno()) {
@@ -51,6 +56,62 @@ $result = mysqli_stmt_get_result($stmt);
         </li>
     </ul>
 
+    <div class="theater">
+        <h1>
+            <select id="theater-dropdown">
+                <option value="Indiana">Indiana</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+                <option value="option4">Option 4</option>
+            </select>
+            <select id="DateSelection">
+            </select>
+        </h1>
+    </div>
+    <script>
+        function populateDropdown() {
+            var dropdown = document.getElementById('DateSelection');
+  
+            var currentDate = new Date();
+            var currentDateString = formatDate(currentDate);
+  
+            var option = document.createElement('option');
+            option.value = currentDateString;
+            option.textContent = 'Today (' + currentDateString + ')';
+            dropdown.appendChild(option);
+  
+            var tomorrowDate = new Date();
+            tomorrowDate.setDate(currentDate.getDate() + 1);
+            var tomorrowDateString = formatDate(tomorrowDate);
+  
+            option = document.createElement('option');
+            option.value = tomorrowDateString;
+            option.textContent = 'Tomorrow (' + tomorrowDateString + ')';
+            dropdown.appendChild(option);
+        }
+
+
+        function formatDate(date) {
+            var year = date.getFullYear();
+            var month = (date.getMonth() + 1).toString().padStart(2, '0');
+            var day = date.getDate().toString().padStart(2, '0');
+            return year + '-' + month + '-' + day;
+        }
+
+        populateDropdown();
+
+        document.getElementById('theater-dropdown').addEventListener('change', function() {
+            if (this.value == "Indiana") {
+                var web = "ShowTimes.php?theater=indiana";
+                <?php echo"window.location.href=web";
+                ?>
+           }
+           else {
+                alert('Waiting for database');
+           }
+        });
+    </script>
+ 
     <!--Movie Listings-->
     <h2>Showtimes: </h2>
     <?php

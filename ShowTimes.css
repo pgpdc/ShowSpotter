@@ -102,3 +102,12 @@ img{
     margin: 10px;
     padding: 10px;
 }
+
+.theater {
+    display: flex;
+
+}
+
+#theater-dropdown {
+    
+}
