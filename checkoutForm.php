@@ -20,39 +20,39 @@
             <input type="varchar" name="cardName" id="cardName">
         </p>
         <p>
-            <label for="creditNum">Username:</label>
+            <label for="creditNum">Credit Card Number:</label>
             <input type="varchar" name="creditNum" id="creditNum">
         </p>
         <p>
-            <label for="expDate">Username:</label>
+            <label for="expDate">Experation Date:</label>
             <input type="varchar" name="expDate" id="expDate">
         </p>
         <p>
-            <label for="cvv">Username:</label>
+            <label for="cvv">Cvv:</label>
             <input type="int" name="cvv" id="cvv">
         </p>
         <p>
-            <label for="name">Username:</label>
+            <label for="name">Full Name:</label>
             <input type="text" name="name" id="name">
         </p>
         <p>
-            <label for="address">Username:</label>
+            <label for="address">Adress:</label>
             <input type="varchar" name="address" id="address">
         </p>
         <p>
-            <label for="city">Username:</label>
+            <label for="city">City:</label>
             <input type="text" name="city" id="city">
         </p>
         <p>
-            <label for=state">Username:</label>
+            <label for=state">State:</label>
             <input type="text" name="state" id="state">
         </p>
         <p>
-            <label for="zipCode">Username:</label>
+            <label for="zipCode">Zip Code:</label>
             <input type="int" name="zipCode" id="zipCode">
         </p>
         <p>
-            <label for="billSame">Username:</label>
+            <label for="billSame">Is billing address the same as your address:</label>
             <input type="text" name="billSame" id="billSame">
         </p>
         <input type="submit" value="Submit">
