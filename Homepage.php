@@ -19,7 +19,8 @@
             </select>
             <button type="button" id="myButton" onclick="changeTheater()">Submit</button>
             <script>
-                var web = "";
+                var web = "ShowTimes.php?theater=indiana";
+                //Default set to Indiana;
                 document.getElementById('theater-dropdown').addEventListener('change', function() {
                     if (this.value == "Indiana") {
                         web = "ShowTimes.php?theater=indiana";
