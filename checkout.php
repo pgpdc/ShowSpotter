@@ -4,7 +4,6 @@
     <title>Inser Checkout Data</title>
 </head>
 <body>
-    <center>
         <?php
         session_start();
         $DATABASE_HOST ='localhost';
@@ -37,6 +36,5 @@
         }
         mysqli_close($conn)
         ?>
-        </center>
     </body>
     </html>
