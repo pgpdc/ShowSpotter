@@ -43,7 +43,7 @@
             <input type="text" name="city" id="city">
         </p>
         <p>
-            <label for=state">State:</label>
+            <label for="state">State:</label>
             <input type="text" name="state" id="state">
         </p>
         <p>
