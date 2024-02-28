@@ -1,10 +1,9 @@
-<$DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Checkout Form</title>
 </head>
 <body>
-    <center>
         <h1>Checkout Form</h1>
         <form action="checkout.php" method="post">
         <p>
@@ -52,11 +51,10 @@
             <input type="int" name="zipCode" id="zipCode">
         </p>
         <p>
-            <label for="billSame">Is billing address the same as your address:</label>
+            <label for="billSame">Is billing address the same as your home address:</label>
             <input type="text" name="billSame" id="billSame">
         </p>
         <input type="submit" value="Submit">
 </form>
-</center>
 </body>
 </html>
