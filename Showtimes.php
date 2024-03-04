@@ -169,22 +169,27 @@ $result = mysqli_stmt_get_result($stmt);
     }
 
     // Sort the movies alphabetically
-    ksort($movies);
-
-    // Display the movie details
-    foreach ($movies as $title => $movie) {
-        echo "<div class='movie-box'>";
-        echo "<h3>$title</h3>";
-        echo "<img src='" . $movie['imageUrl'] . "' alt='$title'><br>";
-        foreach ($movie['startTimes'] as $startTime) {
-            // Convert the start time to 12-hour format with AM/PM
-            $startTimeIn12HourFormat = date("g:i A", strtotime($startTime));
-            
-            // Create a link to the room page for this start time
-            echo "<a href='room.php?id=$room_id&time=$startTime' style='color: darkblue; font-weight: bold;'>$startTimeIn12HourFormat</a><br>";
+    if(isset($movies)) {
+        ksort($movies);
+        // Display the movie details
+        foreach ($movies as $title => $movie) {
+            echo "<div class='movie-box'>";
+            echo "<h3>$title</h3>";
+            echo "<img src='" . $movie['imageUrl'] . "' alt='$title'><br>";
+            foreach ($movie['startTimes'] as $startTime) {
+                // Convert the start time to 12-hour format with AM/PM
+                $startTimeIn12HourFormat = date("g:i A", strtotime($startTime));
+                
+                // Create a link to the room page for this start time
+                echo "<a href='room.php?id=$room_id&time=$startTime' style='color: darkblue; font-weight: bold;'>$startTimeIn12HourFormat</a><br>";
+            }
+            echo "<br></div>";
         }
-        echo "<br></div>";
     }
+    
+
+    
+    
     ?>
 
 
