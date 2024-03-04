@@ -42,11 +42,31 @@ h1{
     font-family: 'Times New Roman', Times, serif ;
     color: black;
     text-align:center;
+    margin: -10px;
+    margin-bottom: 15px;
 }
 
 body{font-family: "Verdana", "Geneva", sans-serif;
-    background-image: url("PhotosForWebsite/Theatre.jpg");
+    background: linear-gradient(to bottom, #000000, #434343);
     align-content: center;
-    background-size: 100%;
+    min-height: 100vh;
     font-size:30px;
 }
+
+.container {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center; 
+}
+
+
+.container iframe {
+    width: 40%;
+    height: 500px;
+}
+
+iframe {
+    background-color: white;
+}
+
+

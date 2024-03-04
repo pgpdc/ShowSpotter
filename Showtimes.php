@@ -37,7 +37,7 @@ $result = mysqli_stmt_get_result($stmt);
 <head>
     <meta charset="utf-8">
     <meta name="viewpoint" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="ShowTimes.css">
+    <link rel="stylesheet" href="Styles/ShowTimes.css">
 
 </head>
 <title>ShowSpotter</title>

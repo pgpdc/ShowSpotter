@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["admin"] != TRUE) {
+if ($_SESSION["admin"] != TRUE) {
     header("location: index.html");
 }
 // Database connection
@@ -51,19 +51,57 @@ function callAPI($title)
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
     // Get the movie title from the form
     $title = $_POST['title'];
-    
+
     // Call the API with the movie title
     $data = callAPI($title);
 
     // Check if the 'results' key is set in the API response
+    echo "
+    <style>
+        body {
+            display: flex;
+            justify-content: flex-start; 
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            flex-direction: column;
+            padding-top: 50px; 
+        }
+        div {
+            border: 1px solid #000;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            width: 80%;
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+        h2 {
+            font-weight: bold;
+            text-align: center; 
+        }
+        p {
+            margin-bottom: 5px;
+            text-align: center; 
+        }
+        img {
+            width: 200px;
+            display: block; 
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+    </style>
+";
+
     if (isset($data['results'])) {
         // Display the movie options to the admin
         foreach ($data['results'] as $movie) {
             // Check if the movie has additional information
-            if (isset($movie['releaseYear']) || isset($movie['releaseDate']) || isset($movie['primaryImage'])) {
-                echo "<div style='border:1px solid #000; padding:10px; margin-bottom:10px;'>";
+            if (isset($movie['releaseYear']) && isset($movie['releaseDate']) && isset($movie['primaryImage'])) {
+                echo "<div>";
                 echo "<h2><a href='addMovies.php?id=" . rawurlencode($movie['id']) . "'>" . $movie['titleText']['text'] . "</a></h2>";
-                
+
                 // Display the movie details
                 if (isset($movie['releaseYear'])) {
                     echo "<p><strong>Release Year:</strong> " . $movie['releaseYear']['year'] . "</p>";
@@ -72,31 +110,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
                     echo "<p><strong>Release Date:</strong> " . $movie['releaseDate']['day'] . "-" . $movie['releaseDate']['month'] . "-" . $movie['releaseDate']['year'] . "</p>";
                 }
                 if (isset($movie['primaryImage'])) {
-                    echo "<p><img src='" . $movie['primaryImage']['url'] . "' alt='" . $movie['primaryImage']['caption']['plainText'] . "' style='width:200px;'></p>";
+                    echo "<p><img src='" . $movie['primaryImage']['url'] . "' alt='" . $movie['primaryImage']['caption']['plainText'] . "'></p>";
                 }
                 echo "</div>";
             }
         }
     }
-    
-    
-    
-    
 } else if (isset($_GET['id'])) {
     // The admin has selected a movie, display the form for date and start time
     echo "
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type='text'], input[type='date'], input[type='time'] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type='submit'] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            background-color: #007BFF;
+            cursor: pointer;
+        }
+        input[type='submit']:hover {
+            background-color: #0056b3;
+        }
+    </style>
     <form action='addMovies.php?id=" . $_GET['id'] . "' method='post'>
-        <label for='date'>Date (YYYY-MM-DD):</label><br>
-        <input type='date' id='date' name='date' required><br>
-        <label for='timestart'>Start Time (HH:MM:SS):</label><br>
-        <input type='time' id='timestart' name='timestart' required><br>
-        <label for='timeend'>End Time (HH:MM:SS):</label><br>
-        <input type='time' id='timeend' name='timeend' required><br>
-        <label for='room_id'>Room ID:</label><br>
-        <input type='text' id='room_id' name='room_id' required><br>
+        <label for='date'>Date (YYYY-MM-DD):</label>
+        <input type='date' id='date' name='date' required>
+        <label for='timestart'>Start Time (HH:MM:SS):</label>
+        <input type='time' id='timestart' name='timestart' required>
+        <label for='timeend'>End Time (HH:MM:SS):</label>
+        <input type='time' id='timeend' name='timeend' required>
+        <label for='room_id'>Room ID:</label>
+        <input type='text' id='room_id' name='room_id' required>
         <input type='submit' value='Insert'>
     </form>
     ";
+
     if (isset($_POST['date']) && isset($_POST['timestart']) && isset($_POST['timeend']) && isset($_POST['room_id'])) {
         // The admin has submitted the date and start time
         $id = $_GET['id'];
@@ -110,19 +185,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
 
         $stmt = mysqli_prepare($link, $sql);
 
-        if(mysqli_stmt_execute($stmt)) {
-            echo "New record created successfully";
+        if (mysqli_stmt_execute($stmt)) {
+            echo "<script type='text/javascript'>
+                    alert('New record created successfully');
+                    window.location = 'addMovies.php';
+                  </script>";
         } else {
-            echo "Error";
+            echo "<script type='text/javascript'>
+                    alert('Error');
+                    window.location = 'addMovies.php';
+                  </script>";
         }
-        
     }
 } else {
     // No form is submitted, display the form for movie title
     echo "
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type='text'] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type='submit'] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            background-color: #007BFF;
+            cursor: pointer;
+        }
+        input[type='submit']:hover {
+            background-color: #0056b3;
+        }
+    </style>
     <form action='addMovies.php' method='post'>
-        <label for='title'>Movie Title:</label><br>
-        <input type='text' id='title' name='title' required><br>
+        <label for='title'>Movie Title:</label>
+        <input type='text' id='title' name='title' required>
         <input type='submit' value='Search'>
     </form>
     ";
