@@ -42,7 +42,7 @@ h1{
     font-family: 'Times New Roman', Times, serif ;
     color: black;
     text-align:center;
-    margin: -10px;
+    margin: -8px;
     margin-bottom: 15px;
 }
 
@@ -51,22 +51,25 @@ body{font-family: "Verdana", "Geneva", sans-serif;
     align-content: center;
     min-height: 100vh;
     font-size:30px;
+    
 }
 
 .container {
     display: flex;
     justify-content: space-around; 
     align-items: center; 
+    overflow: hidden;
 }
 
 
 .container iframe {
     width: 40%;
-    height: 500px;
+    height: 600px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px 0px rgba(255, 0, 0, 1);
 }
 
-iframe {
-    background-color: white;
-}
+
+::-webkit-scrollbar { width: 0px; height: 0px; } ::-webkit-scrollbar-button { width: 0px; height: 0px; } ::-webkit-scrollbar-thumb { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-thumb:hover { background: transparent; } ::-webkit-scrollbar-thumb:active { background: transparent; } ::-webkit-scrollbar-track { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-track:hover { background: transparent; } ::-webkit-scrollbar-track:active { background: transparent; } ::-webkit-scrollbar-corner { background: transparent; }
 
 

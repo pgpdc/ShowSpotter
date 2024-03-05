@@ -1,3 +1,10 @@
+<?php
+session_start();
+if ($_SESSION["admin"] != TRUE) {
+    header("location: index.php");
+}
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -27,7 +34,8 @@
   <div class="container">
 
     <iframe src="addMovies.php"></iframe>
-    <iframe src="addMovies.php"></iframe>
+    <iframe src="movieSchedule.php"></iframe>
+    
 
 
   </div>

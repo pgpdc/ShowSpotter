@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION["admin"] != TRUE) {
-    header("location: index.html");
+    header("location: index.php");
 }
 // Database connection
 $DATABASE_HOST = 'localhost';
@@ -58,22 +58,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
     // Check if the 'results' key is set in the API response
     echo "
     <style>
+        ::-webkit-scrollbar { width: 0px; height: 0px; } ::-webkit-scrollbar-button { width: 0px; height: 0px; } ::-webkit-scrollbar-thumb { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-thumb:hover { background: transparent; } ::-webkit-scrollbar-thumb:active { background: transparent; } ::-webkit-scrollbar-track { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-track:hover { background: transparent; } ::-webkit-scrollbar-track:active { background: transparent; } ::-webkit-scrollbar-corner { background: transparent; }
         body {
             display: flex;
             justify-content: flex-start; 
             align-items: center;
             height: 100vh;
+
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            flex-direction: column;
-            padding-top: 50px; 
+             
+            flex-wrap: wrap;
         }
         div {
             border: 1px solid #000;
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 10px;
-            width: 80%;
+            width: 21vh;
             margin-left: auto; 
             margin-right: auto; 
         }
@@ -86,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
             text-align: center; 
         }
         img {
-            width: 200px;
+            width: 20vh;
             display: block; 
             margin-left: auto; 
             margin-right: auto; 
@@ -120,6 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
     // The admin has selected a movie, display the form for date and start time
     echo "
     <style>
+        ::-webkit-scrollbar { width: 0px; height: 0px; } ::-webkit-scrollbar-button { width: 0px; height: 0px; } ::-webkit-scrollbar-thumb { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-thumb:hover { background: transparent; } ::-webkit-scrollbar-thumb:active { background: transparent; } ::-webkit-scrollbar-track { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-track:hover { background: transparent; } ::-webkit-scrollbar-track:active { background: transparent; } ::-webkit-scrollbar-corner { background: transparent; }
         body {
             display: flex;
             justify-content: center;
@@ -201,6 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
     // No form is submitted, display the form for movie title
     echo "
     <style>
+        ::-webkit-scrollbar { width: 0px; height: 0px; } ::-webkit-scrollbar-button { width: 0px; height: 0px; } ::-webkit-scrollbar-thumb { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-thumb:hover { background: transparent; } ::-webkit-scrollbar-thumb:active { background: transparent; } ::-webkit-scrollbar-track { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-track:hover { background: transparent; } ::-webkit-scrollbar-track:active { background: transparent; } ::-webkit-scrollbar-corner { background: transparent; }
         body {
             display: flex;
             justify-content: center;

@@ -7,7 +7,7 @@ $isAdmin = 0;
 
 // Check to see if there is a current session and the user is logged in
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
-    header("location: index.html");
+    header("location: index.php");
 }
 
 //Only execute when the submit button is pressed
@@ -46,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         if($isAdmin == 1) {
                             $_SESSION["admin"] = TRUE;
                         }
-                        header("location: index.html");
+                        header("location: index.php");
                     } else {
                         $password_err = "Incorrect Password";
                     }
