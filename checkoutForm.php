@@ -5,6 +5,8 @@
 </head>
 <body>
         <h1>Checkout Form</h1>
+        <h2>Checkout</h2>
+        <h3>Billing</h3>
         <form action="checkout.php" method="post">
         <p>
             <label for="username">Username:</label>
