@@ -124,9 +124,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
     <style>
         ::-webkit-scrollbar { width: 0px; height: 0px; } ::-webkit-scrollbar-button { width: 0px; height: 0px; } ::-webkit-scrollbar-thumb { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-thumb:hover { background: transparent; } ::-webkit-scrollbar-thumb:active { background: transparent; } ::-webkit-scrollbar-track { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-track:hover { background: transparent; } ::-webkit-scrollbar-track:active { background: transparent; } ::-webkit-scrollbar-corner { background: transparent; }
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
@@ -161,7 +158,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
         input[type='submit']:hover {
             background-color: #0056b3;
         }
+        .admin-home-button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            background-color: #007BFF;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .admin-home-button:hover {
+            background-color: #0056b3;
+        }
+        .button-container, .form-container {
+            display: flex;
+            justify-content: center;
+        }
+        .form-container {
+            padding: 10%;
+        }
     </style>
+    <div class='button-container'>
+    <a href='admin.php' class='admin-home-button'>Admin Home</a>
+</div>
+    <body>
+    <div class='form-container'>
     <form action='addMovies.php?id=" . $_GET['id'] . "' method='post'>
         <label for='date'>Date (YYYY-MM-DD):</label>
         <input type='date' id='date' name='date' required>
@@ -173,6 +198,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
         <input type='text' id='room_id' name='room_id' required>
         <input type='submit' value='Insert'>
     </form>
+    </div>
+    </body>
     ";
 
     if (isset($_POST['date']) && isset($_POST['timestart']) && isset($_POST['timeend']) && isset($_POST['room_id'])) {
@@ -192,7 +219,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
             echo "<script type='text/javascript'>
                     alert('New record created successfully');
                     window.location = 'addMovies.php';
-                  </script>";
+                  </scrip>";
         } else {
             echo "<script type='text/javascript'>
                     alert('Error');

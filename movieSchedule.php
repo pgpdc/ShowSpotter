@@ -26,7 +26,7 @@ function data_calendar()
         $room_id = $rs['room_id'];
         $title = getMovieTitle($imdbid);
         $color = getColor($room_id);
-        echo "{title: '$title', start: '$date' + 'T' + '$timestart', end: '$date' + 'T' + '$timeend', resourceId: '$room_id', color: '$color'},";
+        echo "{title: '$title', imdbid: '$imdbid', start: '$date' + 'T' + '$timestart', end: '$date' + 'T' + '$timeend', resourceId: '$room_id', color: '$color'},";
     }
 }
 function getMovieTitle($imdbid)
@@ -62,13 +62,13 @@ function getColor($roomId)
 {
     switch ($roomId) {
         case 'ROOM_A':
-            return '#ff0000'; // red
+            return '#ff0000';
         case 'ROOM_B':
-            return '#00ff00'; // green
+            return '#00ff00';
         case 'ROOM_C':
-            return '#0000ff'; // blue
+            return '#0000ff'; 
         default:
-            return '#000000'; // black
+            return '#000000';
     }
 }
 
@@ -80,6 +80,7 @@ function getColor($roomId)
 
 <head>
     <meta charset='utf-8' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -89,57 +90,84 @@ function getColor($roomId)
                 initialView: 'timeGridWeek',
                 headerToolbar: {
                     left: 'prev,next today',
-                    center: 'title',
+                    center: 'title customButton',
                     right: 'timeGridWeek,timeGridDay'
                 },
+                customButtons: {
+        customButton: {
+            text: 'Admin Home',
+            click: function() {
+                window.location.href = 'admin.php';
+            }
+        }
+    },
                 slotMinTime: '09:00:00',
                 slotMaxTime: '24:00:00',
                 events: [<?php data_calendar(); ?>],
                 eventColor: function(event) {
                     switch (event.resourceId) {
                         case 'ROOM_A':
-                            return '#ff0000'; // red
+                            return '#ff0000';
                         case 'ROOM_B':
-                            return '#00ff00'; // green
+                            return '#00ff00';
                         case 'ROOM_C':
-                            return '#0000ff'; // blue
+                            return '#0000ff';
                         default:
-                            return '#000000'; // black
+                            return '#000000';
                     }
                 },
-                eventTimeFormat: { // like '14:30:00'
+                eventTimeFormat: { 
                     hour: '2-digit',
                     minute: '2-digit',
-                    meridiem: false
+                    meridiem: true
                 },
                 eventContent: function(arg) {
-    var title = document.createElement('div');
-    var startTime = arg.event.start.toTimeString().slice(0,5);
-    var endTime = arg.event.end ? arg.event.end.toTimeString().slice(0,5) : '';
-    title.innerHTML = arg.event.title + ' (' + arg.event.extendedProps.resourceId + ') ' + startTime + (endTime ? '-' + endTime : '');
-    var arrayOfDomNodes = [ title ];
-    return { domNodes: arrayOfDomNodes };
-}
-,
+                    var title = document.createElement('div');
+
+                    var convertTo12Hr = function(time) {
+                        var hours = parseInt(time.slice(0, 2));
+                        var minutes = time.slice(3, 5);
+                        var ampm = hours >= 12 ? 'PM' : 'AM';
+                        hours = hours % 12;
+                        hours = hours ? hours : 12; 
+                        return hours + ':' + minutes + ' ' + ampm;
+                    }
+
+                    var startTime = convertTo12Hr(arg.event.start.toISOString().slice(11, 16));
+                    var endTime = arg.event.end ? convertTo12Hr(arg.event.end.toISOString().slice(11, 16)) : '';
+
+                    title.innerHTML = arg.event.title + ' (' + arg.event.extendedProps.resourceId + ') ' + startTime + (endTime ? '-' + endTime : '');
+                    var arrayOfDomNodes = [title];
+                    return {
+                        domNodes: arrayOfDomNodes
+                    };
+                },
+
                 eventClick: function(info) {
                     if (confirm('Are you sure you want to remove this movie from the database?')) {
                         $.ajax({
-                            url: 'remove_movie.php', // Assuming you have a PHP script to remove movies
+                            url: 'remove_movie.php',
                             type: 'POST',
                             data: {
-                                imdbid: info.event.title
+                                imdbid: info.event.extendedProps.imdbid,
+                                roomId: info.event.extendedProps.resourceId,
+                                startTime: info.event.start.toISOString().slice(11, 16),
+                                endTime: info.event.end ? info.event.end.toISOString().slice(11, 16) : ''
                             },
                             success: function() {
-                                info.event.remove(); // Remove the event from the calendar
+                                info.event.remove();
                             }
                         });
                     }
                 }
+
+
             });
 
             calendar.render();
         });
     </script>
+
 </head>
 
 <body>

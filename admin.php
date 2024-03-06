@@ -33,10 +33,10 @@ if ($_SESSION["admin"] != TRUE) {
 
   <div class="container">
 
-    <iframe src="addMovies.php"></iframe>
-    <iframe src="movieSchedule.php"></iframe>
-    
-
+    <!-- <iframe src="addMovies.php"></iframe>
+    <iframe src="movieSchedule.php"></iframe> -->
+    <a href="addMovies.php">Add Movies</a>
+    <a href="movieSchedule.php">Movie Schedule</a>
 
   </div>
 </body>
