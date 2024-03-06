@@ -37,7 +37,7 @@
     </div>
 
     <!-- (E) SAVE SELECTION -->
-    <form id="ninja" method="post" action="seatsave.php">
+    <form id="ninja" method="post" action="checkoutForm.php">
       <input type="hidden" name="sessid" value="<?=$sessid?>">
       <input type="hidden" name="userid" value="<?=$userid?>">
     </form>
