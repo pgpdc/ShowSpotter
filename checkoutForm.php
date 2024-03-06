@@ -4,7 +4,14 @@
         <title>Checkout Form</title>
 </head>
 <body>
-        <h1>Checkout Form</h1>
+        <h1>Checkout Form:</h1>
+        <h2>Checkout:</h2>
+        <p>
+        <?php
+        require "seatreservelib.php";
+
+        </p>
+        <h3>Billing</h3>
         <form action="checkout.php" method="post">
         <p>
             <label for="username">Username:</label>
