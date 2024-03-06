@@ -61,14 +61,26 @@ body{font-family: "Verdana", "Geneva", sans-serif;
     overflow: hidden;
 }
 
-
 .container a {
     width: 40%;
     height: 600px;
-    border: 5px solid red;
+    color: #fff;
+    background-color: #007BFF;
     border-radius: 15px;
-    box-shadow: 0px 0px 10px 0px rgba(255, 0, 0, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black; 
+    font-size: 20px; 
+    transition: all 0.3s ease;
 }
+
+.container a:hover {
+    border-color: #007BFF;
+    background-color: #0056b3;
+}
+
 
 
 ::-webkit-scrollbar { width: 0px; height: 0px; } ::-webkit-scrollbar-button { width: 0px; height: 0px; } ::-webkit-scrollbar-thumb { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-thumb:hover { background: transparent; } ::-webkit-scrollbar-thumb:active { background: transparent; } ::-webkit-scrollbar-track { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-track:hover { background: transparent; } ::-webkit-scrollbar-track:active { background: transparent; } ::-webkit-scrollbar-corner { background: transparent; }

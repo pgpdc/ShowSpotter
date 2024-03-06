@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
     echo "
     <style>
         ::-webkit-scrollbar { width: 0px; height: 0px; } ::-webkit-scrollbar-button { width: 0px; height: 0px; } ::-webkit-scrollbar-thumb { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-thumb:hover { background: transparent; } ::-webkit-scrollbar-thumb:active { background: transparent; } ::-webkit-scrollbar-track { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-track:hover { background: transparent; } ::-webkit-scrollbar-track:active { background: transparent; } ::-webkit-scrollbar-corner { background: transparent; }
-        body {
+        .movies-container {
             display: flex;
             justify-content: flex-start; 
             align-items: center;
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
              
             flex-wrap: wrap;
         }
-        div {
+        .movies {
             border: 1px solid #000;
             padding: 10px;
             margin-bottom: 10px;
@@ -93,15 +93,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
             margin-left: auto; 
             margin-right: auto; 
         }
+        .admin-home-button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            background-color: #007BFF;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .admin-home-button:hover {
+            background-color: #0056b3;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
     </style>
 ";
 
     if (isset($data['results'])) {
         // Display the movie options to the admin
+        echo "<div class='button-container'>
+        <a href='admin.php' class='admin-home-button'>Admin Home</a>
+    </div>
+    <div class='movies-container'>";
         foreach ($data['results'] as $movie) {
             // Check if the movie has additional information
             if (isset($movie['releaseYear']) && isset($movie['releaseDate']) && isset($movie['primaryImage'])) {
-                echo "<div>";
+                echo "<div class='movies'>";
                 echo "<h2><a href='addMovies.php?id=" . rawurlencode($movie['id']) . "'>" . $movie['titleText']['text'] . "</a></h2>";
 
                 // Display the movie details
@@ -117,6 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
                 echo "</div>";
             }
         }
+        echo "</div>";
     }
 } else if (isset($_GET['id'])) {
     // The admin has selected a movie, display the form for date and start time
@@ -219,7 +244,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
             echo "<script type='text/javascript'>
                     alert('New record created successfully');
                     window.location = 'addMovies.php';
-                  </scrip>";
+                  </script>";
         } else {
             echo "<script type='text/javascript'>
                     alert('Error');
@@ -233,9 +258,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
     <style>
         ::-webkit-scrollbar { width: 0px; height: 0px; } ::-webkit-scrollbar-button { width: 0px; height: 0px; } ::-webkit-scrollbar-thumb { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-thumb:hover { background: transparent; } ::-webkit-scrollbar-thumb:active { background: transparent; } ::-webkit-scrollbar-track { background: transparent; border: 0px none; border-radius: 0px; } ::-webkit-scrollbar-track:hover { background: transparent; } ::-webkit-scrollbar-track:active { background: transparent; } ::-webkit-scrollbar-corner { background: transparent; }
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
@@ -270,11 +292,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
         input[type='submit']:hover {
             background-color: #0056b3;
         }
+        .admin-home-button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            background-color: #007BFF;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .admin-home-button:hover {
+            background-color: #0056b3;
+        }
+        .button-container, .form-container {
+            display: flex;
+            justify-content: center;
+        }
+        .form-container {
+            padding: 10%;
+        }
     </style>
+    <div class='button-container'>
+        <a href='admin.php' class='admin-home-button'>Admin Home</a>
+    </div>
+    <div class='form-container'>
     <form action='addMovies.php' method='post'>
         <label for='title'>Movie Title:</label>
         <input type='text' id='title' name='title' required>
         <input type='submit' value='Search'>
     </form>
+    </div>
     ";
 }
