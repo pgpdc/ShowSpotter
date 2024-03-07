@@ -37,6 +37,7 @@ if ($_SESSION["admin"] != TRUE) {
     <iframe src="movieSchedule.php"></iframe> -->
     <a href="addMovies.php">Add Movies</a>
     <a href="movieSchedule.php">Movie Schedule</a>
+    <a href="admin_edit_account.php">Edit User Accounts</a>
 
   </div>
 </body>
