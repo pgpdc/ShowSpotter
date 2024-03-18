@@ -50,8 +50,9 @@ class Reserve {
     $this->query($sql, $data);
     return true;
   }
-}
 
+ 
+}
 // (F) DATABASE SETTINGS - CHANGE TO YOUR OWN!
 define("DB_HOST", "localhost");
 define("DB_NAME", "test");
