@@ -13,7 +13,7 @@
        <?php
         //Checkout Cart
         require "seatreservelib.php";
-        $_RSV->save($_POST["sessid"], $_POST["userid"], $_POST["seats"]);
+        $_RSV->save($_POST["sessid"], $_POST["userid"], $_POST["seats"], $_POST["time"]);
         
        $typeTickets = $_POST['seats'];
        

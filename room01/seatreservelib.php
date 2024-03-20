@@ -46,7 +46,7 @@ class Reserve {
   }
 
   // (E) SAVE RESERVATION
-  function save ($sessid, $userid, $seats) {
+  function save ($sessid, $userid, $seats, $time) {
     $sql = "INSERT INTO `reservations` (`session_id`, `seat_id`, `user_id`) VALUES ";
     $data = [];
     foreach ($seats as $seat) {

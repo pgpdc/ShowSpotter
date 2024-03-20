@@ -12,10 +12,10 @@
     $sessid = 1;
     $userid = 999;
     $date = $_GET["date"];
-    $timetime = $_GET["time"];
+    $time = $_GET["time"];
     echo $date;
     echo "\n";
-    echo $timetime;
+    echo $time;
     // (B) GET SESSION SEATS
     require "seatreservelib.php";
     $seats = $_RSV->get($sessid);
@@ -44,6 +44,7 @@
     <form id="ninja" method="post" action="checkoutForm.php">
       <input type="hidden" name="sessid" value="<?=$sessid?>">
       <input type="hidden" name="userid" value="<?=$userid?>">
+      <input type="hidden" name="time" value="<?=$time?>">
     </form>
     <button id="go" onclick="reserve.save()">Reserve Seats</button>
   </body>
