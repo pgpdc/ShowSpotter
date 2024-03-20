@@ -4,63 +4,24 @@
         <title>Checkout Form</title>
 </head>
 <body>
-    
         <h1>Checkout Form</h1>
         <h2>Checkout Cart:</h2>
 
+<!--<?php/* 
+require_once 'saveTickets.php';
 
-       <form action="saveTickets.php"method="post">
-       <?php
-        //Checkout Cart
-        require "seatreservelib.php";
-        $_RSV->save($_POST["sessid"], $_POST["userid"], $_POST["seats"]);
-        
-       $typeTickets = $_POST['seats'];
-       
-       foreach ($typeTickets as $ticket) 
-       {
-        echo "<label for='$ticket'>$ticket:</label>";
-        echo "<select name='tickets[$ticket]'>
-             <option value='Adult'>Adult</option>
-             <option value='Child'>Child</option>
-             <option value='Senior'>Senior</option>
-                                   </select><br>";
-       }
+$enteredTickets = $_POST['tickets'];
 
-
-
-
-       foreach($_POST["seats"] as $key => $value)
+foreach($_POST["tickets"] as $key => $value)
 
         {
         
         echo "Seat ". $value . "<br>";
-        
-        
-        /*echo "Enter what ticket ype it is (Adult,Child)?";
-        $tickets= readline('Enter what ticket ype it is (Adult,Child)?');
-        echo "It is:". $tickets;-->
-        <?php*/
         }
-        
-        
-        ?>
-        <input type="submit" value="Submit">
-        </form>
+*/
 
-        <!--<form id="ninja" method="post" action="checkoutForm.php">
-      <input type="hidden" name="sessid" value="<?=$sessid?>">
-      <input type="hidden" name="userid" value="<?=$userid?>">
-    </form>
-    <button id="go" onclick="reserve.save()">Reserve Seats</button>-->
-  </body>
-<!--
-
-
-
-
-
-        <h3>Billing Info:</h3>
+?>-->
+<h3>Billing Info:</h3>
         <form action="checkout.php" method="post">
         <p>
             <label for="username">Username:</label>
@@ -110,7 +71,7 @@
             <label for="billSame">Is billing address the same as your home address:</label>
             <input type="text" name="billSame" id="billSame">
         </p>
-        <input type="submit" value="Submit">-->
+        <input type="submit" value="Submit">
 </form>
 </body>
 </html>
