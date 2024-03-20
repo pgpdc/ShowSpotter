@@ -144,3 +144,22 @@ img{
     display: flex;
 
 }
+
+.result {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.result-button {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.result-button:hover {
+    background-color: #0056b3;
+}
