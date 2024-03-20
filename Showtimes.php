@@ -44,8 +44,21 @@ $result = mysqli_stmt_get_result($stmt);
 <title>ShowSpotter</title>
 
 <body>
+<!--
     <h1>ShowSpotter</h1>
+-->
 
+    <nav>
+        <div class="brand">ShowSpotter</div>
+        <div class="links">
+            <a href="index.php">Home</a>
+            <a href="">Concessions</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="login.php">Sign-In</a>
+        </div>
+    </nav>
+
+<!--
     <ul>
         <li>Menu
             <ul class="dropdown">
@@ -69,6 +82,8 @@ $result = mysqli_stmt_get_result($stmt);
             </select>
         </h1>
     </div>
+-->
+
     <script>
         function populateDropdown() {
             var dropdown = document.getElementById('DateSelection');
