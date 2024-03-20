@@ -5,7 +5,8 @@ $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
 if ($_GET["theater"] == "indiana") {
-    $DATABASE_NAME = 'indiana';
+    $DATABASE_NAME = $_GET["theater"];
+    //$DATABASE_NAME = 'indiana';
 }
 else if ($_GET["theater"] == "testing") {
     $DATABASE_NAME = 'testing';
@@ -43,8 +44,21 @@ $result = mysqli_stmt_get_result($stmt);
 <title>ShowSpotter</title>
 
 <body>
+<!--
     <h1>ShowSpotter</h1>
+-->
 
+    <nav>
+        <div class="brand">ShowSpotter</div>
+        <div class="links">
+            <a href="index.php">Home</a>
+            <a href="">Concessions</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="login.php">Sign-In</a>
+        </div>
+    </nav>
+
+<!--
     <ul>
         <li>Menu
             <ul class="dropdown">
@@ -68,6 +82,8 @@ $result = mysqli_stmt_get_result($stmt);
             </select>
         </h1>
     </div>
+-->
+
     <script>
         function populateDropdown() {
             var dropdown = document.getElementById('DateSelection');
@@ -181,7 +197,7 @@ $result = mysqli_stmt_get_result($stmt);
                 $startTimeIn12HourFormat = date("g:i A", strtotime($startTime));
                 
                 // Create a link to the room page for this start time
-                echo "<a href='room.php?id=$room_id&time=$startTime' style='color: darkblue; font-weight: bold;'>$startTimeIn12HourFormat</a><br>";
+                echo "<a href='room01/1reservation.php?id=$room_id&time=$startTime&date=$date' style='color: darkblue; font-weight: bold;'>$startTimeIn12HourFormat</a><br>";
             }
             echo "<br></div>";
         }

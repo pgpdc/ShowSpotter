@@ -34,7 +34,14 @@ class Reserve {
        WHERE se.`session_id`=?
        ORDER BY sa.`seat_id`", [$sessid]
     );
+    // also where r.'date'=[$date]
+    //echo $sessid;
     $sess = $this->stmt->fetchAll();
+    if (empty($sess)) {
+      // create seats in none exist
+      echo "empty table create new";
+      // $this->insertNewSeats($sessid);
+  }
     return $sess;
   }
 
