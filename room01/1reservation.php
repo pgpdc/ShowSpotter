@@ -8,10 +8,14 @@
   </head>
   <body>
     <?php
-    // (A) FIXED IDS FOR THIS DEMO
+    // (A) FIXED IDS FOR THIS DEMO CHANGE TO USER ID FOR LOGIN
     $sessid = 1;
     $userid = 999;
-
+    $date = $_GET["date"];
+    $timetime = $_GET["time"];
+    echo $date;
+    echo "\n";
+    echo $timetime;
     // (B) GET SESSION SEATS
     require "seatreservelib.php";
     $seats = $_RSV->get($sessid);

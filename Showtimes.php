@@ -5,7 +5,8 @@ $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
 if ($_GET["theater"] == "indiana") {
-    $DATABASE_NAME = 'indiana';
+    $DATABASE_NAME = $_GET["theater"];
+    //$DATABASE_NAME = 'indiana';
 }
 else if ($_GET["theater"] == "testing") {
     $DATABASE_NAME = 'testing';
@@ -181,7 +182,7 @@ $result = mysqli_stmt_get_result($stmt);
                 $startTimeIn12HourFormat = date("g:i A", strtotime($startTime));
                 
                 // Create a link to the room page for this start time
-                echo "<a href='room.php?id=$room_id&time=$startTime' style='color: darkblue; font-weight: bold;'>$startTimeIn12HourFormat</a><br>";
+                echo "<a href='room01/1reservation.php?id=$room_id&time=$startTime&date=$date' style='color: darkblue; font-weight: bold;'>$startTimeIn12HourFormat</a><br>";
             }
             echo "<br></div>";
         }
