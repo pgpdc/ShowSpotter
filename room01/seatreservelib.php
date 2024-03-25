@@ -47,11 +47,11 @@ class Reserve {
 
   // (E) SAVE RESERVATION
   function save ($sessid, $userid, $seats, $time) {
-    $sql = "INSERT INTO `reservations` (`session_id`, `seat_id`, `user_id`) VALUES ";
+    $sql = "INSERT INTO `reservations` (`session_id`, `seat_id`, `user_id`, `time`) VALUES ";
     $data = [];
     foreach ($seats as $seat) {
-      $sql .= "(?,?,?),";
-      array_push($data, $sessid, $seat, $userid);
+      $sql .= "(?,?,?,?),";
+      array_push($data, $sessid, $seat, $userid, $time);
     }
     $sql = substr($sql, 0, -1);
     $this->query($sql, $data);

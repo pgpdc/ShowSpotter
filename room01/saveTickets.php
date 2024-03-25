@@ -25,9 +25,9 @@
 </head>
 <form action="FinalPayment.php"method="post">
 <?php
-
+include_once('checkout.php');
+session_start();
 require_once 'checkout.php';
-
 $enteredTickets = $_POST['tickets'];
 
 foreach($_POST["tickets"] as $key => $value)
@@ -105,7 +105,8 @@ while($row = $result->fetch_assoc()) {
     }
     }
     echo "<br>"."Final Cost:".$finalCost;
-
+    $_SESSION['finalcost'] = $finalCost;
+    echo "YES {$_SESSION['finalcost']}";
     ?>
     </table>
 </section>

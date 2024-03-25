@@ -5,7 +5,8 @@
 </head>
 <body>
        <?php
-        session_start();
+        include_once('saveTickets.php');
+        //session_start();
         $DATABASE_HOST ='localhost';
         $DATABASE_USER = 'root';
         $DATABASE_PASS = '';

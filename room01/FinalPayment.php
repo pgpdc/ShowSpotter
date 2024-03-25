@@ -6,21 +6,12 @@
 <body>
         <h1>Checkout Form</h1>
         <h2>Checkout Cart:</h2>
-
-<!--<?php/* 
+        
+<?php
 require_once 'saveTickets.php';
 
-$enteredTickets = $_POST['tickets'];
-
-foreach($_POST["tickets"] as $key => $value)
-
-        {
-        
-        echo "Seat ". $value . "<br>";
-        }
-*/
-
-?>-->
+     
+?>
 <h3>Billing Info:</h3>
         <form action="checkout.php" method="post">
         <p>
