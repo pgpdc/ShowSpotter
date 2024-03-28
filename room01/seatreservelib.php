@@ -26,9 +26,9 @@ class Reserve {
   }
 
   // (D) GET SEATS FOR GIVEN SESSION
-  function get ($sessid) {
+  function get ($sessid, $time) {
     $this->query(
-      "SELECT sa.`seat_id`, r.`user_id` FROM `seats` sa
+      "SELECT sa.`seat_id`, r.`user_id` , r.`time` FROM `seats` sa
        LEFT JOIN `sessions` se USING (`room_id`)
        LEFT JOIN `reservations` r USING(`seat_id`)
        WHERE se.`session_id`=?

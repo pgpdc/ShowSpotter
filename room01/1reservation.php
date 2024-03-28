@@ -18,18 +18,19 @@
     echo $time;
     // (B) GET SESSION SEATS
     require "seatreservelib.php";
-    $seats = $_RSV->get($sessid);
+    $seats = $_RSV->get($sessid, $time);
     ?>
 
     <!-- (C) DRAW SEATS LAYOUT -->
     <div id="layout"><?php
     foreach ($seats as $s) {
-      $taken = is_numeric($s["user_id"]);
-      printf("<div class='seat%s'%s>%s</div>",
-        $taken ? " taken" : "",
-        $taken ? "" : " onclick='reserve.toggle(this)'",
-        $s["seat_id"]
-      );
+      if ($s["time"] === $time) {
+        // Seat is taken
+        printf("<div class='seat taken'>%s</div>", $s["seat_id"]);
+    } else {
+        // Seat is available
+        printf("<div class='seat' onclick='reserve.toggle(this)'>%s</div>", $s["seat_id"]);
+    }
     }
     ?></div>
 
