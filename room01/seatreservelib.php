@@ -28,11 +28,16 @@ class Reserve {
   // (D) GET SEATS FOR GIVEN SESSION
   function get ($sessid, $time) {
     $this->query(
-      "SELECT sa.`seat_id`, r.`user_id` , r.`time` FROM `seats` sa
-       LEFT JOIN `sessions` se USING (`room_id`)
-       LEFT JOIN `reservations` r USING(`seat_id`)
-       WHERE se.`session_id`=?
-       ORDER BY sa.`seat_id`", [$sessid]
+      "SELECT DISTINCT sa.`seat_id`, r.`user_id`, r.`time`
+        FROM `seats` sa
+        LEFT JOIN `sessions` se USING (`room_id`)
+        LEFT JOIN (
+            SELECT `seat_id`, `user_id`, `time`
+            FROM `reservations`
+            WHERE `time` = ?
+        ) r ON sa.`seat_id` = r.`seat_id`
+        WHERE se.`session_id` = ?
+        ORDER BY sa.`seat_id`", [$time, $sessid]
     );
     // also where r.'date'=[$date]
     //echo $sessid;
