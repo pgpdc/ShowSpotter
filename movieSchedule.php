@@ -24,39 +24,59 @@ function data_calendar()
         $timestart = $rs['timestart'];
         $timeend = $rs['timeend'];
         $room_id = $rs['room_id'];
-        $title = getMovieTitle($imdbid);
+        $title = getMovieTitle($imdbid, $link);
         $color = getColor($room_id);
         echo "{title: '$title', imdbid: '$imdbid', start: '$date' + 'T' + '$timestart', end: '$date' + 'T' + '$timeend', resourceId: '$room_id', color: '$color'},";
     }
 }
-function getMovieTitle($imdbid)
+function getMovieTitle($imdbid, $link)
 {
-    $curl = curl_init();
+    $imdbid = mysqli_real_escape_string($link, $imdbid);
 
-    curl_setopt_array($curl, [
-        CURLOPT_URL => "https://moviesdatabase.p.rapidapi.com/titles/episode/$imdbid",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => [
-            "X-RapidAPI-Host: moviesdatabase.p.rapidapi.com",
-            "X-RapidAPI-Key: 8452b825abmshd1549bfe74262fcp138103jsnd5f10dbe3289"
-        ],
-    ]);
+    // Check if movie data exists in local database
+    $query = "SELECT * FROM Movies WHERE imdbid = '$imdbid'";
+    $movieResult = mysqli_query($link, $query);
 
-    $response = curl_exec($curl);
-    curl_close($curl);
-
-    if ($response) {
-        $data = json_decode($response, true);
-        return $data['results']['titleText']['text'];
+    if (mysqli_num_rows($movieResult) > 0) {
+        // If movie data exists in local database, use it
+        $movie = mysqli_fetch_assoc($movieResult);
+        return $movie['title'];
     } else {
-        return $imdbid; // Return the IMDb ID as a fallback
+        // If movie data doesn't exist in local database, fetch from API
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://moviesdatabase.p.rapidapi.com/titles/episode/$imdbid",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: moviesdatabase.p.rapidapi.com",
+                "X-RapidAPI-Key: 8452b825abmshd1549bfe74262fcp138103jsnd5f10dbe3289"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        if ($response) {
+            $data = json_decode($response, true);
+            $title = $data['results']['titleText']['text'];
+            $imageUrl = $data['results']['primaryImage']['url'];
+
+            // Store the movie data in local database
+            $query = "INSERT INTO Movies (imdbid, title, imageUrl) VALUES ('$imdbid', '$title', '$imageUrl')";
+            mysqli_query($link, $query);
+
+            return $title;
+        } else {
+            return $imdbid; // Return the IMDb ID as a fallback
+        }
     }
 }
+
 
 function getColor($roomId)
 {

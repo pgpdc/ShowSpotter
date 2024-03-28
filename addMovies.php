@@ -234,12 +234,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
         $timestart = $_POST['timestart'];
         $timeend = $_POST['timeend'];
         $room_id = $_POST['room_id'];
-
+    
+        // Check if movie data exists in local database
+        $query = "SELECT * FROM Movies WHERE imdbid = '$id'";
+        $movieResult = mysqli_query($link, $query);
+    
+        if (mysqli_num_rows($movieResult) == 0) {
+            // If movie data doesn't exist in local database, fetch from API
+            $curl = curl_init();
+            $url = "https://moviesdatabase.p.rapidapi.com/titles/" . $id;
+            curl_setopt_array($curl, [
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_HTTPHEADER => [
+                    "X-RapidAPI-Host: moviesdatabase.p.rapidapi.com",
+                    "X-RapidAPI-Key: 8452b825abmshd1549bfe74262fcp138103jsnd5f10dbe3289"
+                ],
+            ]);
+    
+            $response = curl_exec($curl);
+            curl_close($curl);
+    
+            if ($response) {
+                // Decode the JSON response
+                $data = json_decode($response, true);
+    
+                // Get the movie details
+                $movie = $data['results'];
+                $title = $movie['titleText']['text'];
+                $imageUrl = $movie['primaryImage']['url'];
+    
+                // Store the movie data in local database
+                $query = "INSERT INTO Movies (imdbid, title, imageUrl) VALUES ('$id', '$title', '$imageUrl')";
+                mysqli_query($link, $query);
+            }
+        }
+    
         // SQL query
         $sql = "INSERT INTO `showtimes` (`imdbid`, `date`, `timestart`, `timeend`, `room_id`) VALUES ('$id', '$date', '$timestart', '$timeend', '$room_id')";
-
+    
         $stmt = mysqli_prepare($link, $sql);
-
+    
         if (mysqli_stmt_execute($stmt)) {
             echo "<script type='text/javascript'>
                     alert('New record created successfully');
@@ -252,6 +292,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
                   </script>";
         }
     }
+    
 } else {
     // No form is submitted, display the form for movie title
     echo "
