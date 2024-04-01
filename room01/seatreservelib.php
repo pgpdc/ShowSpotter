@@ -26,37 +26,35 @@ class Reserve {
   }
 
   // (D) GET SEATS FOR GIVEN SESSION
-  function get ($sessid, $time) {
+  function get($sessid, $time, $date) {
     $this->query(
-      "SELECT DISTINCT sa.`seat_id`, r.`user_id`, r.`time`
+        "SELECT DISTINCT sa.`seat_id`, r.`user_id`, r.`time`
         FROM `seats` sa
         LEFT JOIN `sessions` se USING (`room_id`)
         LEFT JOIN (
             SELECT `seat_id`, `user_id`, `time`
             FROM `reservations`
-            WHERE `time` = ?
+            WHERE `time` = ? AND `date` = ?  -- Add the condition for date comparison
         ) r ON sa.`seat_id` = r.`seat_id`
         WHERE se.`session_id` = ?
-        ORDER BY sa.`seat_id`", [$time, $sessid]
+        ORDER BY sa.`seat_id`", [$time, $date, $sessid]
     );
-    // also where r.'date'=[$date]
-    //echo $sessid;
     $sess = $this->stmt->fetchAll();
     if (empty($sess)) {
-      // create seats in none exist
-      echo "empty table create new";
-      // $this->insertNewSeats($sessid);
-  }
+        // Create seats if none exist
+        echo "Empty table; creating new seats.";
+    }
     return $sess;
-  }
+}
+
 
   // (E) SAVE RESERVATION
-  function save ($sessid, $userid, $seats, $time) {
-    $sql = "INSERT INTO `reservations` (`session_id`, `seat_id`, `user_id`, `time`) VALUES ";
+  function save ($sessid, $userid, $seats, $time, $date) {
+    $sql = "INSERT INTO `reservations` (`session_id`, `seat_id`, `user_id`, `time`,`date`) VALUES ";
     $data = [];
     foreach ($seats as $seat) {
-      $sql .= "(?,?,?,?),";
-      array_push($data, $sessid, $seat, $userid, $time);
+      $sql .= "(?,?,?,?, ?),";
+      array_push($data, $sessid, $seat, $userid, $time, $date);
     }
     $sql = substr($sql, 0, -1);
     $this->query($sql, $data);
