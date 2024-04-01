@@ -82,13 +82,89 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
         };
     </script>
 
-    <form method="post">
+    <!--<form method="post">
     <input type="text" name="location" placeholder="Latitude,Longitude" required>
     <input type="submit" value="Search Movie Theaters">
     </form>
+    -->
+
+    <div id="placesContainer"></div>
+
+<script>
+
+    navigator.geolocation.getCurrentPosition(position => {
+        const { latitude, longitude } = position.coords;
+        searchMovieTheaters(latitude, longitude);
+        
+    })
+
+    function searchMovieTheaters(latitude, longitude) {
+        //alert(latitude + " " + longitude);
+        fetch('http://localhost/ShowSpotter/locationSearch.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'latitude=' + encodeURIComponent(latitude) + '&longitude=' + encodeURIComponent(longitude)
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok. Status: ' + response.status);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.places && data.places.length > 0) {
+        data.places.forEach(place => {
+
+            console.log(place.formattedAddress); // Log formatted address
+            console.log(place.displayName.text); // Log display name text
+            
+            createPlaceElement(place.formattedAddress, place.displayName.text);
+        });
+    } else {
+        // Handle case where 'places' is empty or not found
+        console.log('No places found or data is malformed.');
+    }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred: ' + error.message); 
+    });
+    }
+
+    function createPlaceElement(displayName, formattedAddress) {
+        
+        const resultDiv = document.createElement('div');
+        resultDiv.className = 'result';
+
+    
+        const nameElement = document.createElement('strong');
+        nameElement.textContent = displayName; 
+        resultDiv.appendChild(nameElement);
+        
+        resultDiv.appendChild(document.createElement('br'));
+
+        const addressText = document.createTextNode(formattedAddress); 
+        resultDiv.appendChild(addressText);
+
+        const selectLink = document.createElement('a');
+        selectLink.href = 'Showtimes.php?theater=indiana'; 
+        selectLink.className = 'result-button';
+        selectLink.textContent = 'Select';
+        resultDiv.appendChild(selectLink);
+
+
+        document.getElementById('placesContainer').appendChild(resultDiv);
+    }
+
+    places.forEach(place => {
+        createPlaceElement(place.displayName, place.formattedAddress);
+    });
+</script>
 
     <?php
-    
+    /* Keeping this if we want to search by specific location.
     if (!empty($locationsData) && isset($locationsData['places'])) {
         foreach ($locationsData['places'] as $place) {
             $displayName = isset($place['displayName']['text']) ? $place['displayName']['text'] : 'No Name Available';
@@ -104,6 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
     } else {
         echo "No movie theaters found or error in response.";
     }
+    */
     ?>
 
    <!-- <h2>Choose a theater: </h2>

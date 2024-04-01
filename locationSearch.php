@@ -1,10 +1,5 @@
 <?php
-// Define a function to perform the API request and return the results, accepting a combined location string
-function fetchLocations($location) {
-    list($latitude, $longitude) = explode(',', $location);
-    $latitude = trim($latitude);
-    $longitude = trim($longitude);
-
+function fetchLocations($latitude, $longitude) {
     $postData = json_encode([
         "includedTypes" => ["movie_theater"],
         "maxResultCount" => 10,
@@ -20,7 +15,7 @@ function fetchLocations($location) {
     $apiUrl = "https://places.googleapis.com/v1/places:searchNearby";
     $headers = [
         "Content-Type: application/json",
-        "X-Goog-Api-Key: AIzaSyCZa8k5Xckx5xLtJkdv3W5HkhV7OKd6CC0", // Replace YOUR_API_KEY with your actual API key
+        "X-Goog-Api-Key: AIzaSyCZa8k5Xckx5xLtJkdv3W5HkhV7OKd6CC0", 
         "X-Goog-FieldMask: places.displayName,places.formattedAddress",
     ];
 
@@ -39,48 +34,26 @@ function fetchLocations($location) {
     } else {
         return json_decode($response, true);
     }
+    return [
+        'status' => 'success',
+        'message' => "Received latitude: $latitude, longitude: $longitude"
+    ];
 }
 
 $locationsData = [];
 
-// Check if the form is submitted and the combined location is provided
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
-    // Fetch locations with the provided combined location string
-    $locationsData = fetchLocations($_POST['location']);
-}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Make sure to validate and sanitize the input
+    $latitude = filter_input(INPUT_POST, 'latitude', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+    $longitude = filter_input(INPUT_POST, 'longitude', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
-echo '<pre>';
-print_r($locationsData);
-echo '</pre>';
+    // Now you can call your function with these values
+    $result = fetchLocations($latitude, $longitude); // Assuming this function exists and returns data
 
-?>
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Movie Theater Search</title>
-</head>
-<body>
-
-<form method="post">
-    <input type="text" name="location" placeholder="Latitude,Longitude" required>
-    <input type="submit" value="Search Movie Theaters">
-</form>
-
-<?php
-// If locations data is available, display the formatted addresses and display names
-if (!empty($locationsData) && isset($locationsData['places'])) {
-    foreach ($locationsData['places'] as $place) {
-        $displayName = isset($place['displayName']['text']) ? $place['displayName']['text'] : 'No Name Available';
-        $formattedAddress = isset($place['formattedAddress']) ? $place['formattedAddress'] : 'No Address Available';
-        
-        echo htmlspecialchars($displayName) . " - " . htmlspecialchars($formattedAddress) . "<br>";
-    }
-} else {
-    echo "No movie theaters found or error in response.";
+    header('Content-Type: application/json');
+    $response = ['status' => 'success', 'message' => 'Data processed successfully.'];
+    echo json_encode($result);
+    
+    exit;
 }
 ?>
-
-</body>
-</html>
