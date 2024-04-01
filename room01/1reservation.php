@@ -13,12 +13,16 @@
     $userid = 999;
     $date = $_GET["date"];
     $time = $_GET["time"];
+    $id = $_GET["id"];
     echo $date;
     echo "\n";
     echo $time;
+    echo "\n";
+    echo "room";
+    echo $id;
     // (B) GET SESSION SEATS
     require "seatreservelib.php";
-    $seats = $_RSV->get($sessid, $time, $date);
+    $seats = $_RSV->get($sessid, $time, $date, $id);
     ?>
 
     <!-- (C) DRAW SEATS LAYOUT -->
@@ -47,6 +51,7 @@
       <input type="hidden" name="userid" value="<?=$userid?>">
       <input type="hidden" name="time" value="<?=$time?>">
       <input type="hidden" name="date" value="<?=$date?>">
+      <input type="hidden" name="id" value="<?=$id?>">
     </form>
     <button id="go" onclick="reserve.save()">Reserve Seats</button>
   </body>

@@ -26,7 +26,7 @@ class Reserve {
   }
 
   // (D) GET SEATS FOR GIVEN SESSION
-  function get($sessid, $time, $date) {
+  function get($sessid, $time, $date, $id) {
     $this->query(
         "SELECT DISTINCT sa.`seat_id`, r.`user_id`, r.`time`
         FROM `seats` sa
@@ -34,10 +34,10 @@ class Reserve {
         LEFT JOIN (
             SELECT `seat_id`, `user_id`, `time`
             FROM `reservations`
-            WHERE `time` = ? AND `date` = ?  -- Add the condition for date comparison
+            WHERE `time` = ? AND `date` = ? AND `id` = ? -- Add the condition for date comparison
         ) r ON sa.`seat_id` = r.`seat_id`
         WHERE se.`session_id` = ?
-        ORDER BY sa.`seat_id`", [$time, $date, $sessid]
+        ORDER BY sa.`seat_id`", [$time, $date, $id, $sessid]
     );
     $sess = $this->stmt->fetchAll();
     if (empty($sess)) {
@@ -49,12 +49,12 @@ class Reserve {
 
 
   // (E) SAVE RESERVATION
-  function save ($sessid, $userid, $seats, $time, $date) {
-    $sql = "INSERT INTO `reservations` (`session_id`, `seat_id`, `user_id`, `time`,`date`) VALUES ";
+  function save ($sessid, $userid, $seats, $time, $date,$id) {
+    $sql = "INSERT INTO `reservations` (`session_id`, `seat_id`, `user_id`, `time`,`date`, `id`) VALUES ";
     $data = [];
     foreach ($seats as $seat) {
-      $sql .= "(?,?,?,?, ?),";
-      array_push($data, $sessid, $seat, $userid, $time, $date);
+      $sql .= "(?,?,?,?,?,?),";
+      array_push($data, $sessid, $seat, $userid, $time, $date, $id);
     }
     $sql = substr($sql, 0, -1);
     $this->query($sql, $data);
