@@ -1,94 +1,19 @@
 *{
     padding: 0%;
     margin: 0%;
-    font-family: 'Times New Roman', Times, serif;
+/*    font-family: 'Times New Roman', Times, serif;*/
+
 }
 
 body{
     font-family: "Verdana", "Geneva", sans-serif;
-    background: linear-gradient(to bottom, #000000, #434343);
+    background: linear-gradient(to bottom, #000000, #171717);
     color: #C0C0C0; 
     text-align: center;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
-
-nav{
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    grid-column-gap: 50px;
-    grid-template-rows: 70px;
-    box-shadow: 0 5px 5px rgba(0,0,0,0.15);
-    position: sticky;
-    top: 0;
-    background-color: white;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-nav .brand{
-    font-size: 28px;
-    font-weight: bold;
-    color: orange;
-}
-
-nav a{
-    text-decoration: none;
-    display: inline-block;
-    padding: 10px 35px;
-    transition: background-color 0.3s, color 0.3s;
-    color: #245990;
-    font-size: 18px;
-}
-
-nav a:hover,
-nav a.active{
-    background: #4d9176;
-    color: #fff;
-    border-radius: 3px;
-}
-
-/*
-ul{
-    background: #800000; 
-    text-align: center;
-    font-size: 30px;
-    list-style:none;
-}
-ul li a{
-    display: block;
-    padding: 30px;
-    color: #C0C0C0;
-    text-align: center;
-    text-decoration: none;
-    font-size: 30px;
-}
-ul li ul.dropdown {
-    text-align: center;
-    width:5px;
-    position:absolute;
-    z-index: 150;
-    display:none;
-}
-ul li a:hover {
-    background:#BDB76B; 
-}
-ul li:hover ul.dropdown{
-    font-display: 5px;
-    display:contents;
-}
-*/
-
-/*ShowSpotter
-h1{
-    font-size: 50pt;
-    font-family: 'Times New Roman', Times, serif ;
-    color: #C0C0C0;
-    text-align:center;
-}
-*/
 
 /*Showtimes*/
 h2{

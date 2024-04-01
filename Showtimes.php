@@ -38,14 +38,11 @@ $result = mysqli_stmt_get_result($stmt);
     <meta charset="utf-8">
     <meta name="viewpoint" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="Styles/ShowTimes.css">
-
+    <link rel="stylesheet" href="Styles/navbar.css">
+    <title>ShowSpotter</title>
 </head>
-<title>ShowSpotter</title>
 
 <body>
-    <!--
-    <h1>ShowSpotter</h1>
--->
 
     <nav>
         <div class="brand">ShowSpotter</div>
@@ -56,32 +53,6 @@ $result = mysqli_stmt_get_result($stmt);
             <a href="login.php">Sign-In</a>
         </div>
     </nav>
-
-    <!--
-    <ul>
-        <li>Menu
-            <ul class="dropdown">
-                <li> <a href="">Showtimes</a></li>
-                <li> <a href="">Sign-In</a></li>
-                <li> <a href="">Concessions</a></li>
-                <li> <a href="checkout.html">Checkout</a></li>
-            </ul>
-        </li>
-    </ul>
-
-    <div class="theater">
-        <h1>
-            <select id="theater-dropdown">
-                <option value="Indiana">Indiana</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-                <option value="option4">Option 4</option>
-            </select>
-            <select id="DateSelection">
-            </select>
-        </h1>
-    </div>
--->
 
     <script>
         function populateDropdown() {
@@ -127,6 +98,7 @@ $result = mysqli_stmt_get_result($stmt);
     </script>
 
     <!--Movie Listings-->
+    <br>
     <h2>Showtimes: </h2>
     <?php
     while ($row = mysqli_fetch_assoc($result)) {
@@ -217,14 +189,9 @@ $result = mysqli_stmt_get_result($stmt);
             echo "<br></div>";
         }
     }
-
-
-
-
     ?>
 
 
 
 </body>
-
 </html>

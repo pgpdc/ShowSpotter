@@ -59,10 +59,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
     <link rel="stylesheet" href="Styles/ShowTimes.css">
-
+    <link rel="stylesheet" href="Styles/navbar.css">
 </head>
+
 <body>
-    <h1>ShowSpotter</h>
+    
+    <nav>
+        <div class="brand">ShowSpotter</div>
+        <div class="links">
+            <a href="index.php">Home</a>
+            <a href="">Concessions</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="login.php">Sign-In</a>
+        </div>
+    </nav>
+    <br>
+
     <script>
         function changeTheater() {
             <?php echo"window.location.href=ShowTimes.php?theater=indiana";
