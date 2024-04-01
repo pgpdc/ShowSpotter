@@ -101,12 +101,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Styles/navbar.css">
     <style>
         body{ font: 14px sans-serif; }
         .wrapper{ width: 360px; padding: 20px; }
     </style>
 </head>
+
 <body>
+
+    <nav>
+        <div class="brand">ShowSpotter</div>
+        <div class="links">
+            <a href="index.php">Home</a>
+            <a href="">Concessions</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="login.php">Sign-In</a>
+        </div>
+    </nav>
+
     <div class="wrapper">
         <h2>Sign Up</h2>
         <p>Please fill this form to create an account.</p>

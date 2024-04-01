@@ -1,0 +1,38 @@
+nav{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    grid-column-gap: 50px;
+    grid-template-rows: 70px;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    background-color: black;
+    border-bottom: #434343 solid 2pt;
+    padding-left: 50px;
+    padding-right: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: left;
+}
+
+nav .brand{
+    font-size: 30px;
+    font-weight: bold;
+    color: orange;
+}
+
+nav a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 35px;
+    transition: background-color 0.3s, color 0.3s;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+nav a:hover,
+nav a.active{
+    background: orange;
+    color: #005bbd;
+    border-radius: 3px;
+}
