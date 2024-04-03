@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2024 at 06:48 PM
+-- Generation Time: Apr 01, 2024 at 09:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -86,16 +86,21 @@ CREATE TABLE `reservations` (
   `seat_id` varchar(16) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `time` varchar(32) NOT NULL,
-  `date` varchar(16) NOT NULL
+  `date` varchar(16) NOT NULL,
+  `id` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reservations`
 --
 
-INSERT INTO `reservations` (`session_id`, `seat_id`, `user_id`, `time`, `date`) VALUES
-(1, 'C5', 999, '21:00:00', '2024-04-02'),
-(1, 'E2', 999, '21:00:00', '2024-04-01');
+INSERT INTO `reservations` (`session_id`, `seat_id`, `user_id`, `time`, `date`, `id`) VALUES
+(1, 'C2', 999, '21:00:00', '2024-04-01', 0),
+(1, 'C3', 999, '21:00:00', '2024-04-01', 0),
+(1, 'C5', 999, '21:00:00', '2024-04-02', 0),
+(1, 'D2', 999, '21:00:00', '2024-04-01', 1),
+(1, 'D3', 999, '21:00:00', '2024-04-01', 0),
+(1, 'E2', 999, '21:00:00', '2024-04-01', 0);
 
 -- --------------------------------------------------------
 
@@ -125,6 +130,7 @@ INSERT INTO `reservedtimes` (`type`, `ticket`) VALUES
 ('C7', 'Adult'),
 ('C8', 'Child'),
 ('D1', 'Adult'),
+('D2', 'Adult'),
 ('D3', 'Adult'),
 ('D8', 'Senior'),
 ('E1', 'Adult'),
@@ -251,7 +257,7 @@ ALTER TABLE `prices`
 -- Indexes for table `reservations`
 --
 ALTER TABLE `reservations`
-  ADD PRIMARY KEY (`seat_id`,`time`,`date`);
+  ADD PRIMARY KEY (`seat_id`,`time`,`date`,`id`);
 
 --
 -- Indexes for table `reservedtimes`
