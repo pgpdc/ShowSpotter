@@ -133,7 +133,9 @@ session_start();
         /*foreach($finalItemCost as $f){
                 echo $f;
         }*/
-        echo "Total:".$_SESSION['finalTotal'];
+        ?>
+        <h3>Total:</h3><?php
+        echo "$".$_SESSION['finalTotal'];
         ?>
 <!--<button onclick="removeIndex('Adult')"> Delete Index </button>-->
 
