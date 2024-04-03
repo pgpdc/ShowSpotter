@@ -1,5 +1,5 @@
 <?php
-
+/*
 function fetchLocations($location) {
     list($latitude, $longitude) = explode(',', $location);
     $latitude = trim($latitude);
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
     $locationsData = fetchLocations($_POST['location']);
 }
 
-
+*/
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +82,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
         };
     </script>
 
-    <!--<form method="post">
+    <!--
+    <form method="post">
     <input type="text" name="location" placeholder="Latitude,Longitude" required>
     <input type="submit" value="Search Movie Theaters">
     </form>
@@ -120,7 +121,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
             console.log(place.formattedAddress); // Log formatted address
             console.log(place.displayName.text); // Log display name text
             
-            createPlaceElement(place.formattedAddress, place.displayName.text);
+            if (!place.displayName.text.includes("Museum")) {
+                createPlaceElement(place.formattedAddress, place.displayName.text);
+            }
+            
         });
     } else {
         // Handle case where 'places' is empty or not found
@@ -158,9 +162,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
         document.getElementById('placesContainer').appendChild(resultDiv);
     }
 
+    /*
     places.forEach(place => {
         createPlaceElement(place.displayName, place.formattedAddress);
     });
+    */
 </script>
 
     <?php
