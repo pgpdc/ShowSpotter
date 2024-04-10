@@ -76,8 +76,10 @@ foreach($enteredTickets as $key => $value)
 
 
 //test adding items
+
 if (isset($_POST['foodVal'])){
-    $foodValue = $_POST['foodVal'];
+    $_SESSION['foodItem'] = $_POST['foodVal'];
+    $foodValue = $_SESSION['foodItem'];
     
     //$arrayCost = [];
     //$_SESSION['customer'] = array();
@@ -110,7 +112,7 @@ if (isset($_POST['foodVal'])){
         }
     }
     
-
+$foodValue= $_SESSION['foodItem'];
 
 
 
@@ -129,6 +131,7 @@ if (isset($_POST['foodVal'])){
                 <th>Tickets:</th>
                 <th>Item Quantity:</th>
                 <th>Final Item(s) Cost:</th>
+                <th>Remove Button</th>
             </tr>
     <?php       
     $finalCost = 0;
@@ -230,17 +233,107 @@ if (isset($_POST['foodVal'])){
     //echo "<br>"."Final Cost:".$finalCost;
     //$_SESSION['finalcost'] = $finalCost;
     //echo "YES {$_SESSION['finalcost']}";
-
-
+    
+    foreach($foodValue as $i => $n){
+        
+    }
+    echo json_encode($foodValue);
     ?>
     </table>
     <br>
-    <!--<button onclick="deleteRow()">Click</button>
+    <label for="ItemO"></label>
+    <label for="Num"></label>
+    <p id="testArr"></p>
+    <script type="text/javascript">
+    let valNum = [];
+    var arr = <?php echo json_encode($foodValue); ?>;
+    var arrNum = <?php echo json_encode($n); ?>;
+    var carName = "Volvo";
+    let entries = Object.entries(arr);
+    let data = entries.map( ([key, val] = entry) => {
+  return val;
+});
+let keys = Object.keys(arr);
+console.log("YESKEYS",keys);
+for (let value of Object.values(arr)){
+    //alert(value);
+}
+console.log(Reflect.ownKeys(arr));
+for (const entry of Array.prototype.values.call(arr)) {
+  console.log(entry);
+}
+delete arr[0];
+console.log(Reflect.ownKeys(arr));
+    //document.getElementById("testArr").innerHTML = arr[0];
+    //let inc = 0;
+    
+    let itemName = Object.keys(arr);
+    let value = Object.values(arr);
+
+    function deleteButton(i) {
+        alert(i);
+        value.splice(i,1);
+        itemName.splice(i,1);
+        console.log(value);
+        console.log(itemName);
+        displayChart();
+    }
+
+    function minusButton(i) {
+        if (value[i] == 1){
+            displayChart();
+        }else{
+        value[i] = value[i]-1;
+        displayChart();}
+    }
+
+    function addButton(i) {
+        if (value[i] == 10){
+        displayChart();
+    }else{
+        var addOne =1;
+        console.log("addButton"+addOne);
+        value[i] = ++value[i];
+        displayChart();}
+    }
+    
+
+
+
+    function displayChart(){
+            var html = "<table border='1|1' class='table'>";
+            setTimeout(() => {
+                html += "<thread>";
+                html +="<tr>";
+                html += "<td>"+"Quantity"+"</td>";
+                html += "<td>"+"Item"+"</td>";
+                html += "<td>"+"Delete Row"+"</td>";
+                html += "<td>"+"Minus"+"</td>";
+                html += "<td>"+"Add"+"</td>";
+                html += "</tr>";
+                html += "</thread>";
+                var inc = 0;
+                for(var i = 0; i < value.length;i++){
+                    html +="<tr>";
+                    html += "<td>"+ value[i] +"</td>";
+                    html += "<td>"+ itemName[i] +"</td>";
+                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='deleteButton(${i})'>Delete</button>` + "</td>";
+                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='minusButton(${i})'>-</button>` + "</td>";
+                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='addButton(${i})'>+</button>` + "</td>";
+                    html += "</tr>";
+                    inc = inc + 1; 
+                    
+            }
+        html += "</table>";
+        document.getElementById("testArr").innerHTML = html},200);
+            }
+        displayChart();
+        
+    </script>
+    
+    
     <script>
-        function deleteRow(){
-            document.getElementById("costTable").deleteRow(0);
-        }
-       </script>*/-->
+</script>
 </section>
 <input type="submit" value="Submit">
 </form>
