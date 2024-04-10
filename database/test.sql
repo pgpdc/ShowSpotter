@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2024 at 09:01 PM
+-- Generation Time: Apr 10, 2024 at 08:42 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,161 @@ SET time_zone = "+00:00";
 --
 -- Database: `test`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `foodprices`
+--
+
+CREATE TABLE `foodprices` (
+  `foodItem` varchar(30) NOT NULL,
+  `foodPrice` decimal(5,0) NOT NULL,
+  `inventory` int(16) NOT NULL,
+  `barcode` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `foodprices`
+--
+
+INSERT INTO `foodprices` (`foodItem`, `foodPrice`, `inventory`, `barcode`) VALUES
+('largeDrink', 8, 0, 0),
+('largePopcorn', 10, 0, 0),
+('mediumDrink', 6, 0, 0),
+('mediumPopcorn', 8, 0, 0),
+('smallDrink', 4, 0, 0),
+('smallPopcorn', 5, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ordereditems`
+--
+
+CREATE TABLE `ordereditems` (
+  `id` bigint(20) NOT NULL,
+  `timeV` varchar(30) NOT NULL,
+  `dateV` varchar(16) NOT NULL,
+  `idForRoom` decimal(11,0) NOT NULL,
+  `item` varchar(30) NOT NULL,
+  `itemCost` decimal(15,0) NOT NULL,
+  `finalItemCost` decimal(15,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `ordereditems`
+--
+
+INSERT INTO `ordereditems` (`id`, `timeV`, `dateV`, `idForRoom`, `item`, `itemCost`, `finalItemCost`) VALUES
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 4, 32),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 5, 30),
+(999, '06:05:00', '2024-04-03', 0, 'smallDrink', 10, 40),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 4, 32),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 5, 30),
+(999, '06:05:00', '2024-04-03', 0, 'smallDrink', 10, 40),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 2, 16),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 4, 24),
+(999, '06:05:00', '2024-04-03', 0, 'smallPopcorn', 8, 40),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 2, 16),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 4, 24),
+(999, '06:05:00', '2024-04-03', 0, 'smallPopcorn', 8, 40),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 2, 16),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 4, 24),
+(999, '06:05:00', '2024-04-03', 0, 'smallPopcorn', 8, 40),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 1, 8),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 1, 6),
+(999, '06:05:00', '2024-04-03', 0, 'smallDrink', 1, 4),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 1, 8),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 1, 6),
+(999, '06:05:00', '2024-04-03', 0, 'smallDrink', 1, 4),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 1, 8),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 1, 6),
+(999, '06:05:00', '2024-04-03', 0, 'smallDrink', 1, 4),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 1, 8),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 1, 6),
+(999, '06:05:00', '2024-04-03', 0, 'smallDrink', 1, 4),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 1, 8),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 1, 6),
+(999, '06:05:00', '2024-04-03', 0, 'smallDrink', 1, 4),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 1, 8),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 1, 6),
+(999, '06:05:00', '2024-04-03', 0, 'smallDrink', 1, 4),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 1, 8),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 1, 6),
+(999, '06:05:00', '2024-04-03', 0, 'smallDrink', 1, 4),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 1, 8),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 1, 6),
+(999, '06:05:00', '2024-04-03', 0, 'smallDrink', 1, 4),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 1, 8),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 1, 6),
+(999, '06:05:00', '2024-04-03', 0, 'smallDrink', 1, 4),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 1, 8),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 1, 6),
+(999, '06:05:00', '2024-04-03', 0, 'smallDrink', 1, 4),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 1, 8),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 1, 6),
+(999, '06:05:00', '2024-04-03', 0, 'smallDrink', 1, 4),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 1, 8),
+(999, '06:05:00', '2024-04-03', 0, 'mediumPopcorn', 8, 64),
+(999, '06:05:00', '2024-04-03', 0, 'smallPopcorn', 8, 40),
+(999, '06:05:00', '2024-04-03', 0, 'largeDrink', 4, 32),
+(999, '06:05:00', '2024-04-03', 0, 'mediumDrink', 2, 12),
+(999, '06:05:00', '2024-04-03', 0, 'smallPopcorn', 9, 45),
+(999, '20:00:00', '2024-04-03', 2, 'largeDrink', 6, 48),
+(999, '20:00:00', '2024-04-03', 2, 'mediumDrink', 8, 48),
+(999, '20:00:00', '2024-04-03', 2, 'mediumDrink', 3, 18),
+(999, '20:00:00', '2024-04-03', 2, 'largeDrink', 2, 16),
+(999, '20:00:00', '2024-04-03', 2, 'largePopcorn', 1, 10),
+(999, '20:00:00', '2024-04-03', 2, 'mediumPopcorn', 8, 64),
+(999, '20:00:00', '2024-04-03', 2, 'smallDrink', 8, 32);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderedtickets`
+--
+
+CREATE TABLE `orderedtickets` (
+  `id` bigint(20) NOT NULL,
+  `timeV` varchar(30) NOT NULL,
+  `dateV` varchar(16) NOT NULL,
+  `idForRoom` int(8) NOT NULL,
+  `ticket` varchar(30) NOT NULL,
+  `sum` varchar(10) NOT NULL,
+  `finalPrice` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `orderedtickets`
+--
+
+INSERT INTO `orderedtickets` (`id`, `timeV`, `dateV`, `idForRoom`, `ticket`, `sum`, `finalPrice`) VALUES
+(999, '06:05:00', '2024-04-03', 0, 'A3', 'Adult', 15),
+(999, '06:05:00', '2024-04-03', 0, 'A4', 'Child', 15),
+(999, '06:05:00', '2024-04-03', 0, 'A3', 'Adult', 15),
+(999, '06:05:00', '2024-04-03', 0, 'A4', 'Child', 15),
+(999, '06:05:00', '2024-04-03', 0, 'B2', 'Adult', 9),
+(999, '06:05:00', '2024-04-03', 0, 'B2', 'Adult', 9),
+(999, '06:05:00', '2024-04-03', 0, 'B2', 'Adult', 9),
+(999, '06:05:00', '2024-04-03', 0, 'B3', 'Senior', 4),
+(999, '06:05:00', '2024-04-03', 0, 'B3', 'Senior', 4),
+(999, '06:05:00', '2024-04-03', 0, 'B3', 'Senior', 4),
+(999, '06:05:00', '2024-04-03', 0, 'B3', 'Senior', 4),
+(999, '06:05:00', '2024-04-03', 0, 'B3', 'Senior', 4),
+(999, '06:05:00', '2024-04-03', 0, 'B3', 'Senior', 4),
+(999, '06:05:00', '2024-04-03', 0, 'B3', 'Senior', 4),
+(999, '06:05:00', '2024-04-03', 0, 'B3', 'Senior', 4),
+(999, '06:05:00', '2024-04-03', 0, 'B3', 'Senior', 4),
+(999, '06:05:00', '2024-04-03', 0, 'B3', 'Senior', 4),
+(999, '06:05:00', '2024-04-03', 0, 'B3', 'Senior', 4),
+(999, '06:05:00', '2024-04-03', 0, 'B4', 'Adult', 9),
+(999, '06:05:00', '2024-04-03', 0, 'C1', 'Adult', 9),
+(999, '20:00:00', '2024-04-03', 2, 'A3', 'Adult', 9),
+(999, '20:00:00', '2024-04-03', 2, 'G3', 'Adult', 9),
+(999, '20:00:00', '2024-04-03', 2, 'C4', 'Child', 6),
+(999, '20:00:00', '2024-04-03', 2, 'C6', 'Child', 15),
+(999, '20:00:00', '2024-04-03', 2, 'D6', 'Adult', 15);
 
 -- --------------------------------------------------------
 
@@ -95,12 +250,19 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`session_id`, `seat_id`, `user_id`, `time`, `date`, `id`) VALUES
+(1, 'A3', 999, '20:00:00', '2024-04-03', 2),
 (1, 'C2', 999, '21:00:00', '2024-04-01', 0),
 (1, 'C3', 999, '21:00:00', '2024-04-01', 0),
+(1, 'C3', 999, '21:00:00', '2024-04-03', 2),
+(1, 'C4', 999, '20:00:00', '2024-04-03', 2),
+(1, 'C4', 999, '21:00:00', '2024-04-03', 2),
 (1, 'C5', 999, '21:00:00', '2024-04-02', 0),
+(1, 'C6', 999, '20:00:00', '2024-04-03', 2),
 (1, 'D2', 999, '21:00:00', '2024-04-01', 1),
 (1, 'D3', 999, '21:00:00', '2024-04-01', 0),
-(1, 'E2', 999, '21:00:00', '2024-04-01', 0);
+(1, 'D6', 999, '20:00:00', '2024-04-03', 2),
+(1, 'E2', 999, '21:00:00', '2024-04-01', 0),
+(1, 'G3', 999, '20:00:00', '2024-04-03', 2);
 
 -- --------------------------------------------------------
 
@@ -246,6 +408,13 @@ INSERT INTO `sessions` (`session_id`, `room_id`, `session_date`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `foodprices`
+--
+ALTER TABLE `foodprices`
+  ADD PRIMARY KEY (`foodItem`),
+  ADD UNIQUE KEY `foodPrimary` (`foodItem`,`foodPrice`);
 
 --
 -- Indexes for table `prices`
