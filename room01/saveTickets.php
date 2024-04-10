@@ -170,7 +170,6 @@ $foodValue= $_SESSION['foodItem'];
 
         }
     }}   
-
     //$finalCost = 0;
     //Test
     
@@ -238,6 +237,7 @@ $foodValue= $_SESSION['foodItem'];
         
     }
     echo json_encode($foodValue);
+    echo json_encode($enteredTickets);
     ?>
     </table>
     <br>
@@ -246,9 +246,16 @@ $foodValue= $_SESSION['foodItem'];
     <p id="testArr"></p>
     <script type="text/javascript">
     let valNum = [];
+    //Array for tickets from php to javascript
+    //var arrT = <?php echo json_encode($enteredTickets); ?>;
+    //Array for concessions from php to javascript
     var arr = <?php echo json_encode($foodValue); ?>;
     var arrNum = <?php echo json_encode($n); ?>;
-    
+    //Tickets split to key and value
+    //let ticketName = Object.keys(arrT);
+    //let valueT = Object.values(arrT);
+
+    //Concessions
     let itemName = Object.keys(arr);
     let value = Object.values(arr);
 
@@ -295,6 +302,23 @@ $foodValue= $_SESSION['foodItem'];
                 html += "</tr>";
                 html += "</thread>";
                 var inc = 0;
+                //Tickets
+                /*for(var i = 0; i < valueT.length;i++){
+                    html +="<tr>";
+                    html += "<td>"+ valueT[i] +"</td>";
+                    html += "<td>"+ ticketName[i] +"</td>";
+                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='deleteButton(${i})'>Delete</button>` + "</td>";
+                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='minusButton(${i})'>-</button>` + "</td>";
+                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='addButton(${i})'>+</button>` + "</td>";
+                    html += "</tr>";
+                    inc = inc + 1; 
+                    
+            }*/
+
+
+
+
+                //Concessions
                 for(var i = 0; i < value.length;i++){
                     html +="<tr>";
                     html += "<td>"+ value[i] +"</td>";
