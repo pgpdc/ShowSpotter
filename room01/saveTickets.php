@@ -248,24 +248,6 @@ $foodValue= $_SESSION['foodItem'];
     let valNum = [];
     var arr = <?php echo json_encode($foodValue); ?>;
     var arrNum = <?php echo json_encode($n); ?>;
-    var carName = "Volvo";
-    let entries = Object.entries(arr);
-    let data = entries.map( ([key, val] = entry) => {
-  return val;
-});
-let keys = Object.keys(arr);
-console.log("YESKEYS",keys);
-for (let value of Object.values(arr)){
-    //alert(value);
-}
-console.log(Reflect.ownKeys(arr));
-for (const entry of Array.prototype.values.call(arr)) {
-  console.log(entry);
-}
-delete arr[0];
-console.log(Reflect.ownKeys(arr));
-    //document.getElementById("testArr").innerHTML = arr[0];
-    //let inc = 0;
     
     let itemName = Object.keys(arr);
     let value = Object.values(arr);
