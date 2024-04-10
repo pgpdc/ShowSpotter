@@ -247,13 +247,13 @@ $foodValue= $_SESSION['foodItem'];
     <script type="text/javascript">
     let valNum = [];
     //Array for tickets from php to javascript
-    //var arrT = <?php echo json_encode($enteredTickets); ?>;
+    var arrT = <?php echo json_encode($enteredTickets); ?>;
     //Array for concessions from php to javascript
     var arr = <?php echo json_encode($foodValue); ?>;
     var arrNum = <?php echo json_encode($n); ?>;
     //Tickets split to key and value
-    //let ticketName = Object.keys(arrT);
-    //let valueT = Object.values(arrT);
+    let ticketName = Object.keys(arrT);
+    let valueT = Object.values(arrT);
 
     //Concessions
     let itemName = Object.keys(arr);
@@ -265,6 +265,15 @@ $foodValue= $_SESSION['foodItem'];
         itemName.splice(i,1);
         console.log(value);
         console.log(itemName);
+        displayChart();
+    }
+
+    function deleteTicket(i) {
+        alert(i);
+        valueT.splice(i,1);
+        ticketName.splice(i,1);
+        console.log(valueT);
+        console.log(ticketName);
         displayChart();
     }
 
@@ -294,8 +303,8 @@ $foodValue= $_SESSION['foodItem'];
             setTimeout(() => {
                 html += "<thread>";
                 html +="<tr>";
-                html += "<td>"+"Quantity"+"</td>";
-                html += "<td>"+"Item"+"</td>";
+                html += "<td>"+"Quantity/Ticket Type"+"</td>";
+                html += "<td>"+"Item/Seat Number"+"</td>";
                 html += "<td>"+"Delete Row"+"</td>";
                 html += "<td>"+"Minus"+"</td>";
                 html += "<td>"+"Add"+"</td>";
@@ -303,17 +312,17 @@ $foodValue= $_SESSION['foodItem'];
                 html += "</thread>";
                 var inc = 0;
                 //Tickets
-                /*for(var i = 0; i < valueT.length;i++){
+                for(var i = 0; i < valueT.length;i++){
                     html +="<tr>";
                     html += "<td>"+ valueT[i] +"</td>";
                     html += "<td>"+ ticketName[i] +"</td>";
-                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='deleteButton(${i})'>Delete</button>` + "</td>";
-                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='minusButton(${i})'>-</button>` + "</td>";
-                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='addButton(${i})'>+</button>` + "</td>";
+                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='deleteTicket(${i})'>Delete</button>` + "</td>";
+                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick=''></button>` + "</td>";
+                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick=''></button>` + "</td>";
                     html += "</tr>";
                     inc = inc + 1; 
                     
-            }*/
+            }
 
 
 
