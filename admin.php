@@ -38,6 +38,7 @@ if ($_SESSION["admin"] != TRUE) {
     <a href="addMovies.php">Add Movies</a>
     <a href="movieSchedule.php">Movie Schedule</a>
     <a href="admin_edit_account.php">Edit User Accounts</a>
+    <a href="modifyInventory.php">Inventory</a>
 
   </div>
 </body>
