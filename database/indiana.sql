@@ -64,8 +64,7 @@ CREATE TABLE `movies` (
 
 INSERT INTO `movies` (`imdbid`, `title`, `imageUrl`) VALUES
 ('tt0052357', 'Vertigo', 'https://m.media-amazon.com/images/M/MV5BYTE4ODEwZDUtNDFjOC00NjAxLWEzYTQtYTI1NGVmZmFlNjdiL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_.jpg'),
-('tt0054215', 'Psycho', 'https://m.media-amazon.com/images/M/MV5BNTQwNDM1YzItNDAxZC00NWY2LTk0M2UtNDIwNWI5OGUyNWUxXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg'),
-('tt6263850', 'Deadpool 3', '');
+('tt0054215', 'Psycho', 'https://m.media-amazon.com/images/M/MV5BNTQwNDM1YzItNDAxZC00NWY2LTk0M2UtNDIwNWI5OGUyNWUxXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg');
 
 -- --------------------------------------------------------
 
