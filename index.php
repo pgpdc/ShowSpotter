@@ -50,6 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
 }
 
 */
+session_start();
+
+function isAdmin() {
+    return isset($_SESSION['admin']) && $_SESSION['admin'] === TRUE;
+}
+
+$isUserAdmin = isAdmin();
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +84,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
             <a href="index.php">Home</a>
             <a href="">Concessions</a>
             <a href="checkout.html">Checkout</a>
-            <a href="login.php">Sign-In</a>
+            <?php if ($isUserAdmin): ?>
+                <a href="admin.php">Admin Hub</a>  
+            <?php endif; ?> 
+            <div class="dropdown">
+                <button class="dropbtn">Account</button>
+                <div class="dropdown-content">
+                <?php if ($isUserAdmin): ?> 
+                    <p>Admin</p> 
+                <?php else: ?> 
+                    <p>Customer</p> 
+                <?php endif; ?>
+                    <a href="login.php">Sign-In</a>
+                    <a href="logout.php">Log-Out</a>
+                </div>
+            </div>
         </div>
     </nav>
     <br>

@@ -1,57 +1,15 @@
-ul{
-    background: purple;
-    text-align: center;
-    font-size: 30px;
-    list-style:none;
+* {
+    padding: 0%;
+    margin: 0%;
 }
 
-li {
-    display: block;
-    padding: 30px;
-    color: black;
+body{
+    font-family: "Verdana", "Geneva", sans-serif;
+    background: linear-gradient(to bottom, #000000, #171717);
     text-align: center;
-    text-decoration: none;
-    font-size: 30px;
-}
-ul li a{
-    display: block;
-    padding: 5px;
-    color: black;
-    text-align: center;
-    text-decoration: none;
-    font-size: 30px;
-}
-ul li ul.dropdown {
-    text-align: center;
-    width:5px;
-    position:absolute;
-    z-index: 150;
-    display:none;
-}
-ul li a:hover {
-    background:plum;
-}
-ul li:hover ul.dropdown{
-    font-display: 5px;
-    display:contents;
-}
-
-h1{
-    background: blueviolet;
-    font-size: 50pt;
-    font-family: 'Times New Roman', Times, serif ;
-    color: black;
-    text-align:center;
-    margin: -8px;
-    margin-bottom: 15px;
-}
-
-body{font-family: "Verdana", "Geneva", sans-serif;
-    background: linear-gradient(to bottom, #000000, #434343);
-    align-content: center;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
-    font-size:30px;
-    
 }
 
 .container {

@@ -28,6 +28,11 @@ $stmt = mysqli_prepare($link, $sql);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
+function isAdmin() {
+    return isset($_SESSION['admin']) && $_SESSION['admin'] === TRUE;
+}
+
+$isUserAdmin = isAdmin();
 
 ?>
 
@@ -50,7 +55,21 @@ $result = mysqli_stmt_get_result($stmt);
             <a href="index.php">Home</a>
             <a href="">Concessions</a>
             <a href="checkout.html">Checkout</a>
-            <a href="login.php">Sign-In</a>
+            <?php if ($isUserAdmin): ?>
+                <a href="admin.php">Admin Hub</a>  
+            <?php endif; ?>    
+            <div class="dropdown">
+                <button class="dropbtn">Account</button>
+                <div class="dropdown-content">
+                <?php if ($isUserAdmin): ?> 
+                    <p>Admin</p> 
+                <?php else: ?> 
+                    <p>Customer</p> 
+                <?php endif; ?>
+                    <a href="login.php">Sign-In</a>
+                    <a href="logout.php">Log-Out</a>
+                </div>
+            </div>
         </div>
     </nav>
 
