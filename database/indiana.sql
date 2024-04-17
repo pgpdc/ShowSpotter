@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2024 at 08:41 PM
+-- Generation Time: Apr 17, 2024 at 04:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,12 +39,12 @@ CREATE TABLE `foodprices` (
 --
 
 INSERT INTO `foodprices` (`foodItem`, `foodPrice`, `inventory`, `barcode`) VALUES
-('largeDrink', 8.00, 0, 0),
-('largePopcorn', 10.00, 0, 0),
-('mediumDrink', 6.00, 0, 0),
-('mediumPopcorn', 8.00, 0, 0),
-('smallDrink', 4.00, 0, 0),
-('smallPopcorn', 5.00, 0, 0);
+('Large Drink', 8.00, 100, 0),
+('Large Popcorn', 10.00, 100, 0),
+('Medium Drink', 6.00, 50, 0),
+('Medium Popcorn', 8.00, 100, 0),
+('Small Drink', 4.00, 0, 0),
+('Small Popcorn', 5.00, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -64,7 +64,8 @@ CREATE TABLE `movies` (
 
 INSERT INTO `movies` (`imdbid`, `title`, `imageUrl`) VALUES
 ('tt0052357', 'Vertigo', 'https://m.media-amazon.com/images/M/MV5BYTE4ODEwZDUtNDFjOC00NjAxLWEzYTQtYTI1NGVmZmFlNjdiL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_.jpg'),
-('tt0054215', 'Psycho', 'https://m.media-amazon.com/images/M/MV5BNTQwNDM1YzItNDAxZC00NWY2LTk0M2UtNDIwNWI5OGUyNWUxXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg');
+('tt0054215', 'Psycho', 'https://m.media-amazon.com/images/M/MV5BNTQwNDM1YzItNDAxZC00NWY2LTk0M2UtNDIwNWI5OGUyNWUxXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg'),
+('tt0876563', 'Ponyo', 'https://m.media-amazon.com/images/M/MV5BOTc3YmM3N2QtODZkMC00ZDE5LThjMTQtYTljN2Y1YTYwYWJkXkEyXkFqcGdeQXVyODEzNjM5OTQ@._V1_.jpg');
 
 -- --------------------------------------------------------
 
@@ -276,6 +277,7 @@ CREATE TABLE `reservations` (
 
 INSERT INTO `reservations` (`session_id`, `seat_id`, `user_id`, `time`, `date`, `id`) VALUES
 (1, 'A3', 999, '20:00:00', '2024-04-03', 2),
+(1, 'A4', 999, '10:39:00', '2024-04-17', 1),
 (1, 'C2', 999, '20:00:00', '2024-04-10', 1),
 (1, 'C2', 999, '21:00:00', '2024-04-01', 0),
 (1, 'C3', 999, '10:00:00', '2024-04-15', 1),
@@ -469,7 +471,8 @@ INSERT INTO `showtimes` (`id`, `imdbid`, `date`, `timestart`, `timeend`, `room_i
 (28, 'tt0052357', '2024-04-01', '21:00:00', '23:59:00', '01'),
 (29, 'tt0054215', '2024-04-03', '20:00:00', '23:00:00', '02'),
 (30, 'tt0054215', '2024-04-10', '20:00:00', '22:00:00', '1'),
-(31, 'tt0054215', '2024-04-15', '10:00:00', '12:00:00', '1');
+(31, 'tt0054215', '2024-04-15', '10:00:00', '12:00:00', '1'),
+(32, 'tt0876563', '2024-04-17', '10:39:00', '00:39:00', '1');
 
 --
 -- Indexes for dumped tables
@@ -541,7 +544,7 @@ ALTER TABLE `sessions`
 -- AUTO_INCREMENT for table `showtimes`
 --
 ALTER TABLE `showtimes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
