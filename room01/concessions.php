@@ -30,14 +30,15 @@ session_start();
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "test";
+    //Change to indiana
+    $dbname = "indiana";
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn-> connect_error){
         die("Connection Error");
     }
     
     //read in food and drink Items
-    $sql = "SELECT foodItem,foodPrice FROM foodprices";
+    $sql = "SELECT foodItem,foodPrice FROM foodprices ORDER BY foodItem DESC";
     $result = $conn->query($sql);
     
    
@@ -56,16 +57,58 @@ session_start();
 }           
      //Loop-For customer selection of food and drink
      $a=0;
+     ?><p>Drinks:<p><?php
      foreach ($food as $f) 
      {
         //$foodName = array();
-        //$carry = $_POST[$foodName[$f]];
+         //$carry = $_POST[$foodName[$f]];
+        //For drinks
+        $drink = "Drink";
+       
+        //For popcorn
+        $popcorn = "Popcorn";
+        
         $stringPrint = $f;
         $splitCapital = preg_split('/(?=[A-Z])/',$stringPrint);
         $capital = implode(' ',$splitCapital);
-        
         //echo "Select how may you want for ".$word.":";
-        echo "<label for='$f'>Select how may $capital(s)you would like to purchase:<br></label>";
+        
+        if (strpos($stringPrint,$drink) !==false){
+        echo "<label for='$f'>Select how may $f(s) you would like to purchase:<br></label>";
+        //echo "<select name='foodVal[$f]'>
+        echo "<select name='foodVal[$f]'>
+              <option value='0'></option>
+              <option value='1'>1</option>
+              <option value='2'>2</option>
+              <option value='3'>3</option>
+              <option value='4'>4</option>
+              <option value='5'>5</option>
+              <option value='6'>6</option>
+              <option value='7'>7</option>
+              <option value='8'>8</option>
+              <option value='9'>9</option>
+              <option value='10'>10</option>
+                            </select><br>";}
+        $a = $a + 1;}
+
+        ?><p>Popcorn:<p><?php
+        foreach ($food as $f) 
+     {
+        //$foodName = array();
+         //$carry = $_POST[$foodName[$f]];
+        //For drinks
+        $drink = "Drink";
+       
+        //For popcorn
+        $popcorn = "Popcorn";
+        
+        $stringPrint = $f;
+        $splitCapital = preg_split('/(?=[A-Z])/',$stringPrint);
+        $capital = implode(' ',$splitCapital);
+        //echo "Select how may you want for ".$word.":";
+        
+        if(strpos($stringPrint,$popcorn) !==false){
+        echo "<label for='$f'>Select how may $f(s) you would like to purchase:<br></label>";
         //echo "<select name='foodVal[$f]'>
         echo "<select name='foodVal[$f]'>
               <option value='0'></option>
@@ -80,9 +123,9 @@ session_start();
               <option value='9'>9</option>
               <option value='10'>10</option>
                             </select><br>";
-        $a = $a + 1;
-
-    }
+        $a = $a + 1;}
+     }
+    
     
     ?>
     <input type="submit" value="Submit">

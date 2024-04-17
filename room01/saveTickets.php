@@ -128,12 +128,19 @@ $foodValue= $_SESSION['foodItem'];
         <h1>Tickets:</h1>
         <table id="costTable">
             <tr>
-                <th>Tickets:</th>
+                <!--<th>Tickets:</th>
                 <th>Item Quantity:</th>
                 <th>Final Item(s) Cost:</th>
                 <th>Remove Button</th>
-            </tr>
-    <?php       
+            </tr>-->
+    <?php  
+    //For cost table javascript
+    $costPerTicket = array();
+    $costPerItem = array();
+    $ItemCostFinal = array();
+
+
+
     $finalCost = 0;
     //Test
     foreach ($enteredTickets as $type => $ticket)
@@ -148,16 +155,17 @@ $foodValue= $_SESSION['foodItem'];
     if (mysqli_num_rows($result) > 0){
         while($row = mysqli_fetch_assoc($result)){
                 if($row["ticket"] = $ticket){
+                    array_push($costPerTicket,$row["cost"]);
                        ?>
-                        <tr>
-                        <td><?php echo $row["ticket"]; 
+                        <!--<tr>
+                        <td><?php //echo $row["ticket"]; 
                         //$_SESSION[""]  
                               ?>, 
-                        <td><?php echo $row["cost"]; 
+                        <td><?php //echo $row["cost"]; 
                             //array_push($_SESSION['customerCost'],$row["cost"]);
                               //$a = $a+1;
                               ?> </td>
-                         </tr>
+                         </tr>-->
                          
                 
                         <?php
@@ -185,32 +193,40 @@ $foodValue= $_SESSION['foodItem'];
     //echo $ticket;
     $a = 0;
     $var = 0;
+    $val = 0;
     //$var=array();
     if (mysqli_num_rows($resultItem) > 0){
         while($row = mysqli_fetch_assoc($resultItem)){
+            $val =  $row["foodPrice"]*$num;
+            //echo "FINAL COSTS: $val";
+            //PUSH FINAL PRICE FOR EACH ITEM
+            array_push($ItemCostFinal,$val);
+
+            //Push FOOD PRICE
+            array_push($costPerItem,$row["foodPrice"]);
                 if($row["foodItem"] = $item AND $num != 0){
                     //$row["foodItem"] = $ticket
                     //echo $row["foodItem"];
                     //echo "YES";
                        ?>
-                        <tr>
+                        <!--<tr>
                         
-                        <td><?php echo $item; 
+                        <td><?php //echo $item; 
                                   array_push($_SESSION['customerItem'],$item);        
                               ?>, 
                         
                         
-                        <td><?php echo $num; 
+                        <td><?php //echo $num; 
                                   array_push($_SESSION['itemCost'],$num);
                   
                               ?>, 
                         
                         
-                        <td><?php echo  $var= $num*$row["foodPrice"]; 
+                        <td><?php //echo  $var= $num*$row["foodPrice"]; 
                                   array_push($_SESSION['itemsFinal'],$var);
                               //$a = $a+1;
                               ?> </td>
-                         </tr>
+                         </tr>-->
                          
                 
                         <?php
@@ -225,7 +241,7 @@ $foodValue= $_SESSION['foodItem'];
     //array_push($_SESSION['itemsFinal'],$num);
     ?>
     <tr>
-    <th colspan="2"><?php echo "Final Cost: ".$finalCost; ?> </th>
+    <th colspan="2"><?php //echo "Final Cost: ".$finalCost; ?> </th>
     </tr>
     <?php
 
@@ -233,11 +249,28 @@ $foodValue= $_SESSION['foodItem'];
     //$_SESSION['finalcost'] = $finalCost;
     //echo "YES {$_SESSION['finalcost']}";
     
-    foreach($foodValue as $i => $n){
+    foreach($costPerTicket as $ia => $priceVal){
         
     }
-    echo json_encode($foodValue);
-    echo json_encode($enteredTickets);
+    $shownCost = array();
+    
+    foreach($costPerItem as $is => $ci){
+        
+    }
+
+    foreach($foodValue as $i => $n){
+        //echo "VAL: $n <br>";
+        //array_merge($shownCost, $n);
+        //$shownCost.push($n);
+    }
+    
+    //echo json_encode($foodValue);
+    //echo json_encode($enteredTickets);
+    //echo json_encode($shownCost);
+    //Ticket Cost
+    //echo json_encode($costPerTicket);
+    //Final Item Cost
+    //echo json_encode($ItemCostFinal);
     ?>
     </table>
     <br>
@@ -245,21 +278,37 @@ $foodValue= $_SESSION['foodItem'];
     <label for="Num"></label>
     <p id="testArr"></p>
     <script type="text/javascript">
+
     let valNum = [];
     //Array for tickets from php to javascript
     var arrT = <?php echo json_encode($enteredTickets); ?>;
     //Array for concessions from php to javascript
     var arr = <?php echo json_encode($foodValue); ?>;
-    var arrNum = <?php echo json_encode($n); ?>;
+    
+    //console.log(arrNum);
+
+    //Array For Cost for Tickets
+    var ticketCost = <?php echo json_encode($costPerTicket); ?>;
+    
+    //Array For Cost for Items
+    const itemsCost = <?php echo json_encode($costPerItem); ?>;
+    const PerCostItem = itemsCost;
+    const finalItemCosts = <?php echo json_encode($ItemCostFinal); ?>;
     //Tickets split to key and value
     let ticketName = Object.keys(arrT);
     let valueT = Object.values(arrT);
+
 
     //Concessions
     let itemName = Object.keys(arr);
     let value = Object.values(arr);
 
     function deleteButton(i) {
+        //Minus for FinalCost for the item
+        //Removing finalCost value
+        const final= Number(finalCost) - Number(finalItemCosts[i]);
+        finalCost = final;
+
         alert(i);
         value.splice(i,1);
         itemName.splice(i,1);
@@ -269,6 +318,12 @@ $foodValue= $_SESSION['foodItem'];
     }
 
     function deleteTicket(i) {
+        //Minus for FinalCost for the ticket
+        //Removing finalCost value
+        const final= Number(finalCost) - Number(ticketCost[i]);
+        finalCost = final;
+        
+
         alert(i);
         valueT.splice(i,1);
         ticketName.splice(i,1);
@@ -281,6 +336,13 @@ $foodValue= $_SESSION['foodItem'];
         if (value[i] == 1){
             displayChart();
         }else{
+        //Removing final cost for item
+        const final = Number(finalCost) - Number(itemsCost[i]);
+        finalCost = final;
+        //Add to cost count for item
+        const sum = Number(finalItemCosts[i])-Number(itemsCost[i]);
+        finalItemCosts[i] = sum;
+        
         value[i] = value[i]-1;
         displayChart();}
     }
@@ -289,14 +351,32 @@ $foodValue= $_SESSION['foodItem'];
         if (value[i] == 10){
         displayChart();
     }else{
+        //Removing finalCost value
+        const final= Number(finalCost) - Number(finalItemCosts[i]);
+        finalCost = final;
+        console.log(finalCost);
         var addOne =1;
         console.log("addButton"+addOne);
+        //Add to cost count for item
+        const sum = Number(itemsCost[i])+Number(finalItemCosts[i]);
+        finalItemCosts[i] = sum;
+        
+        //Updating finalCost
+        const added= Number(finalCost) + Number(sum);
+        finalCost= added;
         value[i] = ++value[i];
         displayChart();}
     }
+
     
-
-
+    var finalCost = 0;
+    var finalTicket = 0;
+    for(var i = 0; i < ticketCost.length;i++){
+          finalCost += Number(ticketCost[i]);
+    }
+    for(var i = 0; i < finalItemCosts.length;i++){
+            finalCost += finalItemCosts[i];
+    }
 
     function displayChart(){
             var html = "<table border='1|1' class='table'>";
@@ -308,10 +388,18 @@ $foodValue= $_SESSION['foodItem'];
                 html += "<td>"+"Delete Row"+"</td>";
                 html += "<td>"+"Minus"+"</td>";
                 html += "<td>"+"Add"+"</td>";
+                //Add cost
+                html += "<td>"+"Cost Per Item"+"</td>";
+                html += "<td>"+"Final Item Cost"+"</td>";
                 html += "</tr>";
+                
                 html += "</thread>";
                 var inc = 0;
                 //Tickets
+                var costs=0;
+                
+                
+                
                 for(var i = 0; i < valueT.length;i++){
                     html +="<tr>";
                     html += "<td>"+ valueT[i] +"</td>";
@@ -319,35 +407,57 @@ $foodValue= $_SESSION['foodItem'];
                     html += "<td>" + `<button type="button" class="btn btn-danger" onclick='deleteTicket(${i})'>Delete</button>` + "</td>";
                     html += "<td>" + `<button type="button" class="btn btn-danger" onclick=''></button>` + "</td>";
                     html += "<td>" + `<button type="button" class="btn btn-danger" onclick=''></button>` + "</td>";
+                    //Cost
+                    html += "<td>"+ ticketCost[i] +"</td>";
+                    html += "<td>"+ " " +"</td>";
                     html += "</tr>";
                     inc = inc + 1; 
                     
             }
-
+            
 
 
 
                 //Concessions
+                
                 for(var i = 0; i < value.length;i++){
+                    if (value[i] > 0){
                     html +="<tr>";
                     html += "<td>"+ value[i] +"</td>";
                     html += "<td>"+ itemName[i] +"</td>";
                     html += "<td>" + `<button type="button" class="btn btn-danger" onclick='deleteButton(${i})'>Delete</button>` + "</td>";
                     html += "<td>" + `<button type="button" class="btn btn-danger" onclick='minusButton(${i})'>-</button>` + "</td>";
                     html += "<td>" + `<button type="button" class="btn btn-danger" onclick='addButton(${i})'>+</button>` + "</td>";
+                    //Cost
+                    html += "<td>"+ itemsCost[i] +"</td>";
+                    html += "<td>"+ finalItemCosts[i] +"</td>";
                     html += "</tr>";
-                    inc = inc + 1; 
+                    
+                    inc = inc + 1;
+                    costs = costs+1;}
+                    else{
+                        inc = inc+1;
+                    }
                     
             }
         html += "</table>";
+        html += "<table>";
+        html +="<tr>";
+                html += "<td width=845px>"+"Final Price:"+ finalCost +"</td>";
+        html +="</tr>";
+        html += "</table>"
         document.getElementById("testArr").innerHTML = html},200);
             }
         displayChart();
-        
     </script>
     
     
     <script>
+const jsonObject = JSON.stringify(ticketName);
+sessionStorage.setItem('ticketName',jsonObject);
+const str = sessionStorage.getItem('ticketName');
+const parsedObject = JSON.parse(str);
+console.log(parsedObject);
 </script>
 </section>
 <input type="submit" value="Submit">
