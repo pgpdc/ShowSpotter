@@ -50,6 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
 }
 
 */
+session_start();
+
+function isAdmin() {
+    return isset($_SESSION['admin']) && $_SESSION['admin'] === TRUE;
+}
+
+$isUserAdmin = isAdmin();
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +67,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
     <title>Homepage</title>
     <link rel="stylesheet" href="Styles/ShowTimes.css">
     <link rel="stylesheet" href="Styles/navbar.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZa8k5Xckx5xLtJkdv3W5HkhV7OKd6CC0&callback=initMap" async defer></script>
+    <script>
+        function clearBox(elementID)
+    {
+    document.getElementById(elementID).innerHTML = "";
+    }
+    </script>
 </head>
 
 <body>
@@ -70,7 +84,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
             <a href="index.php">Home</a>
             <a href="">Concessions</a>
             <a href="checkout.html">Checkout</a>
-            <a href="login.php">Sign-In</a>
+            <?php if ($isUserAdmin): ?>
+                <a href="admin.php">Admin Hub</a>  
+            <?php endif; ?> 
+            <div class="dropdown">
+                <button class="dropbtn">Account</button>
+                <div class="dropdown-content">
+                <?php if ($isUserAdmin): ?> 
+                    <p>Admin</p> 
+                <?php else: ?> 
+                    <p>Customer</p> 
+                <?php endif; ?>
+                    <a href="login.php">Sign-In</a>
+                    <a href="logout.php">Log-Out</a>
+                </div>
+            </div>
         </div>
     </nav>
     <br>
@@ -82,12 +110,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
         };
     </script>
 
-    <!--
-    <form method="post">
-    <input type="text" name="location" placeholder="Latitude,Longitude" required>
-    <input type="submit" value="Search Movie Theaters">
+    
+    <form id="addressForm">
+        <input type="text" id="addressInput" placeholder="Enter an address">
+        <select name="distance" id="distance">
+            <option value="1610">1 Mile</option>
+            <option value="16094">10 Miles</option>
+            <option value="32187">20 Miles</option>
+            <option value="48280">30 Miles</option>
+        </select>
+        <button type="submit"  onclick="clearBox('placesContainer')">Get Theaters</button>
     </form>
-    -->
+
+    <script>
+        function initMap() {
+            var geocoder = new google.maps.Geocoder();
+
+            document.getElementById('addressForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                var address = document.getElementById('addressInput').value;
+                var distance = document.getElementById('distance').value;
+
+                geocoder.geocode({'address': address}, function(results, status) {
+                    if (status === 'OK') {
+                        var lat = results[0].geometry.location.lat();
+                        var lng = results[0].geometry.location.lng();
+                        
+                        console.log(lat + " " + lng);
+                        searchMovieTheatersWDistance(lat, lng, distance);
+                    } else {
+
+                    }
+                });
+            });
+        }
+    </script>
+    <br>
+     
 
     <div id="placesContainer"></div>
 
@@ -137,6 +196,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
     });
     }
 
+    function searchMovieTheatersWDistance(latitude, longitude, distance) {
+        //alert(latitude + " " + longitude);
+        fetch('http://localhost/ShowSpotter/locationSearchWDistance.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'latitude=' + encodeURIComponent(latitude) + '&longitude=' + encodeURIComponent(longitude) + '&distance=' + encodeURIComponent(distance)
+        })
+        .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok. Status: ' + response.status);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.places && data.places.length > 0) {
+        data.places.forEach(place => {
+
+            console.log(place.formattedAddress); // Log formatted address
+            console.log(place.displayName.text); // Log display name text
+            
+            if (!place.displayName.text.includes("Museum")) {
+                createPlaceElement(place.formattedAddress, place.displayName.text);
+            }
+            
+        });
+    } else {
+        // Handle case where 'places' is empty or not found
+        console.log('No places found or data is malformed.');
+    }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred: ' + error.message); 
+    });
+    }
+
     function createPlaceElement(displayName, formattedAddress) {
         
         const resultDiv = document.createElement('div');
@@ -153,6 +250,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
         resultDiv.appendChild(addressText);
 
         const selectLink = document.createElement('a');
+        //echo "<a href='detailsPage.php?name=" . urlencode($displayName) . "' class='result-button'>View Details</a>";
+
         selectLink.href = 'Showtimes.php?theater=indiana'; 
         selectLink.className = 'result-button';
         selectLink.textContent = 'Select';
@@ -162,11 +261,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
         document.getElementById('placesContainer').appendChild(resultDiv);
     }
 
-    /*
-    places.forEach(place => {
-        createPlaceElement(place.displayName, place.formattedAddress);
-    });
-    */
 </script>
 
     <?php
