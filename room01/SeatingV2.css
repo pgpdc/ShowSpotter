@@ -1,0 +1,103 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background-color: blue;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+}
+
+#layout {
+    perspective: 1000px;
+    margin-bottom: 30px;
+    color: blue;
+}
+
+.screen {
+    background-color: white;
+    height: 100px;
+    width: 100%;
+    margin: 15px 0;
+    transform: rotateX(-40deg);
+    box-shadow: 0 3px 10px rgba(255,255,255,1);
+}
+
+.seat {
+    background-color: white;
+    height: 26px;
+    width: 48px;
+    margin: 3px;
+    font-size: 18px;
+    color: black;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+}
+
+.seat.sold {
+    background-color: red;
+}
+
+.seat.selected{
+    background-color: green;
+}
+
+
+/* creates the space between the rows*/
+.seat:nth-of-type(3) {
+    margin-right: 18px;
+}
+
+/* creates the space between the rows*/
+.seat:nth-last-of-type(2) {
+    margin-left: 18px;
+}
+
+.seat:not(.sold):hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.showcase .seat:not(.sold):hover {
+    cursor: default;
+    transform: scale(1);
+}
+
+.showcase {
+    background: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: pink;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.showcase li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.showcase li small {
+    margin-left: 2px;
+    font-size: 19px;
+}
+
+.row {
+    display: flex;
+    padding-top: 5px;
+}
+
+
+
+
+
+
