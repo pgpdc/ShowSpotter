@@ -14,28 +14,41 @@ body {
     margin: 0;
 }
 
-.container {
+#layout {
     perspective: 1000px;
     margin-bottom: 30px;
+    color: blue;
+}
+
+.screen {
+    background-color: white;
+    height: 100px;
+    width: 100%;
+    margin: 15px 0;
+    transform: rotateX(-40deg);
+    box-shadow: 0 3px 10px rgba(255,255,255,1);
 }
 
 .seat {
     background-color: white;
     height: 26px;
-    width: 32px;
+    width: 48px;
     margin: 3px;
-    font-size: 50px;
+    font-size: 18px;
+    color: black;
     border-top-left-radius: 13px;
     border-top-right-radius: 13px;
+}
+
+.seat.sold {
+    background-color: red;
 }
 
 .seat.selected{
     background-color: green;
 }
 
-.seat.sold {
-    background-color: red;
-}
+
 /* creates the space between the rows*/
 .seat:nth-of-type(3) {
     margin-right: 18px;
@@ -83,14 +96,7 @@ body {
     padding-top: 5px;
 }
 
-.screen {
-    background-color: white;
-    height: 100px;
-    width: 100%;
-    margin: 15px 0;
-    transform: rotateX(-40deg);
-    box-shadow: 0 3px 10px rgba(255,255,255,1);
-}
+
 
 
 
