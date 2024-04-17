@@ -44,3 +44,25 @@ input[type=submit]{
 input[type=submit]:hover{
     color:rgb(164, 214, 164);
 }
+table {
+    margin: 0 auto;
+    font-size: 20px;
+    border: 1px solid black;
+}
+h1{
+text-align:center;
+font-size: xx-large;
+}
+td{
+border:5px solid black;
+background-color: lightgrey;
+font-weight:lighter;
+}
+th, td{
+text-align:center;
+padding: 10px;
+font-weight:bold;
+}
+#testArray{
+    border: red 2px solid;
+}

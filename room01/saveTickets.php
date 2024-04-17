@@ -18,7 +18,7 @@ session_start();
         }
         td{
     border:5px solid black;
-    background-color: green;
+    background-color: lightgrey;
     font-weight:lighter;
         }
 th, td{
@@ -126,7 +126,7 @@ $foodValue= $_SESSION['foodItem'];
 <body>
     <section>
         <h1>Tickets:</h1>
-        <table id="costTable">
+        <!--<table id="costTable">-->
             <tr>
                 <!--<th>Tickets:</th>
                 <th>Item Quantity:</th>
@@ -317,20 +317,7 @@ $foodValue= $_SESSION['foodItem'];
         displayChart();
     }
 
-    function deleteTicket(i) {
-        //Minus for FinalCost for the ticket
-        //Removing finalCost value
-        const final= Number(finalCost) - Number(ticketCost[i]);
-        finalCost = final;
-        
-
-        alert(i);
-        valueT.splice(i,1);
-        ticketName.splice(i,1);
-        console.log(valueT);
-        console.log(ticketName);
-        displayChart();
-    }
+    
 
     function minusButton(i) {
         if (value[i] == 1){
@@ -367,8 +354,8 @@ $foodValue= $_SESSION['foodItem'];
         value[i] = ++value[i];
         displayChart();}
     }
-
-    
+    console.log("Original"+itemName+"<br>");
+    console.log("Original"+value+"<br>");
     var finalCost = 0;
     var finalTicket = 0;
     for(var i = 0; i < ticketCost.length;i++){
@@ -377,7 +364,9 @@ $foodValue= $_SESSION['foodItem'];
     for(var i = 0; i < finalItemCosts.length;i++){
             finalCost += finalItemCosts[i];
     }
-
+    for(var i = 0; i < value.length;i++){
+                    
+                }
     function displayChart(){
             var html = "<table border='1|1' class='table'>";
             setTimeout(() => {
@@ -421,46 +410,115 @@ $foodValue= $_SESSION['foodItem'];
                 //Concessions
                 
                 for(var i = 0; i < value.length;i++){
-                    if (value[i] > 0){
-                    html +="<tr>";
-                    html += "<td>"+ value[i] +"</td>";
-                    html += "<td>"+ itemName[i] +"</td>";
-                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='deleteButton(${i})'>Delete</button>` + "</td>";
-                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='minusButton(${i})'>-</button>` + "</td>";
-                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='addButton(${i})'>+</button>` + "</td>";
+                    if (value[i] != 0){
+                            console.log(i + "YES THIS IS CURRENT VALUE:"+value[i] + "<br>");
+                            console.log(value);
+                            html +="<tr>";
+                            html += "<td>"+ value[i] +"</td>";
+                            html += "<td>"+ itemName[i] +"</td>";
+                            html += "<td>" + `<button type="button" class="btn btn-danger" onclick='deleteButton(${i})'>Delete</button>` + "</td>";
+                            html += "<td>" + `<button type="button" class="btn btn-danger" onclick='minusButton(${i})'>-</button>` + "</td>";
+                            html += "<td>" + `<button type="button" class="btn btn-danger" onclick='addButton(${i})'>+</button>` + "</td>";
                     //Cost
-                    html += "<td>"+ itemsCost[i] +"</td>";
-                    html += "<td>"+ finalItemCosts[i] +"</td>";
-                    html += "</tr>";
+                            html += "<td>"+ itemsCost[i] +"</td>";
+                            html += "<td>"+ finalItemCosts[i] +"</td>";
+                            html += "</tr>";
                     
                     inc = inc + 1;
                     costs = costs+1;}
-                    else{
-                        inc = inc+1;
-                    }
                     
-            }
+                    
+                }
         html += "</table>";
         html += "<table>";
         html +="<tr>";
-                html += "<td width=845px>"+"Final Price:"+ finalCost +"</td>";
+                html += "<td width=845px>"+"Final Price: $"+ finalCost.toFixed(2) +"</td>";
         html +="</tr>";
-        html += "</table>"
+        html += "</table>";
         document.getElementById("testArr").innerHTML = html},200);
             }
         displayChart();
+
+        function deleteTicket(i) {
+        //Minus for FinalCost for the ticket
+        //Removing finalCost value
+        const final= Number(finalCost) - Number(ticketCost[i]);
+        finalCost = final;
+        
+         
+        alert(i);
+        valueT.splice(i,1);
+        ticketName.splice(i,1);
+        console.log(valueT);
+        console.log(ticketName);
+        displayChart();
+
+        //Deleting from session array
+        //sessionStorage.removeItem(finalTickets[i]);
+        //console.log("YES" + finalTickets);
+    }
+    console.log("ARRAY ITEM"+itemName);
     </script>
     
     
-    <script>
-const jsonObject = JSON.stringify(ticketName);
-sessionStorage.setItem('ticketName',jsonObject);
-const str = sessionStorage.getItem('ticketName');
-const parsedObject = JSON.parse(str);
-console.log(parsedObject);
+<script>
+
+//Setting as session storages arrays
+//Ticket ID, Ticket Type, Ticket Cost
+function save(){
+
+//ticket seat number
+const ticketsNum = JSON.stringify(ticketName);
+sessionStorage.setItem('ticketName',ticketsNum);
+//ticket type
+const ticketsType = JSON.stringify(valueT);
+sessionStorage.setItem('valueT',ticketsType);
+//ticket cost
+const ticketsItemCost = JSON.stringify(ticketCost);
+sessionStorage.setItem('ticketCost',ticketsItemCost);
+
+
+//Ticket name and price going to FinalPayment.php
+const ticketList = sessionStorage.getItem('ticketName');
+const finalTickets = JSON.parse(ticketList);
+console.log(finalTickets);
+
+const ticketCostList = sessionStorage.getItem('valueT');
+const finalTicketType = JSON.parse(ticketCostList);
+console.log(finalTicketType);
+
+const ticketFinalCost = sessionStorage.getItem('ticketCost');
+const finalTicketPrice = JSON.parse(ticketFinalCost);
+console.log(finalTicketPrice);
+
+
+        //Item Quantity, Item, Item Cost
+        //Item Amount
+        const itemAmount = JSON.stringify(value);
+        sessionStorage.setItem('value',itemAmount);
+        //Item Name
+        const itemNameFinal = JSON.stringify(itemName);
+        sessionStorage.setItem('itemName',itemNameFinal);
+        //Item Cost
+        const itemCostFinal = JSON.stringify(finalItemCosts);
+        sessionStorage.setItem('finalItemCosts',itemCostFinal);
+
+
+        //Item Quantity, Item, and Item Cost going to FinalPayment.php
+        //Item Amount
+        const itemNumber = sessionStorage.getItem('value');
+        const finalItemQuantity = JSON.parse(itemNumber);
+        console.log(finalItemQuantity);
+        
+        //Complete Final Cost
+        const itemsCostTotal = JSON.stringify(finalCost);
+        sessionStorage.setItem('finalCost',itemsCostTotal);
+
+
+}
 </script>
 </section>
-<input type="submit" value="Submit">
+<input type="submit" onclick="save()" value="Submit">
 </form>
 </body>
 </html>

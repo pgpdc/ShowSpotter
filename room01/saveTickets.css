@@ -1,4 +1,55 @@
 body{
+    background-color: rgb(118, 109, 109);
+    color:black;
+    line-height: 30px;
+    font-size: 25px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position:relative;
+    
+}
+
+h1{
+    text-align: center;
+    color:rgb(249, 215, 153);
+    background-color: black;
+}
+
+h2{
+    text-decoration: underline;
+}
+select{
+    width:80px;
+    border-radius:40px;
+    font-size: 25px;
+    font-weight:bold;
+    color: black;
+    background-color: rgb(245, 245, 245);
+    padding: 15px 20px;
+}
+
+input[type=submit]{
+    width:150px;
+    left:90%;
+    bottom:50px;
+    border-radius:40px;
+    font-size: 25px;
+    font-weight:bold;
+    color: black;
+    background-color: rgb(245, 245, 245);
+    padding: 15px 20px;
+}
+input[type=submit]:hover{
+    color:rgb(164, 214, 164);
+}
+
+
+
+
+
+
+
+
+/*body{
     background-color: rgb(197, 197, 197);
     color:black;
     line-height: 30px;
@@ -52,4 +103,4 @@ input[type=submit]{
 }
 input[type=submit]:hover{
     color:rgb(164, 214, 164);
-}
+}*/
