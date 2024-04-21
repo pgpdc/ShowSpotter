@@ -53,8 +53,8 @@ $isUserAdmin = isAdmin();
         <div class="brand">ShowSpotter</div>
         <div class="links">
             <a href="index.php">Home</a>
-            <a href="">Concessions</a>
-            <a href="checkout.html">Checkout</a>
+            <a href="room01/concessions.php">Concessions</a>
+            <a href="room01/checkout.php">Checkout</a>
             <?php if ($isUserAdmin): ?>
                 <a href="admin.php">Admin Hub</a>  
             <?php endif; ?>    

@@ -13,7 +13,89 @@
         <h2>Checkout Cart:</h2>
         <div id="testArray"></div>
         <script type="text/javascript">
-        //Ticket name and price going to FinalPayment.php
+        //Customer Array For Ticket Number
+        const ticketNumCustomerYes = sessionStorage.getItem('ticketName');
+        const CticketNumber = JSON.parse(ticketNumCustomerYes);
+        console.log(CticketNumber);
+
+        //Customer Array For ticket Type
+        const ticketTypeCustomerYes = sessionStorage.getItem('ticketTypes');
+        const CticketType = JSON.parse(ticketTypeCustomerYes);
+        console.log(CticketType);
+
+        const ticketCostArrays = sessionStorage.getItem('costPerTicket');
+        const ticketsCosts = JSON.parse(ticketCostArrays);
+        console.log(ticketsCosts);
+
+        //Customer's Ticket Quantity
+        const quantityItem = sessionStorage.getItem('itemQ');
+        const itemQuantitys = JSON.parse(quantityItem);
+        console.log(itemQuantitys);
+    
+        //Customers Item Name
+        const nameItem = sessionStorage.getItem('foodName');
+        const ItemNames = JSON.parse(nameItem);
+        console.log(ItemNames);
+
+        //Cost per Item
+        const itemsValue = sessionStorage.getItem('costOfItem');
+        const finalItemValue = JSON.parse(itemsValue);
+        console.log(finalItemValue);
+
+
+
+        //Ticket Type from database
+        const ticketList = sessionStorage.getItem('ticketNameData');
+        const ticketTypeList = JSON.parse(ticketList);
+        console.log("DATA"+ticketTypeList);
+
+        var ticketCostArray = [];
+        /*var countType = 0;
+        while(countType != 3){
+            console.log("LOOOOP:"+ ticketTypeList[countType]);
+            countType = countType +1;
+        }*/
+        /*for(var i = 0; i < CticketType.length;i++){
+        var countType = 0;
+        while(countType != 3){
+            console.log("TESTL:" + CticketType[i]);
+            console.log("TESTL:" + ticketTypeList[countType]);
+            if(CticketType[i] == ticketTypeList[countType]){
+                console.log("TEST:" + ticketsCosts[countType]);
+                ticketCostArray.push(ticketsCosts[countType]);
+                console.log("ArrayPush"+ticketCostArray);
+                //Calulate final cost
+                //TotalTicket = TotalTicket + Number(ticketsCosts[i]);
+                //finalItemCost = finalItemCost + Number(ticketsCosts[countType]);
+                
+                    }
+        countType = countType + 1;
+                }
+            }*/
+
+        //Check if array is null 
+        let nullTicket=null;
+        if(CticketType != nullTicket){
+            
+        for(var i = 0; i < CticketType.length;i++){
+        var countType = 0;
+        while(countType != 3){
+            console.log("TESTL:" + CticketType[i]);
+            console.log("TESTL:" + ticketTypeList[countType]);
+            if(CticketType[i] == ticketTypeList[countType]){
+                console.log("TEST:" + ticketsCosts[countType]);
+                ticketCostArray.push(ticketsCosts[countType]);
+                console.log("ArrayPush"+ticketCostArray);
+                //Calulate final cost
+                //TotalTicket = TotalTicket + Number(ticketsCosts[i]);
+                //finalItemCost = finalItemCost + Number(ticketsCosts[countType]);
+                
+                    }
+        countType = countType + 1;
+                }
+            }
+        }
+        /*//Ticket name and price going to FinalPayment.php
         const ticketList = sessionStorage.getItem('ticketName');
         const finalTickets = JSON.parse(ticketList);
         console.log(ticketList);
@@ -42,8 +124,10 @@
         console.log(finalItemCost);
         //finalCost
         const finalTotalCost = sessionStorage.getItem('finalCost');
-        const itemsTotal = JSON.parse(finalTotalCost);
-        
+        const itemsTotal = JSON.parse(finalTotalCost);*/
+        var Final = 0;
+
+        var finalCost = 0; 
         function displayChart(){
             var html = "<table backgroundColor='white' border='1|1' class='table'>";
             setTimeout(() => {
@@ -62,49 +146,45 @@
                 //Tickets
                 var costs=0;
                 
-                for(var i = 0; i < finalTickets.length;i++){
-                    console.log(finalTickets[i]);
-                    if (finalTickets[i] != 0){
+                console.log("ticketCostArray"+ticketCostArray);
+                if(CticketType != nullTicket){
+                for(var i = 0; i < CticketType.length;i++){
+                    console.log(CticketType[i]);
+                    if (CticketType[i] != 0){
                     html +="<tr>";
-                    html += "<td>"+ finalTickets[i] +"</td>";
-                    html += "<td>"+ finalTicketType[i] +"</td>";
-                    html += "<td>"+ finalTicketPrice[i] +"</td>";
+                    html += "<td>"+ CticketType[i] +"</td>";
+                    html += "<td>"+ CticketNumber[i] +"</td>";
+                    html += "<td>"+ "$"+Number(ticketCostArray[i]).toFixed(2) +"</td>";
+                    //Store in final cost
+                    finalCost = Number(finalCost) + Number(ticketCostArray[i]);
                     html += "</tr>";
                     inc = inc + 1; 
                     }
                     
             }
+        }
 
-            for(var i = 0; i < finalItemQuantity.length;i++){
-                    console.log(finalItemQuantity[i]);
-                    if (finalItemQuantity[i] != 0){
+            for(var i = 0; i < itemQuantitys.length;i++){
+                    console.log(itemQuantitys[i]);
+                    if (itemQuantitys[i] != 0){
                     html +="<tr>";
-                    html += "<td>"+ finalItemQuantity[i] +"</td>";
-                    html += "<td>"+ finalItemNames[i] +"</td>";
-                    html += "<td>"+ finalItemCost[i] +"</td>";
+                    html += "<td>"+ itemQuantitys[i] +"</td>";
+                    html += "<td>"+ ItemNames[i] +"</td>";
+                    var itemCalc = itemQuantitys[i]*finalItemValue[i];
+                    html += "<td>"+ "$"+ itemCalc.toFixed(2) +"</td>";
+                    //Store in final cost
+                    finalCost = Number(finalCost) + Number(itemCalc);
                     html += "</tr>";
+
                     inc = inc + 1; 
                     }
+                
                     
-            }  
-                /*for(var i = 0; i < valueT.length;i++){
-                    html +="<tr>";
-                    html += "<td>"+ valueT[i] +"</td>";
-                    html += "<td>"+ ticketName[i] +"</td>";
-                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick='deleteTicket(${i})'>Delete</button>` + "</td>";
-                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick=''></button>` + "</td>";
-                    html += "<td>" + `<button type="button" class="btn btn-danger" onclick=''></button>` + "</td>";
-                    //Cost
-                    html += "<td>"+ ticketCost[i] +"</td>";
-                    html += "<td>"+ " " +"</td>";
-                    html += "</tr>";
-                    inc = inc + 1; 
-                    
-            }*/
+            } 
             html += "</table>";
         html += "<table>";
         html +="<tr>";
-                html += "<td width=845px>"+"Total Price:"+ itemsTotal.toFixed(2) +"</td>";
+                html += "<td width=845px>"+"Total Price: $"+ finalCost.toFixed(2) +"</td>";
         html +="</tr>";
         html += "</table>"
         document.getElementById("testArray").innerHTML = html},200);
