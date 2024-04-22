@@ -8,6 +8,7 @@
   </head>
   <body>
     <?php
+    session_start();
     // (A) FIXED IDS FOR THIS DEMO CHANGE TO USER ID FOR LOGIN
     $sessid = 1;
     $userid = 999;
@@ -20,6 +21,7 @@
     echo "\n";
     echo "room";
     echo $id;
+    echo "Name " . $_SESSION["name"];
     // (B) GET SESSION SEATS
     require "seatreservelib.php";
     $seats = $_RSV->get($sessid, $time, $date, $id);
