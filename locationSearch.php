@@ -43,12 +43,11 @@ function fetchLocations($latitude, $longitude) {
 $locationsData = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Make sure to validate and sanitize the input
+    
     $latitude = filter_input(INPUT_POST, 'latitude', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     $longitude = filter_input(INPUT_POST, 'longitude', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
-    // Now you can call your function with these values
-    $result = fetchLocations($latitude, $longitude); // Assuming this function exists and returns data
+    $result = fetchLocations($latitude, $longitude); 
 
     header('Content-Type: application/json');
     $response = ['status' => 'success', 'message' => 'Data processed successfully.'];

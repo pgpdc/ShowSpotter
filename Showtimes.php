@@ -73,7 +73,41 @@ $isUserAdmin = isAdmin();
         </div>
     </nav>
 
+    <div class="theater">
+        <h1>
+            <select id="theater-dropdown">
+ 
+            </select>
+            <select id="DateSelection">
+            </select>
+        </h1>
+    </div>
+
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Retrieve the addresses array from sessionStorage
+            const addresses = JSON.parse(sessionStorage.getItem('addresses'));
+            
+            // Check if addresses are retrieved and log for debugging
+            console.log('Retrieved addresses:', addresses);
+
+            if (addresses && addresses.length) {
+                const dropdown = document.getElementById('theater-dropdown');
+                // Populate the dropdown
+                addresses.forEach(address => {
+                    const option = document.createElement('option');
+                    option.value = address;
+                    option.textContent = address;
+                    dropdown.appendChild(option);
+                });
+            } else {
+                console.log('No addresses found in sessionStorage.');
+            }
+        });
+    </script>
+    <script>
+
         function populateDropdown() {
             var dropdown = document.getElementById('DateSelection');
 
