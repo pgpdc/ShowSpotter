@@ -1,64 +1,3 @@
-<?php
-/*
-function fetchLocations($location) {
-    list($latitude, $longitude) = explode(',', $location);
-    $latitude = trim($latitude);
-    $longitude = trim($longitude);
-
-    $postData = json_encode([
-        "includedTypes" => ["movie_theater"],
-        "maxResultCount" => 10,
-        "rankPreference" => "DISTANCE",
-        "locationRestriction" => [
-            "circle" => [
-                "center" => ["latitude" => $latitude, "longitude" => $longitude],
-                "radius" => 20000.0
-            ]
-        ]
-    ]);
-
-    $apiUrl = "https://places.googleapis.com/v1/places:searchNearby";
-    $headers = [
-        "Content-Type: application/json",
-        "X-Goog-Api-Key: AIzaSyCZa8k5Xckx5xLtJkdv3W5HkhV7OKd6CC0", 
-        "X-Goog-FieldMask: places.displayName,places.formattedAddress",
-    ];
-
-    $ch = curl_init($apiUrl);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-    $response = curl_exec($ch);
-    $err = curl_error($ch);
-    curl_close($ch);
-
-    if ($err) {
-        return "cURL Error #:" . $err;
-    } else {
-        return json_decode($response, true);
-    }
-}
-
-$locationsData = [];
-
-// Check if the form is submitted and the combined location is provided
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['location'])) {
-    // Fetch locations with the provided combined location string
-    $locationsData = fetchLocations($_POST['location']);
-}
-
-*/
-session_start();
-
-function isAdmin() {
-    return isset($_SESSION['admin']) && $_SESSION['admin'] === TRUE;
-}
-
-$isUserAdmin = isAdmin();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,10 +8,9 @@ $isUserAdmin = isAdmin();
     <link rel="stylesheet" href="Styles/navbar.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZa8k5Xckx5xLtJkdv3W5HkhV7OKd6CC0&callback=initMap" async defer></script>
     <script>
-        function clearBox(elementID)
-    {
-    document.getElementById(elementID).innerHTML = "";
-    }
+    function clearBox(elementID) {
+         document.getElementById(elementID).innerHTML = "";
+        }
     </script>
 </head>
 
@@ -84,21 +22,7 @@ $isUserAdmin = isAdmin();
             <a href="index.php">Home</a>
             <a href="">Concessions</a>
             <a href="checkout.html">Checkout</a>
-            <?php if ($isUserAdmin): ?>
-                <a href="admin.php">Admin Hub</a>  
-            <?php endif; ?> 
-            <div class="dropdown">
-                <button class="dropbtn">Account</button>
-                <div class="dropdown-content">
-                <?php if ($isUserAdmin): ?> 
-                    <p>Admin</p> 
-                <?php else: ?> 
-                    <p>Customer</p> 
-                <?php endif; ?>
-                    <a href="login.php">Sign-In</a>
-                    <a href="logout.php">Log-Out</a>
-                </div>
-            </div>
+            <a href="login.php">Sign-In</a>
         </div>
     </nav>
     <br>
@@ -151,7 +75,8 @@ $isUserAdmin = isAdmin();
     <div id="placesContainer"></div>
 
 <script>
-
+    
+    
     navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
         searchMovieTheaters(latitude, longitude);
@@ -174,6 +99,7 @@ $isUserAdmin = isAdmin();
         return response.json();
     })
     .then(data => {
+        const addresses = [];
         if (data.places && data.places.length > 0) {
         data.places.forEach(place => {
 
@@ -182,9 +108,11 @@ $isUserAdmin = isAdmin();
             
             if (!place.displayName.text.includes("Museum")) {
                 createPlaceElement(place.formattedAddress, place.displayName.text);
+                addresses.push(place.displayName.text);
             }
             
         });
+        sessionStorage.setItem('addresses', JSON.stringify(addresses));
     } else {
         // Handle case where 'places' is empty or not found
         console.log('No places found or data is malformed.');
@@ -212,6 +140,7 @@ $isUserAdmin = isAdmin();
         return response.json();
     })
     .then(data => {
+        const addresses = [];
         if (data.places && data.places.length > 0) {
         data.places.forEach(place => {
 
@@ -220,9 +149,11 @@ $isUserAdmin = isAdmin();
             
             if (!place.displayName.text.includes("Museum")) {
                 createPlaceElement(place.formattedAddress, place.displayName.text);
-            }
-            
+                addresses.push(place.displayName.text);
+            }      
         });
+        sessionStorage.setItem('addresses', JSON.stringify(addresses));
+
     } else {
         // Handle case where 'places' is empty or not found
         console.log('No places found or data is malformed.');
@@ -252,36 +183,18 @@ $isUserAdmin = isAdmin();
         const selectLink = document.createElement('a');
         //echo "<a href='detailsPage.php?name=" . urlencode($displayName) . "' class='result-button'>View Details</a>";
 
+        //selectLink.href='Showtimes.php?theater=' + displayName;
+        
         selectLink.href = 'Showtimes.php?theater=indiana'; 
         selectLink.className = 'result-button';
         selectLink.textContent = 'Select';
         resultDiv.appendChild(selectLink);
-
 
         document.getElementById('placesContainer').appendChild(resultDiv);
     }
 
 </script>
 
-    <?php
-    /* Keeping this if we want to search by specific location.
-    if (!empty($locationsData) && isset($locationsData['places'])) {
-        foreach ($locationsData['places'] as $place) {
-            $displayName = isset($place['displayName']['text']) ? $place['displayName']['text'] : 'No Name Available';
-            $formattedAddress = isset($place['formattedAddress']) ? $place['formattedAddress'] : 'No Address Available';
-            
-            echo "<div class='result'>";
-            echo "<strong>" . htmlspecialchars($displayName) . "</strong><br>";
-            echo htmlspecialchars($formattedAddress);
-
-            echo "<a href='Showtimes.php?theater=indiana' class='result-button'>Select</a>";
-            echo "</div>";
-        }
-    } else {
-        echo "No movie theaters found or error in response.";
-    }
-    */
-    ?>
 
    <!-- <h2>Choose a theater: </h2>
     <div class="theater">
