@@ -11,13 +11,14 @@ body{
 
 h1{
     text-align: center;
-    color:rgb(219, 148, 14);
-    background-color: rgb(175, 191, 207);
+    color:rgb(249, 215, 153);
+    background-color: black;
 }
 
 h2{
     text-decoration: underline;
 }
+
 select{
     width:150px;
     border-radius:40px;
@@ -27,17 +28,23 @@ select{
     background-color: rgb(245, 245, 245);
     padding: 15px 20px;
 }
-
 input[type=submit]{
-    
-    border-radius:40px;
+    /* Moves Button to the left */
+    position:relative;
+    left:90%;
+    /*Moves button up some */
+    top:15%;
+    /* Width of the button */
+    width:150px;
+
+    padding:16px 32px;
+    margin: 4px 2px;
     font-size: 25px;
     font-weight:bold;
     color: black;
     background-color: rgb(245, 245, 245);
     padding: 15px 20px;
 }
-
 input[type=submit]:hover{
-    color:rgb(164, 214, 164);
+    color:rgb(5, 104, 5);
 }

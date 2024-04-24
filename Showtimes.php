@@ -237,7 +237,7 @@ $isUserAdmin = isAdmin();
                 $startTimeIn12HourFormat = date("g:i A", strtotime($startTime));
 
                 // Create a link to the room page for this start time
-                echo "<a href='room01/1reservation.php?id=$room_id&time=$startTime&date=$date' style='color: darkblue; font-weight: bold;'>$startTimeIn12HourFormat</a><br>";
+                echo "<a href='room01/SeatingV2.php?id=$room_id&time=$startTime&date=$date' style='color: darkblue; font-weight: bold;'>$startTimeIn12HourFormat</a><br>";
             }
             echo "<br></div>";
         }

@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="concessions.css">
 
         <!-- Link To NavBar -->
-        <link rel="stylesheet" href="Styles/navbar.css">
+        <link rel="stylesheet" href="/ShowSpotter/styles/navbar.css">
 </head>
 <body>
 <nav>
@@ -24,11 +24,9 @@
         </div>
 </nav>
 
-
         <h1>Concessions</h1>
         <h2>Food and Drink Options:</h2>
         <h3>For drink: It is self-service and provided on site at your theatre location</h3>
-    <!--<form action="FinalPayment.php"method="post">-->
     
     
     <script>
@@ -63,8 +61,8 @@
     
     
     foreach($ticketType as $t){
-        echo $t;
-        echo "<br>";
+        //cho $t;
+        //echo "<br>";
     }
 }
     ?>
@@ -83,7 +81,6 @@
     const ticketsType = JSON.stringify(ticketTypes);
     sessionStorage.setItem('ticketTypes',ticketsType);
 
-
      //Customer Array For Ticket Number
      const ticketNumCustomer = sessionStorage.getItem('ticketName');
     const CticketNumber = JSON.parse(ticketNumCustomer);
@@ -95,7 +92,6 @@
     console.log(CticketType);
     </script>
     <?php
-
 
     //Getting Values from mySQL
     $servername = "localhost";
@@ -129,8 +125,6 @@
                 $cost[$a] = $row['foodPrice'];
                 //echo $cost[$a];
 
-                //test
-                //array_push($food,$row['foodItem'])
                 $a = $a + 1;
                 //echo "<br>";
     }
@@ -139,15 +133,15 @@
      while ( $i != count($food)){
             //echo $food[$i];
             $foodPrice[$food[$i]] = $cost[$i];
-            echo $foodPrice[$food[$i]];
+            //echo $foodPrice[$food[$i]];
             $i = $i +1;
      }
      foreach($foodPrice as $foodI => $priceI){
-            echo $foodI;
+            //echo $foodI;
      }
      while ( $i != count($foodPrice)){
-        echo "Yes<br>";
-        echo $foodPrice[$i];
+        //echo "Yes<br>";
+        //echo $foodPrice[$i];
         //$foodPrice[$food[$i]] = $cost[$i];
         $i = $i +1;
      }
@@ -156,12 +150,10 @@
 
      //Cost variable to increment
      $costVar = 0;
-     ?><p>Drinks:<p><?php
+     ?></p><h4>Drinks Menu:</h4><p><?php
      foreach ($foodPrice as $f => $c) 
      {
         
-        //$foodName = array();
-         //$carry = $_POST[$foodName[$f]];
         //For drinks
         $drink = "Drink";
        
@@ -174,8 +166,12 @@
         //echo "Select how may you want for ".$word.":";
         
         if (strpos($stringPrint,$drink) !==false){
-        echo "<label for='$f'>Select how may $f(s) cost is $c :<br></label>";
-        //echo "<select name='foodVal[$f]'>
+            
+        echo "<label for='$f'>How may $f(s):<br></label>";
+        echo "<br>";   
+        echo "Cost:$ {$c}";
+        echo "<br>";
+    
         echo "<select name='foodVal[$f]'>
               <option value='0'></option>
               <option value='1'>1</option>
@@ -195,12 +191,10 @@
         $costVar = $costVar + 1;
     }
     $costVar = 0;
-        ?><p>Popcorn:<p><?php
+        ?></p><h4>Popcorn Menu:</h4><p><?php
         foreach ($foodPrice as $f => $c) 
      {
         
-        //$foodName = array();
-         //$carry = $_POST[$foodName[$f]];
         //For drinks
         $drink = "Drink";
        
@@ -213,8 +207,11 @@
         //echo "Select how may you want for ".$word.":";
         
         if(strpos($stringPrint,$popcorn) !==false){
-        echo "<label for='$f'>Select how may $f(s) cost is $$c:<br></label>";
-        //echo "<select name='foodVal[$f]'>
+        echo "<label for='$f'>How may $f(s):<br></label>";
+        echo "<br>";   
+        echo "Cost:$ {$c}";
+        echo "<br>";
+
         echo "<select name='foodVal[$f]'>
               <option value='0'></option>
               <option value='1'>1</option>
@@ -233,7 +230,7 @@
         //$costVar = $costVar + 1;
     }
     
-    ?>
+    ?></p>
     <script>
     //Array for Database item and price
     var foodPrice = <?php echo json_encode($foodPrice); ?>;
@@ -247,54 +244,11 @@
     const itemValues= JSON.stringify(value);
     sessionStorage.setItem('value',itemValues);
     
-    
-    //convert php array to javascript
-    /*function save(){
-    //Test
-    var foodPrice = <?php //echo json_encode($foodPrice); ?>;
-
-    //Define
-    let itemName = Object.keys(foodPrice);
-    let value = Object.values(foodPrice);
-
-    const itemNameFinal = JSON.stringify(itemName);
-    sessionStorage.setItem('itemName',itemNameFinal);
-    
-   
-
-    //Define key and Value for foodPrice
-
-    //Original commented out for test
-    //var arr = <?php //echo json_encode($food); ?>;
-    //Concessions
-    //let itemName = Object.keys(arr);
-    //let value = Object.values(arr);
-     
-    const itemAmount = JSON.stringify(value);
-    sessionStorage.setItem('value',itemAmount);
-    //Item Name
-    const itemNameFinal = JSON.stringify(itemName);
-    sessionStorage.setItem('itemName',itemNameFinal);
-    
-    const itemNames = sessionStorage.getItem('itemName');
-    const finalItemNames = JSON.parse(itemNames);
-    console.log(finalItemNames);
-
-    //Adding cost field
-    var arrCost = <?php echo json_encode($cost); ?>;
-    //Price
-    let itemCost = Object.keys(arrCost);
-    let valueCost = Object.values(arrCost);
-    //Define
-    const itemCostFinal = JSON.stringify(itemCost);
-    sessionStorage.setItem('itemCost',itemCostFinal);
-    }*/
     </script>
     <input type="submit" onclick="save()" value="Submit">
     </form>
 </body>
         </html>
-
 
 
 
