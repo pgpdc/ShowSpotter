@@ -8,8 +8,8 @@
         <title>Checkout Form</title>
         <link rel="stylesheet" href="FinalPayment.css">
         <?php
-       //require "seatreservelib.php";
-        //include "checkoutForm.php";
+        //require_once('seatreservelib.php');
+        //include_once('checkoutForm.php');
         //$_RSV->save($_SESSION["sessid"], $_SESSION["userid"], $_SESSION["seats"], $_SESSION["time"], $_SESSION["date"], $_SESSION["id"]);
         ?>
 </head>
@@ -139,8 +139,10 @@
         html += "</table>"
         document.getElementById("testArray").innerHTML = html},200);
             }
-        //displayChart();
+        
         displayChart();
+
+    
         </script>
         
 <!--<button onclick="removeIndex('Adult')"> Delete Index </button>-->
@@ -199,7 +201,7 @@
             <label for="billSame">Is billing address the same as your home address:</label>
             <input type="text" name="billSame" id="billSame">
         </p>
-        <input type="submit" value="Submit">
+        <input type="submit" onclick="" value="Submit">
 </body>
 </html>
 

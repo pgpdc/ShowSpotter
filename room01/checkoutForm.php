@@ -15,7 +15,7 @@ session_start();
        <form action="concessions.php"method="post">
        <?php
         //Checkout Cart
-        require "seatreservelib.php";
+        require_once('seatreservelib.php');
         $_RSV->save($_POST["sessid"], $_POST["userid"], $_POST["seats"], $_POST["time"], $_POST["date"], $_POST["id"]);
         
         //Creating session variables
@@ -24,6 +24,8 @@ session_start();
         $_SESSION["date"] = $_POST["date"];
         $_SESSION["id"] = $_POST["id"];
        
+
+        
         $typeTickets = $_POST['seats'];
 
 

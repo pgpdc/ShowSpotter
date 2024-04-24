@@ -28,8 +28,8 @@
         <h2>Food and Drink Options:</h2>
         <h3>For drink: It is self-service and provided on site at your theatre location</h3>
     
-    
     <script>
+
     //Javascript arrays for tickets number
 
     //Customer Array Index for ticket number javascript array
