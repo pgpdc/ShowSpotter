@@ -67,7 +67,7 @@
       ?>
     </div>
 
-    <script src="SeatingV2.js"></script>
+    <script src="1reservation.js"></script>
     <form id="ninja" method="post" action="checkoutForm.php">
       <input type="hidden" name="sessid" value="<?=$sessid?>">
       <input type="hidden" name="userid" value="<?=$userid?>">
