@@ -1,30 +1,30 @@
-
-   
-
 <DOCTYPE html>
 <html>
 <head>
+        <!-- Link To NavBar -->
+        <link rel="stylesheet" href="/ShowSpotter/styles/navbar.css">
         <link rel="stylesheet" href="concessions.css">
         <style>
-            table {
+            table{
+                    width:60%;
                     margin: 0 auto;
                     font-size: 20px;
                     border: 1px solid black;
-        }
-        h1{
-                text-align:center;
-                font-size: xx-large;
-        }
-        td{
-    border:5px solid black;
-    background-color: lightgrey;
-    font-weight:lighter;
-        }
-th, td{
-    text-align:center;
-    padding: 10px;
-    font-weight:bold;
-        }
+                    }
+            h1{
+                    text-align:center;
+                    font-size: xx-large;
+                    }
+            td{
+                    border:5px solid black;
+                    background-color: lightgrey;
+                    font-weight:lighter;
+                    }
+            th, td{
+                    text-align:center;
+                    padding: 10px;
+                    font-weight:bold;
+                    }
         </style>
 </head>
 <body>
@@ -80,40 +80,16 @@ if (isset($_POST['foodVal'])){
         //echo "<br>";
     }
     }
-$arrQuantity = array();
+    $arrQuantity = array();
 ?>
     <section>
         <h1>Tickets:</h1>
-    <?php
-    //echo json_encode($foodValue);
-    //echo json_encode($foodValue);
-    //echo json_encode($enteredTickets);
-    //echo json_encode($shownCost);
-    //Ticket Cost
-    //echo json_encode($costPerTicket);
-    //Final Item Cost
-    //echo json_encode($ItemCostFinal);
-    ?>
     </table>
     <br>
     <label for="ItemO"></label>
     <label for="Num"></label>
     <p id="testArr"></p>
     <script type="text/javascript">
-
-    //Need Array for Ticket(Type), TicketNum, TicketPrice
-    //Customer Array Index for ticket number javascript array
-    /*
-    const ticketIndexs = sessionStorage.getItem('ticketNumIndex');
-    const CticketIndex = JSON.parse(ticketIndexs);
-    console.log(CticketIndex);
-    */
-    //Customer Ticket Number javascript array
-    /*
-    const ticketNumbers = sessionStorage.getItem('customerTicketNum');
-    const CticketNum = JSON.parse(ticketNumbers);
-    console.log("CticketNum"+CticketNum);
-    */
 
    //Customer Array For Ticket Number
     const ticketNumCustomerY = sessionStorage.getItem('ticketName');
@@ -125,20 +101,8 @@ $arrQuantity = array();
     const CticketType = JSON.parse(ticketTypeCustomer);
     console.log(CticketType);
 
-    
-
-
-
-
-
-
-
-
-
-
     //Database Ticket Arrays
     //Ticket Type from database
-    //RIGHT HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     const ticketList = sessionStorage.getItem('ticketNameData');
     const ticketTypeList = JSON.parse(ticketList);
     console.log("DATA"+ticketTypeList);
@@ -190,25 +154,13 @@ $arrQuantity = array();
     //finalItemValue.reverse();
     console.log("DATABASE COST"+finalItemValue);
 
-    
-    //Length of Databse 
-   /* for (var i=0; i < finalItemNames.length; i++){
-        //console.log("D"+ arrFoodName[i]);
-        //console.log("C"+ finalItemNames[i]);
-        //const findPrice = finalItemNames.filter(finalItemNames[i] == arrFoodName.includes(finalItemNames[i]));
-        //Trying to get values from database
-        if (finalItemNames[i] == arrFoodName[i]){
-            //console.log("FINDING PRICE:"+finalItemNames[i]);
-        }
-    }*/
-    //ADDING COUNT FIRST IN ORDER TO REMOVE ELEMENTS 
-    //const varCOUNTNAME = finalItemNames.length;
-    //console.log("FOUND:"+findPrice);
     var a = 0;
     var count = 0;
     const  arrIndex = 0;
+
     const arrNames = [];
     const costOfItem = [];
+
     var namesArray = arrNames.concat(finalItemNames);
     for(var i=0; i < namesArray.length;i++){
         var count=0;
@@ -221,51 +173,7 @@ $arrQuantity = array();
             console.log("COST IS:"+finalItemValue[i]);
             costOfItem.push(finalItemValue[i]);
         }
-        /*if (findV == false){
-            var indexOfV = finalItemNames.indexOf(finalItemNames[i]);
-            console.log("FALSE I"+indexOfV);
-            console.log("FALSE A"+finalItemNames);
-            console.log("FALSE IA"+finalItemNames[i]);
-            //const a = removeItem(finalItemValue[i],finalItemValue);
-            //finalItemValue.pop();
-            //finalItemNames.pop();
-            //finalItemValue.splice(indexOfV,1);
-            //finalItemNames.splice(indexOfV,1);
-            console.log("ARRAYAFTERREMOVAL"+finalItemValue);
-            //const findV = arrFoodName.includes(finalItemNames[i])
-        }*/
-        console.log(finalItemValue);
-        //const findC = arrFoodName[i].includes(finalItemNames);
-        //console.log(findC);
-        //console.log("D"+ arrFoodName[i]);
-        //console.log("C"+ finalItemNames[i]);
-        //for (var a=0; a < arrFoodName.length; a++){
-        //while(finalItemNames[i] != lengthA){
-        //console.log("FINDING PRICE:"+arrFoodName[i]);
-       /* if (arrFoodName[a] == arrFoodName[i]){
-            console.log("FOUND IT FINALLY"+ arrFoodName[i]);
-            //console.log("INDEX OF NAME"+indexName);
-            var IndexForName = finalItemNames.findexIndex(arrFoodName[i]);
-
-            }
-        while (arrFoodName[a] !=  finalItemNames[count]){
-            
-            if (a > arrFoodName.length){
-                    //a = 0;
-            }
-            if(count > finalItemNames.length){
-                    i=0;
-            }
-        //console.log("WHILE LOOP D:"+finalItemNames[count])
-        //console.log("WHILE LOOP C:"+arrFoodName[a])
-        count = count+1;
-        }
-        a= a+1;
-        
-        if (arrFoodName[a] == arrFoodName[i]){
-            console.log("FOUND IT FINALLY"+ arrFoodNames[i]);
-            }
-            count=0;*/
+            console.log(finalItemValue);
         }
 
     
@@ -280,55 +188,9 @@ $arrQuantity = array();
     var finalCost = 0;
     var finalTicket = 0;
 
-    //var arrayForItemsQuantities = [];
-
-    //const ticketsQuantity = JSON.stringify(arrayForItemsQuantities);
-    //const q = sessionStorage.setItem('arrayForItemsQuantities',ticketsQuantity);
-    //console.log("PPPPPPPPPP"+q);
-
-    //var arrQ = <?php //echo json_encode($arrQuantity); ?>;
-    //Seperated Name and Item Quantity
-    //let itemQ = Object.keys(arrQ);
-    //let valueQ = Object.values(arrQ);
-
-    //const ticketsQuantity = JSON.stringify(itemQ);
-    //const arrayForItemsQuantities= sessionStorage.setItem('qP',ticketsQuantity);
-    //console.log("PPPPPPPPPP"+arrayForItemsQuantities);
-
-    //const quantityItem = sessionStorage.setItem('arrayForItemsQuantities');
-    //const arrayQ = JSON.parse(quantityItem);
-    //console.log("QUANTITY FOR THIS ARRAY IS "+arrayQ);
     var arrayForItemsQuantities= [];
     
     var arrayForItemNames = [];
-    //var costOfItem = [];
-    //Calculate Price for Items
-    /*for(var i = 0; i < valueCustomer.length;i++){
-        
-        if(valueCustomer[i] != 0){
-        console.log("Quantity !!!!"+valueCustomer[i]);
-            var countType =0;
-            let lengthFoodItems = finalItemNames.length;
-            console.log("Length"+lengthFoodItems);
-            let measure = -1;
-            while(measure != lengthFoodItems){
-                //Increment Meaure to get index for database food items
-                measure = measure + 1;
-                    console.log("countType"+valueCustomer[measure])
-                    if (itemNameCustomer[i] == finalItemNames[measure]){
-                        console.log(valueCustomer[i] + "value LOOP QUantity");
-                        console.log(itemNameCustomer[i] + "value LOOP Customer");
-                        console.log(finalItemValue[measure] + "value LOOP Value");
-                        costOfItem.push(finalItemValue[measure]);
-                        arrayForItemNames.push(itemNameCustomer[i]);
-                        arrayForItemsQuantities.push(valueCustomer[i]);
-                        //arrayForItemsQuantities[i]= itemNameCustomer[i];
-                        }
-                     
-            }
-                        
-                    }
-    }*/
     
     //testing new value for total price
     var totalVal = 0;
@@ -352,7 +214,6 @@ $arrQuantity = array();
                 }
     function displayChart(){
 
-    
             var finalItemCost = 0;
             var html = "<table border='1|1' class='table'>";
             setTimeout(() => {
@@ -366,11 +227,10 @@ $arrQuantity = array();
                 //Add cost
                 html += "<td>"+"Cost Per Item"+"</td>";
                 html += "<td>"+"Final Item Cost"+"</td>";
-
-                
                 html += "</tr>";
-                
                 html += "</thread>";
+
+                //
                 var inc = 0;
                 //Tickets
                 var costs=0;
@@ -391,7 +251,7 @@ $arrQuantity = array();
                     while(countType != 3){
                         console.log("countType"+ticketTypeList[countType])
                         if(CticketType[i] == ticketTypeList[countType]){
-                                html += "<td>"+ ticketsCosts[countType] +"</td>";
+                                html += "<td>"+"$"+ Number(ticketsCosts[countType]).toFixed(2) +"</td>";
                                 ticketCostArray.push(ticketsCosts[countType]);
                                 console.log("ArrayPush"+ticketCostArray);
                                 //Calulate final cost
@@ -423,73 +283,43 @@ $arrQuantity = array();
                             html += "<td>" + `<button type="button" class="btn btn-danger" onclick='minusButton(${i})'>-</button>` + "</td>";
                             html += "<td>" + `<button type="button" class="btn btn-danger" onclick='addButton(${i})'>+</button>` + "</td>";
                     //Cost
-                            html += "<td>"+ costOfItem[i] +"</td>";
+                            html += "<td>"+"$"+ costOfItem[i] +"</td>";
                             totalVal= itemQ[i]*costOfItem[i];
-                            html += "<td>"+ totalVal+"</td>";
+                            html += "<td>"+"$"+ Number(totalVal).toFixed(2) +"</td>";
                             finalItemCost = finalItemCost + totalVal;
-                            //finalTicket.push(finalItemCost);
-                            html += "</tr>";
-                    
-                    
-                    //totalPrice = totalPrice + finalItemValue[i];
+                            //html += "</tr>";
 
-                
-
-                /*for(var i = 0; i <arrayForItemNames.length;i++){
-                            console.log(i + "YES THIS IS CURRENT VALUE:"+valueCustomer[i] + "<br>");
-                            console.log(arrayForItemsQuantities);
-                            console.log(arrayForItemNames[i]);
-                            html +="<tr>";
-                            html += "<td>"+ arrayForItemsQuantities[i] +"</td>";
-                            html += "<td>"+ arrayForItemNames[i] +"</td>";
-                            html += "<td>" + `<button type="button" class="btn btn-danger" onclick='deleteButton(${i})'>Delete</button>` + "</td>";
-                            html += "<td>" + `<button type="button" class="btn btn-danger" onclick='minusButton(${i})'>-</button>` + "</td>";
-                            html += "<td>" + `<button type="button" class="btn btn-danger" onclick='addButton(${i})'>+</button>` + "</td>";
-                    //Cost
-                            html += "<td>"+ costOfItem[i] +"</td>";
-                            totalVal= arrayForItemsQuantities[i]*costOfItem[i];
-                            html += "<td>"+ totalVal+"</td>";
-                            finalItemCost = finalItemCost + totalVal;
-                            //finalTicket.push(finalItemCost);
-                            html += "</tr>";*/
-                    
-                    
-                    //totalPrice = totalPrice + finalItemValue[i];
                     inc = inc + 1;
                     costs = costs+1;
                     
-                    
-                }
-                
+                } 
         html += "</table>";
         html += "<table>";
-        html +="<tr>";
-                html += "<td width=845px>"+"Final Price: $"+ finalItemCost +"</td>";
+        //html +="<tr>";
+                html += "<td width=845px>"+"Final Price: $"+ finalItemCost.toFixed(2) +"</td>";
         html +="</tr>";
-        
         html += "</table>";
-        //Set finalItemCost to zero so when added
-        //const finalItemCost = 0;
         document.getElementById("testArr").innerHTML = html},200);
-            }
-            console.log("ArrayPushYesMoreMore"+ticketCostArray);  
-        displayChart();
+        }
+    //console.log("ArrayPushYesMoreMore"+ticketCostArray);  
 
-    //BUTTON FUNCTIONS  
+    displayChart();
+
+    //BUTTON FUNCTIONS-For the diagram such as delete add minus 
     function deleteButton(i) {
-        //Minus for FinalCost for the item
-        //Removing finalCost value
-        const final= Number(finalCost) - Number(costOfItem[i]);
-        finalCost = final;
+                            //Minus for FinalCost for the item
+                            //Removing finalCost value
+                            const final= Number(finalCost) - Number(costOfItem[i]);
+                            finalCost = final;
 
-        alert(i);
-        itemQ.splice(i,1);
-        foodName.splice(i,1);
-        costOfItem.splice(i,1);
-        console.log(itemQ);
-        console.log(foodName);
-        //sessionStorage.removeItem("ticketName")
-        displayChart();
+                            alert(i);
+                            itemQ.splice(i,1);
+                            foodName.splice(i,1);
+                            costOfItem.splice(i,1);
+                            console.log(itemQ);
+                            console.log(foodName);
+                            //sessionStorage.removeItem("ticketName")
+                            displayChart();
         
     }
 
@@ -499,210 +329,125 @@ $arrQuantity = array();
         if (itemQ[i] == 1){
             displayChart();
         }else{
-        //Set finalItemCost to zero
-        
-        var finalItemCost = 0;
-        console.log("MINUS BUTTON" + finalItemCost);
-        //Removing final cost for item
-        const final = Number(finalCost) - Number(totalVal);
-        finalCost = final;
-        //Add to cost count for item
-        const sum = Number(costOfItem[i])-Number(finalItemValue[i]);
-        //finalItemCosts[i] = sum;
-        
-        itemQ[i] = itemQ[i]-1;
-        displayChart();
-        
+                            //Set finalItemCost to zero
+                            var finalItemCost = 0;
+                            console.log("MINUS BUTTON" + finalItemCost);
+                            
+                            //Removing final cost for item
+                            const final = Number(finalCost) - Number(totalVal);
+                            finalCost = final;
+                            
+                            //Add to cost count for item
+                            const sum = Number(costOfItem[i])-Number(finalItemValue[i]);
+                            
+                            //finalItemCosts[i] = sum;
+                            itemQ[i] = itemQ[i]-1;
+                            displayChart();
+                                
     }
     }
 
     function addButton(i) {
         if (itemQ[i] == 10){
-        displayChart();
+                            displayChart();
     }else{
-        //Removing finalCost value
-        const final= Number(finalCost) - Number(costOfItem[i]);
-        finalCost = final;
-        console.log(finalCost);
-        var addOne =1;
-        console.log("addButton"+addOne);
-        //Add to cost count for item
-        const sum = Number(finalItemValue[i])+Number(costOfItem[i]);
-        //finalItemCost[i] = sum;
-        console.log("SUM"+sum);
-        //Updating finalCost
-        const added= Number(finalCost) + Number(sum);
-        finalCost= added;
-        itemQ[i] = ++itemQ[i];
-        //Updating array value for next page
-        displayChart();}
+                            //Removing finalCost value
+                            const final= Number(finalCost) - Number(costOfItem[i]);
+                            finalCost = final;
+                            console.log(finalCost);
+                            var addOne =1;
+                            console.log("addButton"+addOne);
+                            
+                            //Add to cost count for item
+                            const sum = Number(finalItemValue[i])+Number(costOfItem[i]);
+                            
+                            //finalItemCost[i] = sum;
+                            console.log("SUM"+sum);
+                            
+                            //Updating finalCost
+                            const added= Number(finalCost) + Number(sum);
+                            finalCost= added;
+                            itemQ[i] = ++itemQ[i];
+                            
+                            //Updating array value for next page
+                            displayChart(); 
+            }
     }
         function deleteTicket(i) {
-        //Minus for FinalCost for the ticket
-        //Removing finalCost value
-        const final = Number(finalTicket[i]) - Number(ticketsCosts[i]);
-        finalCost = final;
-        
-         
-        alert(i);
-        //ticketsCosts.splice(i,1);
-        CticketType.splice(i,1);
-        CticketNumber.splice(i,1);
-        console.log(CticketType);
-        console.log(CticketNumber);
-        sessionStorage.removeItem(CticketNumber);
-        sessionStorage.removeItem(CticketType);
-        //sessionStorage.removeItem("CticketNum");
-        //sessionStorage.removeItem("CticketType");
+                            //Minus for FinalCost for the ticket
+                            //Removing finalCost value
+                            const final = Number(finalTicket[i]) - Number(ticketsCosts[i]);
+                            finalCost = final;
+                            
+                            alert(i);
+                            //ticketsCosts.splice(i,1);
+                            CticketType.splice(i,1);
+                            CticketNumber.splice(i,1);
+                            console.log(CticketType);
+                            console.log(CticketNumber);
+                            sessionStorage.removeItem(CticketNumber);
+                            sessionStorage.removeItem(CticketType);
+                            //sessionStorage.removeItem("CticketNum");
+                            //sessionStorage.removeItem("CticketType");
 
+                            //Removes type
+                            delete CticketType["remove"];
+                            sessionStorage.setItem('ticketTypes', JSON.stringify(CticketType));
 
-        //Updates the session storage
-
-        //Removes type
-        delete CticketType["remove"];
-        sessionStorage.setItem('ticketTypes', JSON.stringify(CticketType));
-
-
-        //Removes Number
-        delete CticketNumber["removeYes"];
-        sessionStorage.setItem('ticketName', JSON.stringify(CticketNumber));
-
-        //Removes Cost
-        //delete ticketsCosts["removeYes"];
-        //sessionStorage.setItem('costPerTicket', JSON.stringify(ticketCosts));
-
-        displayChart();
-        //Deleting from session array
-        
-        //console.log("YES" + finalTickets);
+                            //Removes Number
+                            delete CticketNumber["removeYes"];
+                            sessionStorage.setItem('ticketName', JSON.stringify(CticketNumber));
+                            displayChart();
     }
-    //console.log("ARRAY ITEM"+itemName);
+ 
 
     console.log("A"+ticketCostArray);
     </script>
     
 <script>
 
-/*
-function saveThis(){
-//Customer Ticket Number, Type, Cost From Database
-//Ticket Number
-const ticketNumCustomerYes = sessionStorage.setItem('ticketName');
-const ticketNumberFinal = JSON.parse(ticketNumCustomerYes);
-console.log(ticketNumberFinal);
-
-//Customer Array For ticket Type
-const ticketTypeCustomerYes = sessionStorage.setItem('ticketTypes');
-const CticketType = JSON.parse(ticketTypeCustomerYes);
-console.log(CticketType);
-
-//Ticket Cost
-//Ticket Cost
-const ticketCost = sessionStorage.setItem('costPerTicket');
-const ticketsPerP = JSON.parse(ticketCost);
-console.log("TICKET PIRCE FOR "+ticketsPerP);
-
-
-//Customer Item's Quantity, Name, Cost
-//Customer's Item Quantity
-const ticketsQuantity = JSON.stringify(arrayForItemsQuantities);
-sessionStorage.setItem('arrayForItemsQuantities',ticketsQuantity);
-
-//Customer's Item Quantity
-const quantityItem = sessionStorage.setItem('arrayForItemsQuantities');
-const itemQuantitys = JSON.parse(quantityItem);
-console.log(itemQuantitys);
-
-//Tickets Name
-const ticketsName = JSON.stringify(arrayForItemNames);  //Need For Diagram
-sessionStorage.setItem('arrayForItemNames',ticketsName);
-
-const nameItem = sessionStorage.setItem('arrayForItemNames');
-const ItemNames = JSON.parse(nameItem);
-console.log(ItemNames);
-
-//DEFINING-Customer's Items Cost
-const costForItem = JSON.stringify(costOfItem);
-sessionStorage.setItem('costOfItem',costForItem);
-
-//Cost per Item
-const itemsValue = sessionStorage.setItem('costOfItem');
-const finalItemValue = JSON.parse(itemsValue);
-
-
-    
-}
-*/
 const itemAmount = JSON.stringify(itemQ);
-        sessionStorage.setItem('itemQ',itemAmount);
+sessionStorage.setItem('itemQ',itemAmount);
 
-
-        //Item Quantity, Item, and Item Cost going to FinalPayment.php
-        //Item Amount
-        const itemNumber = sessionStorage.getItem('itemQ');
-        const finalItemQuantity = JSON.parse(itemNumber);
-        console.log("FINAL ITEM QUANTITY"+finalItemQuantity);
+//Item Quantity, Item, and Item Cost going to FinalPayment.php
+//Item Amount
+const itemNumber = sessionStorage.getItem('itemQ');
+const finalItemQuantity = JSON.parse(itemNumber);
+console.log("FINAL ITEM QUANTITY"+finalItemQuantity);
 
 //Item Names
 const itemNameFinalPay = JSON.stringify(foodName);
 sessionStorage.setItem('foodName',itemNameFinalPay);
 
-
-    //Item Quantity, Item, and Item Cost going to FinalPayment.php
-        //Item Name
-        const itemNamed = sessionStorage.getItem('foodName');
-        const customerFinalCostOrder = JSON.parse(itemNamed);
-        console.log("FINAL CUSTOMER NAME"+customerFinalCostOrder);
+//Item Quantity, Item, and Item Cost going to FinalPayment.php
+//Item Name
+const itemNamed = sessionStorage.getItem('foodName');
+const customerFinalCostOrder = JSON.parse(itemNamed);
+console.log("FINAL CUSTOMER NAME"+customerFinalCostOrder);
 
 //Item's Customer Cost
 const finalPayment = JSON.stringify(costOfItem);
 sessionStorage.setItem('costOfItem',finalPayment);
 
+//Item Quantity, Item, and Item Cost going to FinalPayment.php
+//Item Name
+const itemCosts = sessionStorage.getItem('costOfItem');
+const customerFinalCosts = JSON.parse(itemCosts);
+console.log("FINAL CUSTOMER Costs"+ customerFinalCosts);
 
-    //Item Quantity, Item, and Item Cost going to FinalPayment.php
-        //Item Name
-        const itemCosts = sessionStorage.getItem('costOfItem');
-        const customerFinalCosts = JSON.parse(itemCosts);
-        console.log("FINAL CUSTOMER Costs"+ customerFinalCosts);
+//Cutomer Number
+const numberOFCustomerTicket = JSON.stringify(foodName);
+sessionStorage.setItem('foodName',numberOFCustomerTicket);
 
-        //Cutomer Number
-        const numberOFCustomerTicket = JSON.stringify(foodName);
-        sessionStorage.setItem('foodName',numberOFCustomerTicket);
-
-        const ticketOrderNumber = sessionStorage.getItem('ticketName');
-        const CticketForThisOrder = JSON.parse(ticketOrderNumber);
-        console.log("NUMBER"+CticketForThisOrder);
+const ticketOrderNumber = sessionStorage.getItem('ticketName');
+const CticketForThisOrder = JSON.parse(ticketOrderNumber);
+console.log("NUMBER"+CticketForThisOrder);
 
 function save(){
 
-/*//ticket seat number
-const ticketsNum = JSON.stringify(ticketName);
-sessionStorage.setItem('ticketName',ticketsNum);
-//ticket type
-const ticketsType = JSON.stringify(valueT);
-sessionStorage.setItem('valueT',ticketsType);
-//ticket cost
-const ticketsItemCost = JSON.stringify(ticketCost);
-sessionStorage.setItem('ticketCost',ticketsItemCost);
-
-
-//Ticket name and price going to FinalPayment.php
-const ticketList = sessionStorage.getItem('ticketName');
-const finalTickets = JSON.parse(ticketList);
-console.log(finalTickets);
-
-const ticketCostList = sessionStorage.getItem('valueT');
-const finalTicketType = JSON.parse(ticketCostList);
-console.log(finalTicketType);
-
-const ticketFinalCost = sessionStorage.getItem('ticketCost');
-const finalTicketPrice = JSON.parse(ticketFinalCost);
-console.log(finalTicketPrice);
-*/
         //Quantity of Items
         const itemAmount = JSON.stringify(itemQ);
         sessionStorage.setItem('itemQ',itemAmount);
-
 
         //Item Quantity, Item, and Item Cost going to FinalPayment.php
         //Item Amount
@@ -714,16 +459,12 @@ console.log(finalTicketPrice);
         const itemNameFinalPay = JSON.stringify(foodName);
         sessionStorage.setItem('foodName',itemNameFinalPay);
 
-
         //Item Quantity, Item, and Item Cost going to FinalPayment.php
         //Item Name
         const itemNamed = sessionStorage.getItem('foodName');
         const finalItemNames = JSON.parse(itemNamed);
         console.log(finalItemNames);
         
-        
-
-
 }
 </script>
 </section>
@@ -731,3 +472,4 @@ console.log(finalTicketPrice);
 </form>
 </body>
 </html>
+

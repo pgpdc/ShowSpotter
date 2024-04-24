@@ -52,10 +52,10 @@ session_start();
                 
                 //echo $row['foodItem'];
                 $ticketArray[$a] = $row['ticket'];
-                echo $ticketArray[$a];
+                //echo $ticketArray[$a];
                 //Adding cost field
                 $costArray[$a] = $row['cost'];
-                echo $costArray[$a];
+                //echo $costArray[$a];
 
                 //test
                 //array_push($food,$row['foodItem'])
@@ -72,8 +72,10 @@ session_start();
             //echo $foodPrice[$food[$i]];
             $i = $i +1;
      }
+
+     //Just to print out seat types from database for customer selection
      foreach($ticketCost as $ticketI => $costI){
-            echo $ticketI;
+            //echo $ticketI;
      }
 
 
@@ -81,12 +83,12 @@ session_start();
 
 
 
-
+       echo "SEAT:<br>";
        //Original Code
        foreach ($typeTickets as $ticket) 
        {
-        echo "SEAT:<br>";
-        echo "<label for='$ticket'>$ticket:</label>";
+        
+        echo "<label for='$ticket'>$ticket:<br></label>";
         echo "<select name='tickets[$ticket]'>
              <option value='Adult'>Adult</option>
              <option value='Child'>Child</option>
@@ -99,11 +101,6 @@ session_start();
        ?>
        <script>
        //save Tickets
-       
-       
-       //for(var i = 0; i < arrT.length;i++){
-               
-       //}
        
        function save(){
        //Save Tickets selected from customer
@@ -138,34 +135,10 @@ session_start();
        //Ticket Cost from database
        const ticketsType = JSON.stringify(costPerTicket);
        sessionStorage.setItem('costPerTicket',ticketsType);
-
-
-
-
-
-
-
-
-       //ticket cost
-       /*
-       const ticketsItemCost = JSON.stringify(ticketCost);
-        sessionStorage.setItem('ticketCost',ticketsItemCost);
-
-
-       //Ticket name and price going to FinalPayment.php
-       const ticketList = sessionStorage.getItem('ticketName');
-       const finalTickets = JSON.parse(ticketList);
-       console.log(finalTicket);*/
        
        }
        </script>
        
-
-
-       
-        
-        
-        
         <input type="submit" onclick="save()" value="Submit">
         </form>
 

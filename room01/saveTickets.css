@@ -28,10 +28,16 @@ select{
 }
 
 input[type=submit]{
-    width:150px;
+    /* Moves Button to the left */
+    position:relative;
     left:90%;
-    bottom:50px;
-    border-radius:40px;
+    /*Moves button up some */
+    bottom:0%;
+    /* Width of the button */
+    width:150px;
+
+    padding:16px 32px;
+    margin: 4px 2px;
     font-size: 25px;
     font-weight:bold;
     color: black;
@@ -39,9 +45,8 @@ input[type=submit]{
     padding: 15px 20px;
 }
 input[type=submit]:hover{
-    color:rgb(164, 214, 164);
+    color:rgb(5, 104, 5);
 }
-
 
 
 

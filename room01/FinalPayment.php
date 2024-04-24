@@ -7,6 +7,11 @@
     <head>
         <title>Checkout Form</title>
         <link rel="stylesheet" href="FinalPayment.css">
+        <?php
+       //require "seatreservelib.php";
+        //include "checkoutForm.php";
+        //$_RSV->save($_SESSION["sessid"], $_SESSION["userid"], $_SESSION["seats"], $_SESSION["time"], $_SESSION["date"], $_SESSION["id"]);
+        ?>
 </head>
 <body>
         <h1>Checkout Form</h1>
@@ -42,36 +47,12 @@
         const finalItemValue = JSON.parse(itemsValue);
         console.log(finalItemValue);
 
-
-
         //Ticket Type from database
         const ticketList = sessionStorage.getItem('ticketNameData');
         const ticketTypeList = JSON.parse(ticketList);
         console.log("DATA"+ticketTypeList);
 
         var ticketCostArray = [];
-        /*var countType = 0;
-        while(countType != 3){
-            console.log("LOOOOP:"+ ticketTypeList[countType]);
-            countType = countType +1;
-        }*/
-        /*for(var i = 0; i < CticketType.length;i++){
-        var countType = 0;
-        while(countType != 3){
-            console.log("TESTL:" + CticketType[i]);
-            console.log("TESTL:" + ticketTypeList[countType]);
-            if(CticketType[i] == ticketTypeList[countType]){
-                console.log("TEST:" + ticketsCosts[countType]);
-                ticketCostArray.push(ticketsCosts[countType]);
-                console.log("ArrayPush"+ticketCostArray);
-                //Calulate final cost
-                //TotalTicket = TotalTicket + Number(ticketsCosts[i]);
-                //finalItemCost = finalItemCost + Number(ticketsCosts[countType]);
-                
-                    }
-        countType = countType + 1;
-                }
-            }*/
 
         //Check if array is null 
         let nullTicket=null;
@@ -82,49 +63,18 @@
         while(countType != 3){
             console.log("TESTL:" + CticketType[i]);
             console.log("TESTL:" + ticketTypeList[countType]);
+            
             if(CticketType[i] == ticketTypeList[countType]){
                 console.log("TEST:" + ticketsCosts[countType]);
                 ticketCostArray.push(ticketsCosts[countType]);
                 console.log("ArrayPush"+ticketCostArray);
-                //Calulate final cost
-                //TotalTicket = TotalTicket + Number(ticketsCosts[i]);
-                //finalItemCost = finalItemCost + Number(ticketsCosts[countType]);
                 
                     }
         countType = countType + 1;
                 }
             }
         }
-        /*//Ticket name and price going to FinalPayment.php
-        const ticketList = sessionStorage.getItem('ticketName');
-        const finalTickets = JSON.parse(ticketList);
-        console.log(ticketList);
-        console.log(finalTickets);
-
-        const ticketCostList = sessionStorage.getItem('valueT');
-        const finalTicketType = JSON.parse(ticketCostList);
-        console.log(finalTicketType);
-
-        const ticketFinalCost = sessionStorage.getItem('ticketCost');
-        const finalTicketPrice = JSON.parse(ticketFinalCost);
-        console.log(finalTicketPrice);
-
-        //Item Quantity
-         const itemNumber = sessionStorage.getItem('value');
-         const finalItemQuantity = JSON.parse(itemNumber);
-         console.log(finalItemQuantity);
-        //Item Name
-        const itemNames = sessionStorage.getItem('itemName');
-        const finalItemNames = JSON.parse(itemNames);
-        console.log(finalItemNames);
-        //Item Cost
-        //Item Amount
-        const itemsCost = sessionStorage.getItem('finalItemCosts');
-        const finalItemCost = JSON.parse(itemsCost);
-        console.log(finalItemCost);
-        //finalCost
-        const finalTotalCost = sessionStorage.getItem('finalCost');
-        const itemsTotal = JSON.parse(finalTotalCost);*/
+        
         var Final = 0;
 
         var finalCost = 0; 
@@ -194,8 +144,10 @@
         </script>
         
 <!--<button onclick="removeIndex('Adult')"> Delete Index </button>-->
+<?php
+//When submitted seat is reserved
 
-
+?>
 
 <h3>Billing Info:</h3>
         <form action="checkout.php" method="post">
@@ -250,3 +202,5 @@
         <input type="submit" value="Submit">
 </body>
 </html>
+
+
