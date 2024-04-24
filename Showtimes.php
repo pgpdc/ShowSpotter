@@ -237,6 +237,7 @@ $isUserAdmin = isAdmin();
     if (isset($movies)) {
         ksort($movies);
         // Display the movie details
+        echo "<div class='container'>";
         foreach ($movies as $title => $movie) {
             echo "<div class='movie-box'>";
             echo "<h3>$title</h3>";
@@ -250,6 +251,7 @@ $isUserAdmin = isAdmin();
             }
             echo "<br></div>";
         }
+        echo "</div>";
     }
     ?>
 
