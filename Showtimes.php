@@ -1,17 +1,37 @@
 <?php
 
 session_start();
-$DATABASE_HOST = 'localhost';
-$DATABASE_USER = 'root';
-$DATABASE_PASS = '';
+// $DATABASE_HOST = 'localhost';
+// $DATABASE_USER = 'root';
+// $DATABASE_PASS = '';
 
-$DATABASE_NAME = $_GET["theater"];
+// // $DATABASE_NAME = $_GET["theater"];
 
 
-$link = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-if (mysqli_connect_errno()) {
-    exit('Failed to connect to MySQL: ' . mysqli_connect_error());
-}
+// if (isset($_SESSION["theater"])) {
+//     $DATABASE_NAME = $_SESSION["theater"];
+//     try {
+//         $link = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+//     } catch (mysqli_sql_exception $e) {
+//         echo "<script type='text/javascript'>
+//                 alert('Oops! Something went wrong. Please try again later.');
+//                 window.location = 'index.php';
+//             </script>";
+//         exit;
+//     }
+// } else {
+//     echo "<script type='text/javascript'>
+//                 alert('Please select a theater!');
+//                 window.location = 'index.php';
+//             </script>";
+// }
+
+require("theaterDatabase.php");
+
+// $link = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+// if (mysqli_connect_errno()) {
+//     exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+// }
 
 
 //$timezone = new DateTimeZone('America/New_York'); // replace with the user's timezone
@@ -27,7 +47,8 @@ $stmt = mysqli_prepare($link, $sql);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
-function isAdmin() {
+function isAdmin()
+{
     return isset($_SESSION['admin']) && $_SESSION['admin'] === TRUE;
 }
 
@@ -54,17 +75,17 @@ $isUserAdmin = isAdmin();
             <a href="index.php">Home</a>
             <a href="room01/concessions.php">Concessions</a>
             <a href="room01/checkout.php">Checkout</a>
-            <?php if ($isUserAdmin): ?>
-                <a href="admin.php">Admin Hub</a>  
-            <?php endif; ?>    
+            <?php if ($isUserAdmin) : ?>
+                <a href="admin.php">Admin Hub</a>
+            <?php endif; ?>
             <div class="dropdown">
                 <button class="dropbtn">Account</button>
                 <div class="dropdown-content">
-                <?php if ($isUserAdmin): ?> 
-                    <p>Admin</p> 
-                <?php else: ?> 
-                    <p>Customer</p> 
-                <?php endif; ?>
+                    <?php if ($isUserAdmin) : ?>
+                        <p>Admin</p>
+                    <?php else : ?>
+                        <p>Customer</p>
+                    <?php endif; ?>
                     <a href="login.php">Sign-In</a>
                     <a href="logout.php">Log-Out</a>
                 </div>
@@ -75,7 +96,7 @@ $isUserAdmin = isAdmin();
     <div class="theater">
         <h1>
             <select id="theater-dropdown">
- 
+
             </select>
             <select id="DateSelection">
             </select>
@@ -85,10 +106,10 @@ $isUserAdmin = isAdmin();
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            
+
             // Retrieve the addresses array from sessionStorage
             const addresses = JSON.parse(sessionStorage.getItem('addresses'));
-            
+
             // Check if addresses are retrieved and log for debugging
             console.log('Retrieved addresses:', addresses);
 
@@ -110,13 +131,12 @@ $isUserAdmin = isAdmin();
         function updateTheater() {
             var updatedTheater = document.getElementById('theater-dropdown').value;
             var updatedDate = document.getElementById('DateSelection').value;
-            
+
             //window.location.href="Showtimes.php?theater=" + updatedTheater + "&date=" + updatedDate;
-            window.location.href="Showtimes.php?theater=indiana" + "&date=" + updatedDate;
+            window.location.href = "Showtimes.php?theater=indiana" + "&date=" + updatedDate;
         }
     </script>
     <script>
-
         function populateDropdown() {
             var dropdown = document.getElementById('DateSelection');
 
@@ -258,4 +278,5 @@ $isUserAdmin = isAdmin();
 
 
 </body>
+
 </html>

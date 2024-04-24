@@ -6,28 +6,51 @@ if ($_SESSION["admin"] != TRUE) {
 
 function data_calendar()
 {
+
     $DATABASE_HOST = 'localhost';
     $DATABASE_USER = 'root';
     $DATABASE_PASS = '';
-    $DATABASE_NAME = 'indiana';
 
-    $link = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-    if (mysqli_connect_errno()) {
-        exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+    // $DATABASE_NAME = $_GET["theater"];
+
+
+    if (isset($_SESSION["theater"])) {
+        $DATABASE_NAME = $_SESSION["theater"];
+        try {
+            $link = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+        } catch (mysqli_sql_exception $e) {
+            header("location: index.php");
+            echo "<script type='text/javascript'>
+                alert('Oops! Something went wrong. Please try again later.');
+                window.location = 'index.php';
+            </script>";
+            exit;
+        }
+    } else {
+        header("location: index.php");
+        echo "<script type='text/javascript'>
+                alert('Please select a theater!');
+                window.location = 'index.php';
+            </script>";
     }
 
-    $result = mysqli_query($link, "SELECT `imdbid`, `date`, `timestart`, `timeend`, `room_id` FROM `showtimes`");
 
-    while ($rs = mysqli_fetch_assoc($result)) {
-        $imdbid = $rs['imdbid'];
-        $date = $rs['date'];
-        $timestart = $rs['timestart'];
-        $timeend = $rs['timeend'];
-        $room_id = $rs['room_id'];
-        $title = getMovieTitle($imdbid, $link);
-        $color = getColor($room_id);
-        echo "{title: '$title', imdbid: '$imdbid', start: '$date' + 'T' + '$timestart', end: '$date' + 'T' + '$timeend', resourceId: '$room_id', color: '$color'},";
+    if (isset($link)) {
+        $result = mysqli_query($link, "SELECT `imdbid`, `date`, `timestart`, `timeend`, `room_id` FROM `showtimes`");
+        while ($rs = mysqli_fetch_assoc($result)) {
+            $imdbid = $rs['imdbid'];
+            $date = $rs['date'];
+            $timestart = $rs['timestart'];
+            $timeend = $rs['timeend'];
+            $room_id = $rs['room_id'];
+            $title = getMovieTitle($imdbid, $link);
+            $color = getColor($room_id);
+            echo "{title: '$title', imdbid: '$imdbid', start: '$date' + 'T' + '$timestart', end: '$date' + 'T' + '$timeend', resourceId: '$room_id', color: '$color'},";
+        }
     }
+    
+
+    
 }
 function getMovieTitle($imdbid, $link)
 {
@@ -86,7 +109,7 @@ function getColor($roomId)
         case 'ROOM_B':
             return '#00ff00';
         case 'ROOM_C':
-            return '#0000ff'; 
+            return '#0000ff';
         default:
             return '#000000';
     }
@@ -114,13 +137,13 @@ function getColor($roomId)
                     right: 'timeGridWeek,timeGridDay'
                 },
                 customButtons: {
-        customButton: {
-            text: 'Admin Home',
-            click: function() {
-                window.location.href = 'admin.php';
-            }
-        }
-    },
+                    customButton: {
+                        text: 'Admin Home',
+                        click: function() {
+                            window.location.href = 'admin.php';
+                        }
+                    }
+                },
                 slotMinTime: '09:00:00',
                 slotMaxTime: '24:00:00',
                 events: [<?php data_calendar(); ?>],
@@ -136,7 +159,7 @@ function getColor($roomId)
                             return '#000000';
                     }
                 },
-                eventTimeFormat: { 
+                eventTimeFormat: {
                     hour: '2-digit',
                     minute: '2-digit',
                     meridiem: true
@@ -149,7 +172,7 @@ function getColor($roomId)
                         var minutes = time.slice(3, 5);
                         var ampm = hours >= 12 ? 'PM' : 'AM';
                         hours = hours % 12;
-                        hours = hours ? hours : 12; 
+                        hours = hours ? hours : 12;
                         return hours + ':' + minutes + ' ' + ampm;
                     }
 
