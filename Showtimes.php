@@ -4,12 +4,9 @@ session_start();
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
-if ($_GET["theater"] == "indiana") {
-    $DATABASE_NAME = $_GET["theater"];
-    //$DATABASE_NAME = 'indiana';
-} else if ($_GET["theater"] == "testing") {
-    $DATABASE_NAME = 'testing';
-}
+
+$DATABASE_NAME = $_GET["theater"];
+
 
 $link = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if (mysqli_connect_errno()) {
@@ -17,10 +14,12 @@ if (mysqli_connect_errno()) {
 }
 
 
-$timezone = new DateTimeZone('America/New_York'); // replace with the user's timezone
-$date = new DateTime('now', $timezone);
-$today = $date->format('Y-m-d');
+//$timezone = new DateTimeZone('America/New_York'); // replace with the user's timezone
+//$date = new DateTime('now', $timezone);
+//$today = $date->format('Y-m-d');
 //$today = $date = new DateTime('now', $timezone);
+
+$today = $_GET["date"];
 
 $sql = "SELECT * FROM `showtimes` WHERE `date` = '$today' ORDER BY 'timestart'";
 
@@ -80,6 +79,7 @@ $isUserAdmin = isAdmin();
             </select>
             <select id="DateSelection">
             </select>
+            <button type="submit" onclick="updateTheater()">Update</button>
         </h1>
     </div>
 
@@ -105,6 +105,15 @@ $isUserAdmin = isAdmin();
                 console.log('No addresses found in sessionStorage.');
             }
         });
+    </script>
+    <script>
+        function updateTheater() {
+            var updatedTheater = document.getElementById('theater-dropdown').value;
+            var updatedDate = document.getElementById('DateSelection').value;
+            
+            //window.location.href="Showtimes.php?theater=" + updatedTheater + "&date=" + updatedDate;
+            window.location.href="Showtimes.php?theater=indiana" + "&date=" + updatedDate;
+        }
     </script>
     <script>
 

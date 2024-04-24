@@ -184,8 +184,18 @@
         //echo "<a href='detailsPage.php?name=" . urlencode($displayName) . "' class='result-button'>View Details</a>";
 
         //selectLink.href='Showtimes.php?theater=' + displayName;
+
+        var currentDate = new Date();
+        var currentDateString = formatDate(currentDate);
+
+        function formatDate(date) {
+            var year = date.getFullYear();
+            var month = (date.getMonth() + 1).toString().padStart(2, '0');
+            var day = date.getDate().toString().padStart(2, '0');
+            return year + '-' + month + '-' + day;
+        }
         
-        selectLink.href = 'Showtimes.php?theater=indiana'; 
+        selectLink.href = 'Showtimes.php?theater=indiana' + '&date=' + currentDateString; 
         selectLink.className = 'result-button';
         selectLink.textContent = 'Select';
         resultDiv.appendChild(selectLink);
