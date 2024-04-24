@@ -11,25 +11,15 @@
   <body>
 
   <?php
-  session_start();
+  session.start();
     // (A) FIXED IDS FOR THIS DEMO
     $sessid = 1;
     $userid = 999;
     $count = 0;
-    $date = $_GET["date"];
-    $time = $_GET["time"];
-    $id = $_GET["id"];
-    echo $date;
-    echo "\n";
-    echo $time;
-    echo "\n";
-    echo "room";
-    echo $id;
-    echo "Name " . $_SESSION["name"];
 
     // (B) GET SESSION SEATS
     require "seatreservelib.php";
-    $seats = $_RSV->get($sessid, $time, $date, $id);
+    $seats = $_RSV->get($sessid);
     ?>
 
     <ul class="showcase">
@@ -57,13 +47,12 @@
           printf("<div class='row'>");
         }
         $count +=1; 
-        if ($s["time"] === $time) {
-          // Seat is taken
-          printf("<div class='seat sold'>%s</div>", $s["seat_id"]);
-      } else {
-          // Seat is available
-          printf("<div class='seat' onclick='reserve.toggle(this)'>%s</div>", $s["seat_id"]);
-      }
+        $sold = is_numeric($s["user_id"]);
+        printf("<div class='seat%s'%s>%s</div>",
+          $sold ? " sold" : "",
+          $sold ? "" : " onclick='reserve.toggle(this)'",
+          $s["seat_id"]
+        );
       }
       ?>
     </div>
