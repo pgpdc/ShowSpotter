@@ -59,7 +59,7 @@
         $count +=1; 
         if ($s["time"] === $time) {
           // Seat is taken
-          printf("<div class='seat taken'>%s</div>", $s["seat_id"]);
+          printf("<div class='seat sold'>%s</div>", $s["seat_id"]);
       } else {
           // Seat is available
           printf("<div class='seat' onclick='reserve.toggle(this)'>%s</div>", $s["seat_id"]);
