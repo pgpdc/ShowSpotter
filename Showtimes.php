@@ -105,79 +105,86 @@ $isUserAdmin = isAdmin();
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+ document.addEventListener('DOMContentLoaded', function() {
 
-            // Retrieve the addresses array from sessionStorage
-            const addresses = JSON.parse(sessionStorage.getItem('addresses'));
+    const addresses = JSON.parse(sessionStorage.getItem('addresses'));
 
-            // Check if addresses are retrieved and log for debugging
-            console.log('Retrieved addresses:', addresses);
 
-            if (addresses && addresses.length) {
-                const dropdown = document.getElementById('theater-dropdown');
-                // Populate the dropdown
-                addresses.forEach(address => {
-                    const option = document.createElement('option');
-                    option.value = address;
-                    option.textContent = address;
-                    dropdown.appendChild(option);
-                });
-            } else {
-                console.log('No addresses found in sessionStorage.');
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedTheater = urlParams.get('theater');
+    const selectedDate = urlParams.get('date');
+
+    const theaterDropdown = document.getElementById('theater-dropdown');
+    const dateDropdown = document.getElementById('DateSelection');
+
+    if (addresses && addresses.length) {
+        addresses.forEach(address => {
+            const option = document.createElement('option');
+            option.value = address.replaceAll(" ", "");
+            option.textContent = address;
+            if (address.replaceAll(" ", "") === selectedTheater) {
+                option.selected = true;
             }
+            theaterDropdown.appendChild(option);
         });
+    } else {
+        console.log('No addresses found in sessionStorage.');
+    }
+
+    populateDateDropdown(dateDropdown, selectedDate);
+
+    function updateTheater() {
+        var updatedTheater = theaterDropdown.value;
+        var updatedDate = dateDropdown.value;
+        window.location.href = "ShowTimes.php?theater=" + encodeURIComponent(updatedTheater) + "&date=" + encodeURIComponent(updatedDate);
+    }
+
+    document.querySelector('button[type="submit"]').addEventListener('click', updateTheater);
+});
+
+function populateDateDropdown(dropdown, selectedDate) {
+    var currentDate = new Date();
+    var currentDateString = formatDate(currentDate);
+
+    var option = document.createElement('option');
+    option.value = currentDateString;
+    option.textContent = 'Today (' + currentDateString + ')';
+    if (currentDateString === selectedDate) {
+        option.selected = true;
+    }
+    dropdown.appendChild(option);
+
+    var tomorrowDate = new Date(currentDate.getTime() + (24 * 60 * 60 * 1000));
+    var tomorrowDateString = formatDate(tomorrowDate);
+
+    option = document.createElement('option');
+    option.value = tomorrowDateString;
+    option.textContent = 'Tomorrow (' + tomorrowDateString + ')';
+    if (tomorrowDateString === selectedDate) {
+        option.selected = true;
+    }
+    dropdown.appendChild(option);
+}
+
+function formatDate(date) {
+    var year = date.getFullYear();
+    var month = (date.getMonth() + 1).toString().padStart(2, '0');
+    var day = date.getDate().toString().padStart(2, '0');
+    return year + '-' + month + '-' + day;
+}
     </script>
+    
     <script>
+        /*
         function updateTheater() {
             var updatedTheater = document.getElementById('theater-dropdown').value;
             var updatedDate = document.getElementById('DateSelection').value;
 
             //window.location.href="Showtimes.php?theater=" + updatedTheater + "&date=" + updatedDate;
             window.location.href = "Showtimes.php?theater=indiana" + "&date=" + updatedDate;
-        }
+        } */
     </script>
-    <script>
-        function populateDropdown() {
-            var dropdown = document.getElementById('DateSelection');
 
-            var currentDate = new Date();
-            var currentDateString = formatDate(currentDate);
-
-            var option = document.createElement('option');
-            option.value = currentDateString;
-            option.textContent = 'Today (' + currentDateString + ')';
-            dropdown.appendChild(option);
-
-            var tomorrowDate = new Date();
-            tomorrowDate.setDate(currentDate.getDate() + 1);
-            var tomorrowDateString = formatDate(tomorrowDate);
-
-            option = document.createElement('option');
-            option.value = tomorrowDateString;
-            option.textContent = 'Tomorrow (' + tomorrowDateString + ')';
-            dropdown.appendChild(option);
-        }
-
-
-        function formatDate(date) {
-            var year = date.getFullYear();
-            var month = (date.getMonth() + 1).toString().padStart(2, '0');
-            var day = date.getDate().toString().padStart(2, '0');
-            return year + '-' + month + '-' + day;
-        }
-
-        populateDropdown();
-
-        document.getElementById('theater-dropdown').addEventListener('change', function() {
-            if (this.value == "Indiana") {
-                var web = "ShowTimes.php?theater=indiana";
-                <?php echo "window.location.href=web";
-                ?>
-            } else {
-                alert('Waiting for database');
-            }
-        });
-    </script>
 
     <!--Movie Listings-->
     <br>

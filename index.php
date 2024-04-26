@@ -187,10 +187,6 @@ $_SESSION['theater'] = "indiana"; //This is how you set the session
         resultDiv.appendChild(addressText);
 
         const selectLink = document.createElement('a');
-        //echo "<a href='detailsPage.php?name=" . urlencode($displayName) . "' class='result-button'>View Details</a>";
-
-        //selectLink.href='Showtimes.php?theater=' + displayName;
-
         var currentDate = new Date();
         var currentDateString = formatDate(currentDate);
 
@@ -200,8 +196,9 @@ $_SESSION['theater'] = "indiana"; //This is how you set the session
             var day = date.getDate().toString().padStart(2, '0');
             return year + '-' + month + '-' + day;
         }
-        
-        selectLink.href = 'Showtimes.php?theater=indiana' + '&date=' + currentDateString; 
+        var newAddress = formattedAddress.replaceAll(" ", "");
+
+        selectLink.href='Showtimes.php?theater=' + newAddress + "&date=" + currentDateString;
         selectLink.className = 'result-button';
         selectLink.textContent = 'Select';
         resultDiv.appendChild(selectLink);

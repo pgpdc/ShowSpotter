@@ -70,10 +70,6 @@ img{
     padding: 10px;
 }
 
-.theater {
-    display: flex;
-
-}
 
 .result {
     margin-bottom: 20px;
@@ -92,4 +88,25 @@ img{
 }
 .result-button:hover {
     background-color: #0056b3;
+}
+.theater {
+    width: 100%; 
+    padding: 10px 0; 
+    box-sizing: border-box; 
+    display: flex;
+    text-align: center;
+}
+
+.theater select {
+    width: 100%; 
+    padding: 8px; 
+    background-color: black; 
+    color: white; 
+    border-radius: 5px; 
+
+}
+
+.theater select option {
+    background-color: black; 
+    color: white; 
 }
