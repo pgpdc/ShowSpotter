@@ -95,12 +95,14 @@ $isUserAdmin = isAdmin();
 
     <div class="theater">
         <h1>
+            <div class="selections">
             <select id="theater-dropdown">
 
             </select>
             <select id="DateSelection">
             </select>
             <button type="submit" onclick="updateTheater()">Update</button>
+            </div>
         </h1>
     </div>
 

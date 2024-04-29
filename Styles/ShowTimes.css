@@ -93,20 +93,58 @@ img{
     width: 100%; 
     padding: 10px 0; 
     box-sizing: border-box; 
-    display: flex;
-    text-align: center;
 }
 
-.theater select {
-    width: 100%; 
+.selections {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 10px;
+}
+
+.selections select, .selections button {
+    flex-grow: 1; 
     padding: 8px; 
     background-color: black; 
     color: white; 
     border-radius: 5px; 
+    border: 1px solid #ccc;
+    text-align: center; 
+}
+
+.selections button {
+    max-width: 100px; 
+    background-color: #007bff; 
+}
+
+#addressForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 0 20px;
+    box-sizing: border-box;
 
 }
 
-.theater select option {
-    background-color: black; 
-    color: white; 
+#addressInput {
+    flex-grow: 1;
+    margin-right: 10px;
+    background-color: black;
+    color: white;
+}
+
+#distance {
+    margin-right: 10px;
+    background-color: black;
+    color: white;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
