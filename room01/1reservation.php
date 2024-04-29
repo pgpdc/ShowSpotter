@@ -48,7 +48,7 @@
     </div>
 
     <!-- (E) SAVE SELECTION -->
-    <form id="ninja" method="post" action="checkoutForm.php">
+    <form id="ninja" method="post" action="FinalPayment.php">
       <input type="hidden" name="sessid" value="<?=$sessid?>">
       <input type="hidden" name="userid" value="<?=$userid?>">
       <input type="hidden" name="time" value="<?=$time?>">

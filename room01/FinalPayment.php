@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -7,10 +7,28 @@
     <head>
         <title>Checkout Form</title>
         <link rel="stylesheet" href="FinalPayment.css">
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <!--<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+         jquery-3.7.1.min.js-->
         <?php
+
+
         //require_once('seatreservelib.php');
-        //include_once('checkoutForm.php');
-        //$_RSV->save($_SESSION["sessid"], $_SESSION["userid"], $_SESSION["seats"], $_SESSION["time"], $_SESSION["date"], $_SESSION["id"]);
+        //$_RSV->save($_POST["sessid"], $_POST["userid"], $_POST["seats"], $_POST["time"], $_POST["date"], $_POST["id"]);
+
+        //Check tickets in reserved from database
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "indiana";
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn-> connect_error){
+            die("Connection Error");
+        }
+    
+        //read in food and drink Items
+        $sql = "SELECT * FROM prices ORDER BY ticket";
+        $result = $conn->query($sql);
         ?>
 </head>
 <body>
@@ -53,6 +71,7 @@
         console.log("DATA"+ticketTypeList);
 
         var ticketCostArray = [];
+        var FinalTicketCost =[];
 
         //Check if array is null 
         let nullTicket=null;
@@ -76,7 +95,7 @@
         }
         
         var Final = 0;
-
+        var finalTicket = 0;
         var finalCost = 0; 
         function displayChart(){
             var html = "<table backgroundColor='white' border='1|1' class='table'>";
@@ -106,10 +125,12 @@
                     html += "<td>"+ CticketNumber[i] +"</td>";
                     html += "<td>"+ "$"+Number(ticketCostArray[i]).toFixed(2) +"</td>";
                     //Store in final cost
+                    finalTicket = Number(finalTicket) + Number(ticketCostArray[i]);
                     finalCost = Number(finalCost) + Number(ticketCostArray[i]);
                     html += "</tr>";
                     inc = inc + 1; 
                     }
+                    
                     
             }
         }
@@ -146,16 +167,129 @@
         </script>
         
 <!--<button onclick="removeIndex('Adult')"> Delete Index </button>-->
-<?php
-//When submitted seat is reserved
 
-?>
 
 <h3>Billing Info:</h3>
-        <form action="checkout.php" method="post">
+        <form action="savedOrder.php" method="post">
+        <script>
+        /*mainWindow = new BrowserWindow({webPrefernces:{
+            nodeIntegration:true
+        }});
+        console.log(result);*/
+        //var sendNames = encodeURIComponent(JSON.stringify(ItemNames));
+        //console.log(sendNames);
+        var jsNames = ItemNames;
+        var jsNamesJSON = JSON.stringify(jsNames);
+
+        document.cookie = ItemNames;
+        console.log("COOKIE"+document.cookie);
+
+        //To seperate cookies
+        var ticketNumberC  = "Ticket Number:";
+        var tickettypeC  = "Ticket Type:";
+        var ticketCostC = "Ticket Final Costs:";
+
+        var finalAmount = "Order Final Cost:";
+        var ItemQuantityC  = "Item's Quantity:";
+        var ItemNameC  = "Item's Name:";
+        var ItemValueA = "Item's Value:";
+   
+        document.cookie =ticketNumberC+CticketNumber+tickettypeC+CticketType+ticketCostC+ticketCostArray+ItemQuantityC+itemQuantitys+ItemNameC+ ItemNames +ItemValueA+ finalItemValue;
+        console.log("COOKIE"+document.cookie);
+        /*window.onload = function() {
+                what();
+                function what(){
+                    document.getElementById('name').innerHTML = sendNames;
+                };
+            }*/
+        </script>
+        <?php
+        ?>
+        <script>
+        //$.post(savedOrder.php,CTicketType);
+        //console.log(ItemNames);
+        /*let order = {
+            "itemnames":ItemNames
+        }
+        var sendNames = encodeURIComponent(JSON.stringify(ItemNames));
+        console.log(sendNames);
+        const sendnames = JSON.stringify(sendNames);
+        sessionStorage.setItem('sendNames',sendnames);*/
+        //var ItemNamePhp = JSON.stringify(ItemNames);
+        //console.log("ITEMS BOUGHT"+ItemNamePhp);
+        //$.post('savedOrder.php',{ItemNamePhp:ItemNamePhp});
+        /*$.ajax({
+            url: "saveOrder.php",
+            method:"post",
+            data:{  order: JSON.stringify(order) },
+            success: function(res){
+                console.log(res);
+            }
+        });*/
+
+        /*fetch("saveOrder.php",{
+            "method":"POST",
+            "headers":{
+                "Content-Type":"application/json; charset=utf-8"
+            },
+            "body":JSON.stringify(order)
+        })*/
+
+        </script>
+
+
+
+        <?php
+        
+        require_once('seatreservelib.php');
+
+        $user = $_SESSION['userid'];
+
+        //SET UP CONNECTION FOR DATABASE
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "indiana";
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn-> connect_error){
+            die("Connection Error");
+        }
+    
+        //read in food and drink Items
+        $sql = "SELECT * FROM paymentinfo WHERE username='$user'";
+        $result = $conn->query($sql);
+        if($result){
+            if(mysqli_num_rows($result)>0){
+                echo "Payment Found With This Account"."<br>";
+                //echo $result["username"];
+                if ($result -> num_rows > 0){
+                    while($row = $result->fetch_assoc()){
+                        $hiddenNum = substr_replace($row["creditNum"],"XXXXXXXXXXXX", 0,12);
+                        
+                        echo "Card Name:".$row["cardName"]."<br>";
+                        echo "Credit Card Number:".$hiddenNum."<br>";
+                        echo "Credit Card Expiration:".$row["expDate"]."<br>";
+                    }
+                }
+            }else{
+                echo "No Recorded Payment On File"."<br>";
+                echo "Please Enter Payment Below"."<br>";
+                recordPayment();
+            }
+        }
+
+        function recordPayment(){
+            ?>
+            <a href="/ShowSpotter/customerInfo.php">Account Details<a>
+            <?php
+        }
+        ?>
+        <!--<div id="name"></div>
+        <input type="hidden" name="names" value="name">-->
+       <!--
         <p>
             <label for="username">Username:</label>
-            <input type="varchar" name="username" id="username">
+            var sendNames = 
         </p>
         <p>
             <label for="password">Password:</label>
@@ -200,7 +334,7 @@
         <p>
             <label for="billSame">Is billing address the same as your home address:</label>
             <input type="text" name="billSame" id="billSame">
-        </p>
+        </p>-->
         <input type="submit" onclick="" value="Submit">
 </body>
 </html>

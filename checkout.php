@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Inser Checkout Data</title>
+    <title>Insert Checkout Data</title>
+    <link rel="stylesheet" href="customer.css">
 </head>
 <body>
        <?php
-        include_once('saveTickets.php');
-        //session_start();
+        include_once("navbar.php");
+
+
+
         $DATABASE_HOST ='localhost';
         $DATABASE_USER = 'root';
         $DATABASE_PASS = '';
@@ -15,14 +18,14 @@
         if (!$conn){
             die("Conection failed:".mysqli_connect_error());
         }
-
+    
         
 
 
-
+        /*
         //$_RSV->set($_POST["sessid"], $_POST["userid"], $_POST["seats"], $_POST["tickets"]);
         //Test
-        /*session_start();
+        session_start();
         $DATABASE_HOST ='localhost';
         $DATABASE_USER = 'root';
         $DATABASE_PASS = '';
@@ -49,7 +52,7 @@
         if (mysqli_query($conn,$sql)){
             echo"Stored"
         }
-        mysqli_close($conn)*/
+        mysqli_close($conn);*/
 
 
 
@@ -62,8 +65,7 @@
 
 
         /* Commenting off for checkout part right now
-
-
+        */
         //Inserts values from checkoutForm
         $username = $_REQUEST['username'];
         $password = $_REQUEST['password'];
@@ -72,7 +74,7 @@
         $expDate = $_REQUEST['expDate'];
         $cvv = $_REQUEST['cvv'];
         $name = $_REQUEST['name'];
-        $address = $_REQUEST['adddress'];
+        $address = $_REQUEST['address'];
         $city = $_REQUEST['city'];
         $state = $_REQUEST['state'];
         $zipCode = $_REQUEST['zipCode'];
@@ -82,10 +84,15 @@
         '$address','$city','$state','$zipCode','$billSame')";
 
         if (mysqli_query($conn,$sql)){
-            echo"Stored";
+            echo"Password Recoreded";
         }
-        mysqli_close($conn)
-        */
+        mysqli_close($conn);
+        
         ?>
+        <input type="button" value="Customer Homepage"
+    onclick="window.location.href='customer.php'"/><br>
+        <script>
+        
+        </script>
     </body>
     </html>

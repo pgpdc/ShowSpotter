@@ -54,6 +54,12 @@ function isAdmin()
 
 $isUserAdmin = isAdmin();
 
+function isCustomer()
+{
+    return isset($_SESSION['name']);
+}
+
+$isUserCustomer = isCustomer();
 ?>
 
 <!DOCTYPE html>
@@ -74,16 +80,18 @@ $isUserAdmin = isAdmin();
         <div class="links">
             <a href="index.php">Home</a>
             <a href="room01/concessions.php">Concessions</a>
-            <a href="room01/checkout.php">Checkout</a>
+            <a href="room01/saveTickets.php">Checkout</a>
             <?php if ($isUserAdmin) : ?>
                 <a href="admin.php">Admin Hub</a>
+                <?php elseif ($isUserCustomer) : ?>
+                <a href="customer.php">Customer Hub</a>
             <?php endif; ?>
             <div class="dropdown">
                 <button class="dropbtn">Account</button>
                 <div class="dropdown-content">
                     <?php if ($isUserAdmin) : ?>
                         <p>Admin</p>
-                    <?php else : ?>
+                    <?php elseif ($isUserCustomer) : ?>
                         <p>Customer</p>
                     <?php endif; ?>
                     <a href="login.php">Sign-In</a>
