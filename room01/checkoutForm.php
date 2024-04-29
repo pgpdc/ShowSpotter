@@ -16,17 +16,22 @@ session_start();
        <?php
         //Checkout Cart
         require_once('seatreservelib.php');
-        $_RSV->save($_POST["sessid"], $_POST["userid"], $_POST["seats"], $_POST["time"], $_POST["date"], $_POST["id"]);
+        //echo $_POST["userid"];
+        
+
+        //Old Reserve Function spot
+        //$_RSV->save($_POST["sessid"], $_POST["userid"], $_POST["seats"], $_POST["time"], $_POST["date"], $_POST["id"]);
         
         //Creating session variables
+        $_SESSION["sessid"] = $_POST["sessid"];
         $_SESSION["userid"] = $_POST["userid"];
         $_SESSION["time"] = $_POST["time"];
         $_SESSION["date"] = $_POST["date"];
         $_SESSION["id"] = $_POST["id"];
        
 
-        
-        $typeTickets = $_POST['seats'];
+        $_SESSION["seats"]=$_POST['seats'];
+        $typeTickets = $_SESSION["seats"];
 
 
         //Get ticket Cost from database
@@ -84,7 +89,6 @@ session_start();
 
 
 
-
        echo "SEAT:<br>";
        //Original Code
        foreach ($typeTickets as $ticket) 
@@ -101,6 +105,15 @@ session_start();
        
 
        ?>
+
+
+    <script> 
+    const d = new Date();
+    let hour = d.getHours();
+    let minutes = d.getMinutes();
+    console.log("This is current time:"+hour +":"+minutes);
+    </script>
+    
        <script>
        //save Tickets
        
@@ -147,61 +160,6 @@ session_start();
  </body>
 
 
-
-
-
-
- <!--<h3>Billing Info:</h3>
-        <form action="checkout.php" method="post">
-        <p>
-            <label for="username">Username:</label>
-            <input type="varchar" name="username" id="username">
-        </p>
-        <p>
-            <label for="password">Password:</label>
-            <input type="varchar" name="password" id="password">
-        </p>
-        <p>
-            <label for="cardName">Card Name:</label>
-            <input type="varchar" name="cardName" id="cardName">
-        </p>
-        <p>
-            <label for="creditNum">Credit Card Number:</label>
-            <input type="varchar" name="creditNum" id="creditNum">
-        </p>
-        <p>
-            <label for="expDate">Experation Date:</label>
-            <input type="varchar" name="expDate" id="expDate">
-        </p>
-        <p>
-            <label for="cvv">Cvv:</label>
-            <input type="int" name="cvv" id="cvv">
-        </p>
-        <p>
-            <label for="name">Full Name:</label>
-            <input type="text" name="name" id="name">
-        </p>
-        <p>
-            <label for="address">Adress:</label>
-            <input type="varchar" name="address" id="address">
-        </p>
-        <p>
-            <label for="city">City:</label>
-            <input type="text" name="city" id="city">
-        </p>
-        <p>
-            <label for="state">State:</label>
-            <input type="text" name="state" id="state">
-        </p>
-        <p>
-            <label for="zipCode">Zip Code:</label>
-            <input type="int" name="zipCode" id="zipCode">
-        </p>
-        <p>
-            <label for="billSame">Is billing address the same as your home address:</label>
-            <input type="text" name="billSame" id="billSame">
-        </p>
-        <input type="submit" value="Submit">-->
 </form>
 </body>
 </html>

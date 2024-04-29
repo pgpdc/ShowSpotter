@@ -38,8 +38,7 @@
 </nav>
 <form action="FinalPayment.php"method="post">
 <?php
-include_once('checkout.php');
-require_once 'checkout.php';
+
 
 $i = 0;
 
@@ -467,6 +466,7 @@ function save(){
         
 }
 </script>
+
 </section>
 <input type="submit" onclick="save()" value="Submit">
 </form>

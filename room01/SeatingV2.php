@@ -13,13 +13,15 @@
   <?php
   session_start();
     // (A) FIXED IDS FOR THIS DEMO
+
+    
     $sessid = 1;
-    $userid = 999;
+    $userid = $_SESSION['name'];
     $date = $_GET["date"];
     $time = $_GET["time"];
     $id = $_GET["id"];
     $count = 0;
-
+ 
     // (B) GET SESSION SEATS
     require "seatreservelib.php";
     $seats = $_RSV->get($sessid, $time, $date, $id);
