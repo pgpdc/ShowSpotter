@@ -1,6 +1,9 @@
 <?php
 
 session_start();
+unset($_SESSION['theater']); //Leave here to unset the session everytime a user goes to the index.php
+$_SESSION['theater'] = $_GET["theater"]; 
+
 // $DATABASE_HOST = 'localhost';
 // $DATABASE_USER = 'root';
 // $DATABASE_PASS = '';

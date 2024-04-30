@@ -20,7 +20,7 @@ session_start();
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "indiana";
+        $dbname = $_SESSION["theater"];;
         $conn = new mysqli($servername, $username, $password, $dbname);
         if ($conn-> connect_error){
             die("Connection Error");
@@ -249,7 +249,7 @@ session_start();
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "indiana";
+        $dbname = $_SESSION["theater"];;
         $conn = new mysqli($servername, $username, $password, $dbname);
         if ($conn-> connect_error){
             die("Connection Error");
