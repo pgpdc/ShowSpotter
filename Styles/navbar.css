@@ -9,6 +9,7 @@ nav{
     top: 0;
     background-color: black;
     border-bottom: orange solid 2pt;
+    border-width: 5px;
     padding-left: 50px;
     padding-right: 20px;
     padding-top: 10px;
