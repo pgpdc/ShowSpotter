@@ -7,7 +7,7 @@ $isAdmin = 0;
 
 // Check to see if there is a current session and the user is logged in
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
-    header("location: index.php");
+    header("location: /ShowSpotter/index.php");
 }
 
 //Only execute when the submit button is pressed
@@ -46,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         if($isAdmin == 1) {
                             $_SESSION["admin"] = TRUE;
                         }
-                        header("location: index.php");
+                        header("location: /ShowSpotter/index.php");
                     } else {
                         $password_err = "Incorrect Password";
                     }
@@ -66,11 +66,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="Styles/login.css">
+    <link rel="stylesheet" href="/ShowSpotter/Styles/login.css">
 </head>
 
 <body>
-<?php require("navbar.php"); ?>
+<?php require("../navbar.php"); ?>
 
     <div class="wrapper">
         <h2>Login</h2>

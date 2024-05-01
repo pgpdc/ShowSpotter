@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<link rel="stylesheet" href="customer.css">
+<link rel="stylesheet" href="Styles/customer.css">
 </head>
 <?php
 session_start();
@@ -20,7 +20,7 @@ session_start();
 <body>
 <?php
 
-include_once("navbar.php");
+include("navbar.php");
 include "databaseConnectBilling.php";
 
 

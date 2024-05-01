@@ -11,9 +11,9 @@
     <?php endif; ?>
     <div class="dropdown">
         <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) : ?>
-            <a href="/ShowSpotter/logout.php">Log-Out</a>
+            <a href="/ShowSpotter/login/logout.php">Log-Out</a>
         <?php else : ?>
-            <a href="/ShowSpotter/login.php">Sign-In</a>
+            <a href="/ShowSpotter/login/login.php">Sign-In</a>
         <?php endif; ?>
     </div>
 </nav>
