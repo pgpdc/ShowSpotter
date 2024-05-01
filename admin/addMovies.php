@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION["admin"] != TRUE) {
-    header("location: index.php");
+    header("location: /ShowSpotter/index.php");
 }
 
 require("../theaterDatabase.php");

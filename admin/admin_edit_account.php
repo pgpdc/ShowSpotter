@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if ($_SESSION["admin"] != TRUE) {
+    header("location: /ShowSpotter/index.php");
+}
+
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
