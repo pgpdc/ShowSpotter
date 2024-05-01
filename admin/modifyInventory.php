@@ -15,7 +15,7 @@ if ($_SESSION["admin"] != TRUE) {
 //     exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 // }
 
-require("theaterDatabase.php");
+require("../theaterDatabase.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['foodItem']) && isset($_POST['change']) && isset($_POST['price'])) {

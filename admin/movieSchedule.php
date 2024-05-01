@@ -104,11 +104,11 @@ function getMovieTitle($imdbid, $link)
 function getColor($roomId)
 {
     switch ($roomId) {
-        case 'ROOM_A':
+        case '1':
             return '#ff0000';
-        case 'ROOM_B':
+        case '2':
             return '#00ff00';
-        case 'ROOM_C':
+        case '3':
             return '#0000ff';
         default:
             return '#000000';
@@ -149,11 +149,11 @@ function getColor($roomId)
                 events: [<?php data_calendar(); ?>],
                 eventColor: function(event) {
                     switch (event.resourceId) {
-                        case 'ROOM_A':
+                        case '1':
                             return '#ff0000';
-                        case 'ROOM_B':
+                        case '2':
                             return '#00ff00';
-                        case 'ROOM_C':
+                        case '3':
                             return '#0000ff';
                         default:
                             return '#000000';

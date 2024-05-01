@@ -3,18 +3,8 @@ session_start();
 if ($_SESSION["admin"] != TRUE) {
     header("location: index.php");
 }
-// Database connection
-// $DATABASE_HOST = 'localhost';
-// $DATABASE_USER = 'root';
-// $DATABASE_PASS = '';
-// $DATABASE_NAME = 'indiana';
 
-// $link = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-// if (mysqli_connect_errno()) {
-//     exit('Failed to connect to MySQL: ' . mysqli_connect_error());
-// }
-
-require("theaterDatabase.php");
+require("../theaterDatabase.php");
 
 // Function to call the API
 function callAPI($title)
@@ -165,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
             display: block;
             margin-bottom: 5px;
         }
-        input[type='text'], input[type='date'], input[type='time'] {
+        input[type='text'], input[type='date'], input[type='time'], select{
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
@@ -221,7 +211,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
         <label for='timeend'>End Time (HH:MM:SS):</label>
         <input type='time' id='timeend' name='timeend' required>
         <label for='room_id'>Room ID:</label>
-        <input type='text' id='room_id' name='room_id' required>
+        <select id='room_id' name='room_id' required>
+            <option disabled selected></option>
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+        </select>
         <input type='submit' value='Insert'>
     </form>
     </div>
@@ -235,11 +230,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
         $timestart = $_POST['timestart'];
         $timeend = $_POST['timeend'];
         $room_id = $_POST['room_id'];
-    
+
         // Check if movie data exists in local database
         $query = "SELECT * FROM Movies WHERE imdbid = '$id'";
         $movieResult = mysqli_query($link, $query);
-    
+
         if (mysqli_num_rows($movieResult) == 0) {
             // If movie data doesn't exist in local database, fetch from API
             $curl = curl_init();
@@ -257,30 +252,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
                     "X-RapidAPI-Key: 8452b825abmshd1549bfe74262fcp138103jsnd5f10dbe3289"
                 ],
             ]);
-    
+
             $response = curl_exec($curl);
             curl_close($curl);
-    
+
             if ($response) {
                 // Decode the JSON response
                 $data = json_decode($response, true);
-    
+
                 // Get the movie details
                 $movie = $data['results'];
                 $title = $movie['titleText']['text'];
                 $imageUrl = $movie['primaryImage']['url'];
-    
+
                 // Store the movie data in local database
                 $query = "INSERT INTO Movies (imdbid, title, imageUrl) VALUES ('$id', '$title', '$imageUrl')";
                 mysqli_query($link, $query);
             }
         }
-    
+
         // SQL query
         $sql = "INSERT INTO `showtimes` (`imdbid`, `date`, `timestart`, `timeend`, `room_id`) VALUES ('$id', '$date', '$timestart', '$timeend', '$room_id')";
-    
+
         $stmt = mysqli_prepare($link, $sql);
-    
+
         if (mysqli_stmt_execute($stmt)) {
             echo "<script type='text/javascript'>
                     alert('New record created successfully');
@@ -293,7 +288,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['title'])) {
                   </script>";
         }
     }
-    
 } else {
     // No form is submitted, display the form for movie title
     echo "
