@@ -124,7 +124,6 @@ function formatDate(date) {
 
 
     <!--Movie Listings-->
-    <br>
     <h2>Showtimes: </h2>
     <?php
     while ($row = mysqli_fetch_assoc($result)) {

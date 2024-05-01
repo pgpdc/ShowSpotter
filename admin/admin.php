@@ -26,7 +26,6 @@ require("../theaterDatabase.php");
     <a href="movieSchedule.php">Movie Schedule</a>
     <a href="admin_edit_account.php">Edit User Accounts</a>
     <a href="modifyInventory.php">Inventory</a>
-
   </div>
 </body>
 

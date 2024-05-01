@@ -167,7 +167,7 @@ if(mysqli_num_rows($queryNameResult)>0){
 
 <script>
 
-  function passHide{
+  function passHide() {
     var a = document.getElementBy("hidden");
     if (a.style.display === "none"){
         a.style.display = "block";
