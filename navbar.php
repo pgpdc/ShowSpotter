@@ -1,37 +1,19 @@
-<?php 
-function isAdmin()
-{
-    return isset($_SESSION['admin']) && $_SESSION['admin'] === TRUE;
-}
-
-$isUserAdmin = isAdmin();
-
-?>
-
-
-<link rel="stylesheet" href="Styles/navbar.css">
+<link rel="stylesheet" href="/ShowSpotter/Styles/navbar.css">
 
 
 <nav>
-        <div class="brand">ShowSpotter</div>
-        <div class="links">
-            <a href="index.php">Home</a>
-            <a href="room01/concessions.php">Concessions</a>
-            <a href="room01/checkout.php">Checkout</a>
-            <?php if ($isUserAdmin) : ?>
-                <a href="admin.php">Admin Hub</a>
-            <?php endif; ?>
-            <div class="dropdown">
-                <button class="dropbtn">Account</button>
-                <div class="dropdown-content">
-                    <?php if ($isUserAdmin) : ?>
-                        <p>Admin</p>
-                    <?php else : ?>
-                        <p>Customer</p>
-                    <?php endif; ?>
-                    <a href="login.php">Sign-In</a>
-                    <a href="logout.php">Log-Out</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <div class="brand">ShowSpotter</div>
+    <a href="/ShowSpotter/index.php">Home</a>
+    <a href="/ShowSpotter/room01/concessions.php">Concessions</a>
+    <a href="/ShowSpotter/room01/checkout.php">Checkout</a>
+    <?php if (isset($_SESSION['admin'])) : ?>
+        <a href="/ShowSpotter/admin.php">Admin Hub</a>
+    <?php endif; ?>
+    <div class="dropdown">
+        <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) : ?>
+            <a href="/ShowSpotter/logout.php">Log-Out</a>
+        <?php else : ?>
+            <a href="/ShowSpotter/login.php">Sign-In</a>
+        <?php endif; ?>
+    </div>
+</nav>

@@ -19,36 +19,13 @@ $isUserAdmin = isAdmin();
   <meta charset="utf-8" />
   <meta name="viewpoint" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="Styles/admin.css" />
-  <link rel="stylesheet" href="Styles/navbar.css">
 </head>
 
 <title>Admin</title>
 
 <body>
   
-  <nav>
-    <div class="brand">ShowSpotter</div>
-    <div class="links">
-      <a href="index.php">Home</a>
-      <a href="">Concessions</a>
-      <a href="checkout.html">Checkout</a>
-        <?php if ($isUserAdmin): ?>
-          <a href="admin.php">Admin Hub</a>  
-        <?php endif; ?> 
-      <div class="dropdown">
-      <button class="dropbtn">Account</button>
-      <div class="dropdown-content">
-        <?php if ($isUserAdmin): ?> 
-          <p>Admin</p> 
-        <?php else: ?> 
-          <p>Customer</p> 
-        <?php endif; ?>
-      <a href="login.php">Sign-In</a>
-      <a href="logout.php">Log-Out</a>
-      </div>
-      </div>
-      </div>
-    </nav>
+<?php require("navbar.php"); ?>
 
   <div class="container">
 

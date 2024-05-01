@@ -4,43 +4,7 @@ session_start();
 unset($_SESSION['theater']); //Leave here to unset the session everytime a user goes to the index.php
 $_SESSION['theater'] = $_GET["theater"]; 
 
-// $DATABASE_HOST = 'localhost';
-// $DATABASE_USER = 'root';
-// $DATABASE_PASS = '';
-
-// // $DATABASE_NAME = $_GET["theater"];
-
-
-// if (isset($_SESSION["theater"])) {
-//     $DATABASE_NAME = $_SESSION["theater"];
-//     try {
-//         $link = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-//     } catch (mysqli_sql_exception $e) {
-//         echo "<script type='text/javascript'>
-//                 alert('Oops! Something went wrong. Please try again later.');
-//                 window.location = 'index.php';
-//             </script>";
-//         exit;
-//     }
-// } else {
-//     echo "<script type='text/javascript'>
-//                 alert('Please select a theater!');
-//                 window.location = 'index.php';
-//             </script>";
-// }
-
 require("theaterDatabase.php");
-
-// $link = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-// if (mysqli_connect_errno()) {
-//     exit('Failed to connect to MySQL: ' . mysqli_connect_error());
-// }
-
-
-//$timezone = new DateTimeZone('America/New_York'); // replace with the user's timezone
-//$date = new DateTime('now', $timezone);
-//$today = $date->format('Y-m-d');
-//$today = $date = new DateTime('now', $timezone);
 
 $today = $_GET["date"];
 
@@ -49,20 +13,6 @@ $sql = "SELECT * FROM `showtimes` WHERE `date` = '$today' ORDER BY 'timestart'";
 $stmt = mysqli_prepare($link, $sql);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
-
-function isAdmin()
-{
-    return isset($_SESSION['admin']) && $_SESSION['admin'] === TRUE;
-}
-
-$isUserAdmin = isAdmin();
-
-function isCustomer()
-{
-    return isset($_SESSION['name']);
-}
-
-$isUserCustomer = isCustomer();
 ?>
 
 <!DOCTYPE html>
@@ -72,37 +22,11 @@ $isUserCustomer = isCustomer();
     <meta charset="utf-8">
     <meta name="viewpoint" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="Styles/ShowTimes.css">
-    <link rel="stylesheet" href="Styles/navbar.css">
     <title>ShowSpotter</title>
 </head>
 
 <body>
-
-    <nav>
-        <div class="brand">ShowSpotter</div>
-        <div class="links">
-            <a href="index.php">Home</a>
-            <a href="room01/concessions.php">Concessions</a>
-            <a href="room01/saveTickets.php">Checkout</a>
-            <?php if ($isUserAdmin) : ?>
-                <a href="admin.php">Admin Hub</a>
-                <?php elseif ($isUserCustomer) : ?>
-                <a href="customer.php">Customer Hub</a>
-            <?php endif; ?>
-            <div class="dropdown">
-                <button class="dropbtn">Account</button>
-                <div class="dropdown-content">
-                    <?php if ($isUserAdmin) : ?>
-                        <p>Admin</p>
-                    <?php elseif ($isUserCustomer) : ?>
-                        <p>Customer</p>
-                    <?php endif; ?>
-                    <a href="login.php">Sign-In</a>
-                    <a href="logout.php">Log-Out</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <?php require("navbar.php"); ?>
 
     <div class="theater">
         <h1>

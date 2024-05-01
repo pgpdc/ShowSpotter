@@ -22,16 +22,8 @@ $_SESSION['theater'] = "indiana"; //This is how you set the session
 
 <body>
     
-    <nav>
-        <div class="brand">ShowSpotter</div>
-        <div class="links">
-            <a href="index.php">Home</a>
-            <a href="">Concessions</a>
-            <a href="checkout.html">Checkout</a>
-            <a href="login.php">Sign-In</a>
-        </div>
-    </nav>
-    <br>
+<?php require("navbar.php"); ?>
+
 
     <script>
         function changeTheater() {
