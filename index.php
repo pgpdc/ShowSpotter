@@ -1,7 +1,7 @@
 <?php
 session_start();
 unset($_SESSION['theater']); //Leave here to unset the session everytime a user goes to the index.php
-$_SESSION['theater'] = "indiana"; //This is how you set the session
+// $_SESSION['theater'] = "indiana"; //This is how you set the session
 ?>
 
 <!DOCTYPE html>

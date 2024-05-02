@@ -46,7 +46,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         if($isAdmin == 1) {
                             $_SESSION["admin"] = TRUE;
                         }
-                        header("location: /ShowSpotter/index.php");
+                        if (isset($_SESSION['theater'])) {
+                            $encodedTheater = urlencode($_SESSION['theater']);
+                            $encodedDate = urlencode(date('Y-m-d'));
+                            header("location: /ShowSpotter/Showtimes.php?theater=$encodedTheater&date=$encodedDate");
+                        } else {
+                            header("location: /ShowSpotter/index.php");
+                        }
                     } else {
                         $password_err = "Incorrect Password";
                     }
