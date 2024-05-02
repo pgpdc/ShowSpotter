@@ -13,13 +13,13 @@ if (isset($_SESSION["theater"])) {
     } catch (mysqli_sql_exception $e) {
         echo "<script type='text/javascript'>
                 alert('Oops! Something went wrong. Please try again later.');
-                window.location = 'index.php';
+                window.location = '/ShowSpotter/index.php';
             </script>";
         exit;
     }
 } else {
     echo "<script type='text/javascript'>
                 alert('Please select a theater!');
-                window.location = 'index.php';
+                window.location = '/ShowSpotter/index.php';
             </script>";
 }
