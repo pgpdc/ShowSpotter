@@ -13,8 +13,10 @@ h1{
     background-color: black;
     line-height: 80px;
     text-align: center;
-    font-size: 65pt;
+    font-size: 60pt;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 h2{

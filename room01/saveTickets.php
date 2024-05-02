@@ -1,8 +1,11 @@
+<?php 
+session_start()
+?>
+
 <DOCTYPE html>
     <html>
 
     <head>
-        <!-- Link To NavBar -->
         <link rel="stylesheet" href="concessions.css">
         <style>
             table {
@@ -11,12 +14,6 @@
                 font-size: 20px;
                 border: 1px solid black;
             }
-
-            h1 {
-                text-align: center;
-                font-size: xx-large;
-            }
-
             td {
                 border: 5px solid black;
                 background-color: lightgrey;
@@ -80,7 +77,7 @@
             $arrQuantity = array();
             ?>
             <section>
-                <h1>Tickets:</h1>
+                <h1>Tickets</h1>
                 </table>
                 <br>
                 <label for="ItemO"></label>
