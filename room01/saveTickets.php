@@ -145,7 +145,7 @@ if (isset($_POST['foodVal'])){
     
     const itemNames = sessionStorage.getItem('itemName');
     const finalItemNames = JSON.parse(itemNames);
-    //console.log("Database Names"+finalItemNames);
+    console.log("Database Names"+finalItemNames);
     
     //Database Item Cost
     const itemsValue = sessionStorage.getItem('value');
@@ -159,7 +159,57 @@ if (isset($_POST['foodVal'])){
 
     const arrNames = [];
     const costOfItem = [];
+    //finalItemValue
+    //Database
+    //finalItemNames
+    //customer
+    //customerFinalCostOrder
+    customerFinalARRAYS=[];
+    customerIndividual=[];
+    for(var i = 0; i <itemQ.length;i++){
+                            console.log(i + "YES THIS IS CURRENT VALUE:"+itemQ[i] + "<br>");
+                            console.log(itemQ);
+                            customerIndividual.push(itemQ);
+                            customerFinalARRAYS.push(foodName[i]);
+                            console.log("CUSTOMER FOOD NAMES:"+foodName);
+                            }
+        
+    
+                            //Calculate Costs
+                            const finalItemsArray = [];
+                            //DatabASE Count
+                            let lengthDatavalue = finalItemNames.length;
+                            //Cusotmer Count
+                            let multiplyDataCustomer = customerFinalARRAYS.length;
+                            console.log("LENGTH:"+multiplyDataCustomer+" Database "+lengthDatavalue);
+                            let looping = multiplyDataCustomer*lengthDatavalue;
+                            let loopingGo = multiplyDataCustomer*lengthDatavalue;
+                            var a = 0;
+                            var i=0;
+                            for(var loop = 0; loop <= looping;loop++){
+                                console.log("LOOP FOR THE DATA BASE ITEM Name:"+finalItemNames[i]);
+                                console.log("LOOP FOR THE DATA BASE ITEM VAL:"+customerFinalARRAYS[i]);
+                                console.log("LOOP FOR THE ITEM VAL:"+finalItemValue[a]);
+                                if(finalItemNames[i] == customerFinalARRAYS[a]){
+                                    console.log("IF LOOP DATABASE name val"+finalItemValue[i]);
+                                    console.log("IF LOOP CUSTOMER name val"+customerFinalARRAYS[a]);
+                                    finalItemsArray.push(finalItemValue[i]);
+                                }
+                                i = i + 1;
+                                if(i == lengthDatavalue){
+                                    a = a + 1;
+                                    console.log("A"+a);
+                                    i = 0;
+                                }
+                            }
 
+
+
+
+
+
+    /*
+    
     var namesArray = arrNames.concat(finalItemNames);
     for(var i=0; i < namesArray.length;i++){
         var count=0;
@@ -174,8 +224,7 @@ if (isset($_POST['foodVal'])){
         }
             console.log(finalItemValue);
         }
-
-    
+    */
     
     //Array for reading in final cost
     const finalItemCosts = <?php echo json_encode($ItemCostFinal); ?>;
@@ -278,12 +327,13 @@ if (isset($_POST['foodVal'])){
                             html +="<tr>";
                             html += "<td>"+ itemQ[i] +"</td>";
                             html += "<td>"+ foodName[i] +"</td>";
+
                             html += "<td>" + `<button type="button" class="btn btn-danger" onclick='deleteButton(${i})'>Delete</button>` + "</td>";
                             html += "<td>" + `<button type="button" class="btn btn-danger" onclick='minusButton(${i})'>-</button>` + "</td>";
                             html += "<td>" + `<button type="button" class="btn btn-danger" onclick='addButton(${i})'>+</button>` + "</td>";
                     //Cost
-                            html += "<td>"+"$"+ costOfItem[i] +"</td>";
-                            totalVal= itemQ[i]*costOfItem[i];
+                            html += "<td>"+"$"+ finalItemsArray[i] +"</td>";
+                            totalVal= itemQ[i]*finalItemsArray[i];
                             html += "<td>"+"$"+ Number(totalVal).toFixed(2) +"</td>";
                             finalItemCost = finalItemCost + totalVal;
                             //html += "</tr>";
@@ -312,6 +362,7 @@ if (isset($_POST['foodVal'])){
                             finalCost = final;
 
                             alert(i);
+                            finalItemsArray.splice(i,1);
                             itemQ.splice(i,1);
                             foodName.splice(i,1);
                             costOfItem.splice(i,1);

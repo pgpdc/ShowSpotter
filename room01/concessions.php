@@ -11,12 +11,14 @@ session_start();
     <meta name="viewpoint" content="width=device-width,initial-scale=1">
     <title>Checkout Form</title>
     <link rel="stylesheet" href="concessions.css">
+    <?php 
+    require("../navbar.php"); ?>
+    <h1>Concessions</h1>
 </head>
 
 <body>
-    <?php require("../navbar.php"); ?>
-
-    <h1>Concessions</h1>
+    
+    
     <h2>Food and Drink Options:</h2>
     <h3>For drink: It is self-service and provided on site at your theatre location</h3>
 
@@ -55,7 +57,7 @@ session_start();
                 //cho $t;
                 //echo "<br>";
             }
-        }
+        
         ?>
         <script>
             //Array For customers ticket type
@@ -83,12 +85,12 @@ session_start();
             console.log(CticketType);
         </script>
         <?php
-
+        }
         //Getting Values from mySQL
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = $_SESSION["theater"];;
+        $dbname = $_SESSION["theater"];
         $conn = new mysqli($servername, $username, $password, $dbname);
         if ($conn->connect_error) {
             die("Connection Error");
@@ -159,9 +161,9 @@ session_start();
 
                 if (strpos($stringPrint, $drink) !== false) {
 
-                    echo "<label for='$f'>How may $f(s):<br></label>";
+                    echo "<label for='$f'>How may <b>$f(s)</b>:<br></label>";
                     echo "<br>";
-                    echo "Cost:$ {$c}";
+                    echo "<b>Cost:</b>$ {$c}";
                     echo "<br>";
 
                     echo "<select name='foodVal[$f]'>
@@ -201,9 +203,9 @@ session_start();
                 //echo "Select how may you want for ".$word.":";
 
                 if (strpos($stringPrint, $popcorn) !== false) {
-                    echo "<label for='$f'>How may $f(s):<br></label>";
+                    echo "<label for='$f'>How may <b>$f(s)</b>:<br></label>";
                     echo "<br>";
-                    echo "Cost:$ {$c}";
+                    echo "<b>Cost:</b>$ {$c}";
                     echo "<br>";
 
                     echo "<select name='foodVal[$f]'>
@@ -226,7 +228,58 @@ session_start();
             }
 
             ?></p>
+        
+
+        <?php
+        //Getting Values from mySQL
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = $_SESSION["theater"];;
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+            die("Connection Error");
+        }
+        /*
+        //read in food and drink Items
+        $sql = "SELECT foodItem,foodPrice FROM foodprices";
+        $result = $conn->query($sql);
+
+        $a = 0;
+        arrFood = [];
+        arrPrices = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+
+                //echo $row['foodItem'];
+                $arrFood[$a] = $row['foodItem'];
+                //echo $food[$a];
+                //Adding cost field
+                $arrPrices[$a] = $row['foodPrice'];
+                //echo $cost[$a];
+
+                $a = $a + 1;
+                //echo "<br>";
+            }
+        }
+        */
+
+        ?>
         <script>
+            /*
+         //Array for Database item and price
+         var foodPrice = <?php //echo json_encode($foodPrice); ?>;
+        //Seperating to item and price
+        let itemName = Object.keys(foodPrice);
+        let value = Object.values(foodPrice);
+        //Setting Database item name
+        const itemNameFinal = JSON.stringify(itemName);
+        sessionStorage.setItem('itemName', itemNameFinal);
+        //Setting Database item cost
+        const itemValues = JSON.stringify(value);
+        sessionStorage.setItem('value', itemValues);
+        */
+
             //Array for Database item and price
             var foodPrice = <?php echo json_encode($foodPrice); ?>;
             //Seperating to item and price

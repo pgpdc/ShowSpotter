@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2024 at 08:30 PM
+-- Generation Time: May 02, 2024 at 01:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -92,13 +92,6 @@ CREATE TABLE `ordereditems` (
   `finalItemCost` decimal(15,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `ordereditems`
---
-
-INSERT INTO `ordereditems` (`userid`, `timeV`, `dateV`, `id`, `itemQuantity`, `item`, `itemCost`, `finalItemCost`) VALUES
-('test8', '00:00:00', '2024-04-29', 1, '1', 'Small Drink', 4, 4);
-
 -- --------------------------------------------------------
 
 --
@@ -115,13 +108,6 @@ CREATE TABLE `orderedtickets` (
   `ticketCost` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `orderedtickets`
---
-
-INSERT INTO `orderedtickets` (`user_id`, `timeV`, `dateV`, `id`, `ticketNumber`, `ticketName`, `ticketCost`) VALUES
-('test8', '00:00:00', '2024-04-29', 1, 'A2', 'Adult', '9');
-
 -- --------------------------------------------------------
 
 --
@@ -130,7 +116,6 @@ INSERT INTO `orderedtickets` (`user_id`, `timeV`, `dateV`, `id`, `ticketNumber`,
 
 CREATE TABLE `paymentinfo` (
   `username` varchar(20) DEFAULT NULL,
-  `password` varchar(30) DEFAULT NULL,
   `cardName` varchar(50) NOT NULL,
   `creditNum` varchar(20) NOT NULL,
   `expDate` varchar(10) NOT NULL,
@@ -147,8 +132,45 @@ CREATE TABLE `paymentinfo` (
 -- Dumping data for table `paymentinfo`
 --
 
-INSERT INTO `paymentinfo` (`username`, `password`, `cardName`, `creditNum`, `expDate`, `cvv`, `name`, `address`, `city`, `state`, `zipCode`, `billSame`) VALUES
-('test8', '', 'Graham Smith', '1345555513133333', '12/5', 555, 'Graham Smith', '3333 Street', 'CA', 'NY', 111111, 'yes');
+INSERT INTO `paymentinfo` (`username`, `cardName`, `creditNum`, `expDate`, `cvv`, `name`, `address`, `city`, `state`, `zipCode`, `billSame`) VALUES
+('test8', 'Graham Smith', '1345555513133333', '12/5', 555, 'Graham Smith', '3333 Street', 'CA', 'NY', 111111, 'yes'),
+('test8', 'Graham Smith', '1345555555555555', '1/15', 555, '', '3333 Street', 'Monreoville', 'NY', 555551, 'yes');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `paymentrecord`
+--
+
+CREATE TABLE `paymentrecord` (
+  `userid` varchar(50) NOT NULL,
+  `time` varchar(32) NOT NULL,
+  `date` varchar(16) NOT NULL,
+  `id` int(8) NOT NULL,
+  `cardNum` varchar(50) NOT NULL,
+  `point` int(100) DEFAULT NULL,
+  `discount` decimal(65,2) NOT NULL,
+  `finalCost` decimal(65,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `points`
+--
+
+CREATE TABLE `points` (
+  `userid` varchar(50) NOT NULL,
+  `notusedPoints` int(100) NOT NULL,
+  `pointsNum` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `points`
+--
+
+INSERT INTO `points` (`userid`, `notusedPoints`, `pointsNum`) VALUES
+('test15', 0, 5);
 
 -- --------------------------------------------------------
 
@@ -457,7 +479,8 @@ INSERT INTO `showtimes` (`id`, `imdbid`, `date`, `timestart`, `timeend`, `room_i
 (35, 'tt0876563', '2024-05-03', '04:17:00', '07:17:00', '1'),
 (36, 'tt0876563', '2024-04-26', '04:18:00', '07:18:00', '1'),
 (37, 'tt0876563', '2024-04-28', '09:07:00', '11:07:00', '1'),
-(38, 'tt0876563', '2024-04-29', '00:00:00', '03:00:00', '1');
+(38, 'tt0876563', '2024-04-29', '00:00:00', '03:00:00', '1'),
+(39, 'tt0876563', '2024-05-02', '00:16:00', '02:16:00', '1');
 
 --
 -- Indexes for dumped tables
@@ -535,7 +558,7 @@ ALTER TABLE `sessions`
 -- AUTO_INCREMENT for table `showtimes`
 --
 ALTER TABLE `showtimes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

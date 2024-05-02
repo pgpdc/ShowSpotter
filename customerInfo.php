@@ -1,19 +1,20 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-<link rel="stylesheet" href="Styles/customer.css">
+<link rel="stylesheet" href="Styles/customerInfo.css">
 </head>
 <?php
 session_start();
 ?>
 <title>Account Details</title>
 <style>
-#myDIV {
-  width: 100%;
-  padding: 50px 0;
-  text-align: center;
-  background-color: lightblue;
-  margin-top: 20px;
+
+.hidden{
+display:none;
+}
+.hiddenTwo{
+display:none;
 }
 </style>
 </head>
@@ -22,153 +23,79 @@ session_start();
 
 include("navbar.php");
 include "databaseConnectBilling.php";
+?>
+<h1>Account Details</h1>
+<?php
 
 
-
-$sql = "SELECT username,password,cardName,creditNum,expDate,cvv,name,address,city,state,zipCode,billSame FROM paymentinfo WHERE username='$user'";
+$sql = "SELECT username,cardName,creditNum,expDate,cvv,name,address,city,state,zipCode,billSame FROM paymentinfo WHERE username='$user'";
 $queryNameResult = mysqli_query($conn, $sql);
 
 if(mysqli_num_rows($queryNameResult)>0){
+    echo "<table>";
+    echo "<tr>";
+    echo "<th>"."Account User"."<th>";
     if($row = mysqli_fetch_assoc($queryNameResult)){
-            echo "Account User and Password:<br>";
-            echo "Username: ". $row["username"]."<br>";
-            echo "Password: ". $row["password"]."<br>";
-            echo "Account Payment Information:<br>";
-            echo "Card Name: ". $row["cardName"]."<br>";
-            echo "Credit Card Number: ". $row["creditNum"]."<br>";
-            echo "Experiation Date: ". $row["expDate"]."<br>";
-            echo "Cvs: ". $row["cvv"]."<br>";
-            echo "Address<br>";
-            echo "Full Name: ". $row["name"]."<br>";
-            echo "Address: ". $row["address"]."<br>";
-            echo "City: ". $row["city"]."<br>";
-            echo "State: ". $row["state"]."<br>";
-            echo "Zip Code: ". $row["zipCode"]."<br>";
-            echo "Billing Same: ". $row["billSame"]."<br>";
-            $conn->close();
+        echo "<tr>";
+        echo "<td>"."<b>Username:</b> ". $row["username"]."<td>"."<br>";
+        echo "</tr>";
+        //echo "<tr>";
+        //echo "<td>"."<b>Password:</b> ". $row["password"]."<td>";
+        //echo "</tr>";
+        echo "<tr>";
+        echo "<th>"."Account Payment Information:"."<th>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>"."<b>Card Name:</b> ". $row["cardName"]."<td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>"."<b>Credit Card Number:</b> ".$row["creditNum"]."<td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>"."<b>Experiation Date:</b> ".$row["expDate"]."<td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>"."<b>Cvs:</b> ".$row["cvv"]."<td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<th>"."<b>Address</b> "."<th>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>"."<b>Full Name:</b> ".$row["name"]."<td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>"."<b>Address:</b> ".$row["address"]."<td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>"."<b>City:</b> ".$row["city"]."<td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>"."<b>State:</b> ". $row["state"]."<td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>"."<b>Zip Code:</b> ".$row["zipCode"]."<td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td>"."<b>Billing Same:</b> ".$row["billSame"]."<td>";
+        echo "</tr>";
+        $conn->close();
+        echo "<tr>";
 }
+echo "<table>";
 }else{
-?>
-<h1>Billing Info:</h1>
-
-        <form action="checkout.php" method="post">
-        <p>
-            <label for="username">Username:</label>
-            <input type="varchar" name="username" id="username">
-        </p>
-        <p>
-            <label for="password">Password:</label>
-            <input type="varchar" name="password" id="password">
-        </p>
-        <p>
-            <label for="cardName">Card Name:</label>
-            <input type="varchar" name="cardName" id="cardName">
-        </p>
-        <p>
-            <label for="creditNum">Credit Card Number:</label>
-            <input type="varchar" name="creditNum" id="creditNum">
-        </p>
-        <p>
-            <label for="expDate">Experation Date:</label>
-            <input type="varchar" name="expDate" id="expDate">
-        </p>
-        <p>
-            <label for="cvv">Cvv:</label>
-            <input type="int" name="cvv" id="cvv">
-        </p>
-        <p>
-            <label for="name">Full Name:</label>
-            <input type="text" name="name" id="name">
-        </p>
-        <p>
-            <label for="address">Address:</label>
-            <input type="varchar" name="address" id="address">
-        </p>
-        <p>
-            <label for="city">City:</label>
-            <input type="text" name="city" id="city">
-        </p>
-        <p>
-            <label for="state">State:</label>
-            <input type="text" name="state" id="state">
-        </p>
-        <p>
-            <label for="zipCode">Zip Code:</label>
-            <input type="int" name="zipCode" id="zipCode">
-        </p>
-        <p>
-            <label for="billSame">Is billing address the same as your home address:</label>
-            <input type="text" name="billSame" id="billSame">
-            <input type="submit" value="submit">
-        </p><?php 
+    ?>
+    <button value="New Pay" value="New Payment"
+    onclick="window.location.href='newPayment.php'">Add Payment</button>
+    <br>
+       <?php
         }?>
 
-<!-- Button that when clicked will allow user to update Password-->
-<button onclick="myFunction()">Update Password</button>
-<div id="hidden" >
-<h2>Update Password:</h2>
-<form method="post" action="customerInfo.php">
-        <p>
-            <label for="password">Password:</label>
-            <input type="varchar" name="password" id="password">
-            <input type="submit" name="updatePass" value="click">
-        </p>
-</form>
-</div>
-<h2>Update Billing Information:</h2>
-<form method="post" action="customerInfo.php">
-        <p>
-            <label for="cardName">Card Name:</label>
-            <input type="varchar" name="cardName" id="cardName">
-        </p>
-        <p>
-            <label for="creditNum">Credit Card Number:</label>
-            <input type="varchar" name="creditNum" id="creditNum">
-        </p>
-        <p>
-            <label for="expDate">Experation Date:</label>
-            <input type="varchar" name="expDate" id="expDate">
-        </p>
-        <p>
-            <label for="cvv">Cvv:</label>
-            <input type="int" name="cvv" id="cvv">
-        </p>
-        <input type="submit" name="updateBilling" value="click">
-</form>
-
-<h2>Update Address Information:</h2>
-<form method="post" action="customerInfo.php">
-<p>
-            <label for="name">Full Name:</label>
-            <input type="text" name="name" id="name">
-        </p>
-        <p>
-            <label for="address">Address:</label>
-            <input type="varchar" name="address" id="address">
-        </p>
-        <p>
-            <label for="city">City:</label>
-            <input type="text" name="city" id="city">
-        </p>
-        <p>
-            <label for="state">State:</label>
-            <input type="text" name="state" id="state">
-        </p>
-        <p>
-            <label for="zipCode">Zip Code:</label>
-            <input type="int" name="zipCode" id="zipCode">
-        </p>
-        <p>
-            <label for="billSame">Is billing address the same as your home address:</label>
-            <input type="text" name="billSame" id="billSame">
-        <input type="submit" name="updateAddress" value="click">
-        </p>
- </form>
 
 <script>
 
-  function passHide{
-    var a = document.getElementBy("hidden");
+  function passHide(){
+    var a = document.getElementById("hidden");
+    console.log("YES");
     if (a.style.display === "none"){
         a.style.display = "block";
     } else {
@@ -176,25 +103,90 @@ if(mysqli_num_rows($queryNameResult)>0){
     }
 }
 
-function myFunction() {
-    var x = document.getElementById("hidden");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
 </script>
+<button onclick="passHide()">Update Payment</button>
+<br>
+<div class="hidden" id="hidden" display="none">
+<h2>Update Billing Information:</h2>
+<form method="post" action="customerInfo.php">
+        <p>
+            <label for="cardName">Card Name:</label>
+            <input type="varchar" name="cardName" id="cardName" minlength="1" required>
+        </p>
+        <p>
+            <label for="creditNum">Credit Card Number:</label>
+            <input type="varchar" name="creditNum" id="creditNum" minlength="8"minlength="19">
+        </p>
+        <p>
+            <label for="expDate">Experation Date:</label>
+            <input type="date" name="expDate" id="expDate" value="2024-05-06" min="2024-05-02" max="2027-1-01" required>
+        </p>
+        <p>
+            <label for="cvv">Cvv:</label>
+            <input type="int" name="cvv" id="cvv"minlength="3"minlength="4" required>
+        </p>
+        <input type="submit" name="updateBilling" value="click">
+</form>
+    </div>
+<script>
+
+function passHideTwo(){
+  var a = document.getElementById("hiddenTwo");
+  console.log("YES");
+  if (a.style.display === "none"){
+      a.style.display = "block";
+  } else {
+      a.style.display = "none";
+  }
+}
+
+</script>
+<button onclick="passHideTwo()">Update Address</button>
+<br>
+<div class="hiddenTwo" id="hiddenTwo" display="none">
+<h2>Update Address Information:</h2>
+<form method="post" action="customerInfo.php">
+<p>
+            <label for="name">Full Name:</label>
+            <input type="text" name="name" id="name"minlength="1" required>
+        </p>
+        <p>
+            <label for="address">Address:</label>
+            <input type="varchar" name="address" id="address"minlength="1" required>
+        </p>
+        <p>
+            <label for="city">City:</label>
+            <input type="text" name="city" id="city"minlength="1" required>
+        </p>
+        <p>
+            <label for="state">State:</label>
+            <input type="text" name="state" id="state"minlength="2" maxlength="2" required>
+        </p>
+        <p>
+            <label for="zipCode">Zip Code:</label>
+            <input type="int" name="zipCode" id="zipCode" minlength="5" maxlength="5" required>
+        </p>
+        <p>
+            <label for="billSame">Is billing address the same as your home address:</label>
+            <input type="text" name="billSame" id="billSame" minlength="2" maxlength="3" required>
+        <br>
+        <input type="submit" name="updateAddress" value="click">
+        </p>
+ </form>
+</div>
+
+
 <!---Update User and Password--->
 <!--Update Billing-->
-<?php
 
+<?php
+/*
 function updateUserInfo(){  
 include "databaseConnectBilling.php";
 $updatedPassword = $_POST['password'];
 $sql = "UPDATE paymentinfo SET password='$updatedPassword' WHERE username='$user'";
 if ($conn->query($sql)===TRUE){
-    echo "yes";
+    //echo "yes";
 }else{
     echo "no";
 }
@@ -202,8 +194,9 @@ if ($conn->query($sql)===TRUE){
 if(isset($_POST['updatePass'])){
     echo $_POST['password'];
     updateUserInfo();
-}
-
+}*/
+?>
+<?php
 function updateBillingInfo(){  
     include "databaseConnectBilling.php";
     $cardName = $_POST['cardName'];
@@ -245,8 +238,9 @@ function updateBillingInfo(){
 <!--Update Address-->
 
 <!--Return to customer hub page-->
-<input type="button" value="Customer Homepage"
-    onclick="window.location.href='customer.php'"/><br>
+<button value="Account Details" value="Customer Homepage"
+    onclick="window.location.href='customer.php'">Return to Customer HomePage</button>
+
 </body>
 </html>
-</html>
+

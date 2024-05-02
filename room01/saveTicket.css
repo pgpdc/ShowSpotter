@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(255, 247, 247);
+    background-color: rgb(197, 197, 197);
     color:black;
     line-height: 30px;
     font-size: 25px;
@@ -12,7 +12,6 @@ h1{
     text-align: center;
     color:rgb(249, 215, 153);
     background-color: black;
-    font-size: 45pt;
 }
 
 h2{
@@ -29,16 +28,10 @@ select{
 }
 
 input[type=submit]{
-    /* Moves Button to the left */
-    position:relative;
-    left:90%;
-    /*Moves button up some */
-    bottom:0%;
-    /* Width of the button */
     width:150px;
-
-    padding:16px 32px;
-    margin: 4px 2px;
+    left:90%;
+    bottom:50px;
+    border-radius:40px;
     font-size: 25px;
     font-weight:bold;
     color: black;
@@ -46,12 +39,5 @@ input[type=submit]{
     padding: 15px 20px;
 }
 input[type=submit]:hover{
-    color:rgb(5, 104, 5);
+    color:rgb(164, 214, 164);
 }
-
-
-
-
-
-
-

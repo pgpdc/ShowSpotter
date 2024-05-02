@@ -1,17 +1,21 @@
 body{
-            background-color: rgb(197, 197, 197);
+            background-color: rgb(253, 245, 245);
             color:black;
             line-height: 30px;
             font-size: 25px;
             font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             position:relative;
+            text-align: center;
     
 }
 
 h1{
-            text-align: center;
-            color:rgb(249, 215, 153);
-            background-color: black;
+    color:rgb(216, 143, 8);
+    background-color: black;
+    height: 15%;
+    text-align: center;
+    font-size: 65pt;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 h2{
@@ -20,7 +24,21 @@ h2{
 h2{
             font-weight: bold;
 }
-
+p{
+    text-align:center;
+}
+button{
+    
+    background-color: orange;
+    font-family: fantasy;
+    color: black;
+    text-align: center;
+    font-size: 30px;
+    padding: 15px 25px;
+    border: 3px solid black;
+    width: 10%;
+    margin:20px;
+}
 table {
             width: 50%;
             margin: 0 auto;
@@ -36,6 +54,10 @@ td{
             background-color: lightgrey;
             font-weight:lighter;
 }
+th{
+    color:orange;
+    font-size: 20pt;
+}
 th, td{
             text-align:center;
             padding: 10px;
@@ -44,9 +66,9 @@ th, td{
 input[type=submit]{
             /* Moves Button to the left */
             position:relative;
-            left:90%;
+            left:45%;
             /*Moves button up some */
-            top:20%;
+            top:30%;
             /* Width of the button */
             width:150px;
 

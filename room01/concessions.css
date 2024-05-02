@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(178, 174, 174);
+    background-color: rgb(248, 244, 244);
     color:black;
     line-height: 30px;
     font-size: 25px;
@@ -9,12 +9,12 @@ body{
 }
 
 h1{
-    text-align: center;
-    color:rgb(249, 215, 153);
-    background-size: 100px;
+    color:rgb(216, 143, 8);
     background-color: black;
-    font-weight: bold;
-    
+    line-height: 80px;
+    text-align: center;
+    font-size: 65pt;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 h2{
@@ -39,7 +39,7 @@ select{
     /*Position ob button*/
     position:relative;
     left:75%;
-
+    border: 3px solid black;
     width:100px;
     border-radius:40px;
     font-size: 25px;
@@ -57,7 +57,7 @@ input[type=submit]{
     top:15%;
     /* Width of the button */
     width:150px;
-
+    
     padding:16px 32px;
     margin: 4px 2px;
     font-size: 25px;

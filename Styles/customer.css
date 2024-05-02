@@ -1,5 +1,21 @@
 body{
-     background-color: grey;
+     background-color: rgb(255, 251, 251);
      text-align: center;
-     font-family: "Verdana", "Geneva", sans-serif;
+     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     font-size: 40px;
+}
+button{
+     background-color: orange;
+     font-family: fantasy;
+     color: black;
+     text-align: center;
+     font-size: 30px;
+     padding: 35px 50px;
+     border: 1px grey;
+     width: 40%;
+     margin:20px;
+}
+button:hover{
+     color:yellow;
+     background-color: darkgoldenrod;
 }

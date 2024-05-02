@@ -5,10 +5,11 @@ session_start();
 <html>
     <head>
         <title>Checkout Form</title>
+        <h1>Checkout Form</h1>
 </head>
 <body>
     
-        <h1>Checkout Form</h1>
+        
         <h2>Checkout Cart:</h2>
         
        <link rel="stylesheet" href="checkoutForm.css">
@@ -19,8 +20,7 @@ session_start();
         //echo $_POST["userid"];
         
 
-        //Old Reserve Function spot
-        //$_RSV->save($_POST["sessid"], $_POST["userid"], $_POST["seats"], $_POST["time"], $_POST["date"], $_POST["id"]);
+
         
         //Creating session variables
         $_SESSION["sessid"] = $_POST["sessid"];

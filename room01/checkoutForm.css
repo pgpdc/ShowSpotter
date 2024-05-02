@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(197, 197, 197);
+    background-color: rgb(255, 255, 255);
     color:black;
     line-height: 80px;
     font-size: 25px;
@@ -8,12 +8,20 @@ body{
     font-weight:bold;
     
 }
-
+h1{
+    color:rgb(216, 143, 8);
+    background-color: black;
+    height: 15%;
+    text-align: center;
+    font-size: 65pt;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+/*
 h1{
     text-align: center;
     color:rgb(249, 215, 153);
     background-color: black;
-}
+}*/
 
 h2{
     text-decoration: underline;

@@ -15,11 +15,11 @@ session_start();
     <h1>Customer HomePage</h1>
     <?php
 
-    echo "HELLO USER " . $_SESSION['name'] . "<br>";
+    echo "HELLO USER:  " . $_SESSION['name'] . "<br>";
     ?>
-    <input type="button" value="Account Details" onclick="window.location.href='customerInfo.php'" /><br>
-    <input type="button" value="Order History" onclick="window.location.href='orderPrint.php'" /><br>
-    <input type="button" value="Reward Details" onclick="window.location.href='rewardsCustomer.php'" /><br>
+    <button value="Account Details" onclick="window.location.href='customerInfo.php'">Account Details</button><br>
+    <button value="Order History" onclick="window.location.href='orderPrint.php'">Order History</button><br>
+    <button value="Reward Details" onclick="window.location.href='rewardsCustomer.php'">Points</button><br>
 
 </body>
 

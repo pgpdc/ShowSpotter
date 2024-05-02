@@ -1,18 +1,54 @@
 <html>
 <head>
-<link rel="stylesheet" href="customer.css">
+<link rel="stylesheet" href="Styles/customerInfo.css">
 </head>
 <body>
 <?php
+//include_once("navbar.php");
+session_start();
+
 include_once("navbar.php");
+//Make database conncection
+include "databaseConnectBilling.php";
 ?>
 <h1>Rewards:</h1>
 <h2>Here are your current points:</h2>
 <?php
-include_once("navbar.php");
-//Pull from database
+
+
+$sql = "SELECT userid,notusedPoints,pointsNum FROM points WHERE userid='$user'";
+$queryPointsResult = mysqli_query($conn, $sql);
+
+if(mysqli_num_rows($queryPointsResult)>0){
+    if($row = mysqli_fetch_assoc($queryPointsResult)){
+            echo "<b>Account Point Info:</b><br>";
+            echo "<b>Username:</b> ". $row["userid"]."<br>";
+            echo "<b>Money that will become points:</b> $". number_format($row["notusedPoints"],2)."<br>";
+            echo "<b>Points:</b> ". $row["pointsNum"]."<br>";
+            $conn->close();
+}
+}else{
+    ?>
+<h1>Points account created:</h1>
+<?php
+echo "User:".$user."<br>";
+$valNot = 0;
+$valPoints = 5;
+echo "Money that can become points set to:".$valNot."<br>";
+echo "Points(For new account you get 5 points):".$valPoints."<br>";
+
+include_once("databaseConnectBilling.php");
+$sqlPoints = "INSERT INTO points VALUES('$user','$valNot','$valPoints')";
+
+if ($conn->query($sqlPoints)===TRUE){
+    //echo "YES";
+}else{
+    echo "ERROR";}
+$conn->close();
+}
 ?>
-<input type="button" value="Customer Homepage"
-    onclick="window.location.href='customer.php'"/><br>
+ <!--Return to customer hub page-->
+ <button value="Customer Hub" value="Customer Homepage"
+    onclick="window.location.href='customer.php'">Customer Hub</button>
 </body>
 </html>
