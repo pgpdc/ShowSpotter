@@ -21,7 +21,7 @@
     <?php endif; ?>
     <?php if (isset($_SESSION['admin'])) : ?>
         <a href="/ShowSpotter/admin/admin.php">Admin Hub</a>
-    <?php elseif (isset($_SESSION['userid'])) : ?>
+    <?php elseif (isset($_SESSION['loggedin'])) : ?>
         <a href="/ShowSpotter/customer.php">Account Hub</a>
     <?php endif; ?>
     <div class="dropdown">
