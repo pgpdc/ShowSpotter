@@ -9,9 +9,10 @@
 </head>
 
 <body>
-    <?php 
+    <?php
+    require("databaseConnect.php");
     require("../navbar.php"); 
-    include "databaseConnect.php";
+    
     ?>
     <h1>Concessions</h1>
     <h2>Food and Drink Options:</h2>
