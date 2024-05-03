@@ -1,22 +1,20 @@
 <html>
 <head>
-<link rel="stylesheet" href="Styles/customerInfo.css">
+<?php
+    session_start();
+?>
+<link rel="stylesheet" href="StylesCustomer/customerInfo.css">
 </head>
 <body>
     <?php
-    session_start();
     include "databaseConnectBilling.php";
     ?>
     <h1>Enter Payment</h1>
-<form action="checkout.php" method="post">
+    <form action="checkout.php" method="post">
         <p>
             <label for="username">Username:</label>
             <input type="varchar" name="username" id="username">
         </p>
-        <!--<p>
-            <label for="password">Password:</label>
-            <input type="varchar" name="password" id="password">
-        </p>-->
         <p>
             <label for="cardName">Card Name:</label>
             <input type="varchar" name="cardName" id="cardName" minlength="1" required>

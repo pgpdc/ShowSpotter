@@ -1,9 +1,10 @@
 body{
     background-color: rgb(255, 251, 251);
     text-align: center;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: 25px;
 }
+
 h1{
     color:rgb(216, 143, 8);
     background-color: black;
@@ -12,54 +13,59 @@ h1{
     font-size: 65pt;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
 button{
     background-color: orange;
     font-family: fantasy;
     color: black;
     text-align: center;
     font-size: 30px;
-    padding: 15px 30px;
+    padding: 15px 25px;
     border: 1px grey;
     width: 10%;
-    margin:10px;
+    margin:20px;
 }
+
 button:hover{
     color:yellow;
     background-color: darkgoldenrod;
 }
+
 table{
     margin-left: auto;
     margin-right: auto;
     font-size: medium;
+    border:3px solid;
+    border-color: black;
 }
+
 table th{
     text-decoration: underline;
     font-size:23pt;
+    border: 1px solid;
+    border-color: black;
 }
+
 table, th, td{
     font-size: 20pt;
     text-align: center;
+    border: 1px solid black;
+    border-color: black;
 }
-select{
-    color:blue;
-    width:15%;
-    margin:20px;
-    height:5%;
-}
-select[name='customerTime']{
-    color:blue;
-}
+
 input[type='submit']{
-    background-color: rgb(184, 128, 23);
+    font-size: 20pt;
+    background-color: orange;
     font-family: fantasy;
     color: black;
     text-align: center;
-    font-size: 30px;
-    width: 15%;
-    margin:20px;
+    width: 10%;
+    margin:10px;
     height:5%;
+    
 }
+
 input[type='submit']:hover{
-    color:rgb(166, 166, 105);
-    background-color: rgb(122, 115, 98);
+    color:yellow;
+    background-color: darkgoldenrod;
 }

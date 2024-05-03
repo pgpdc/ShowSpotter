@@ -5,13 +5,13 @@ session_start();
 ?>
 
 <head>
-    <link rel="stylesheet" href="Styles/customer.css">
+    <link rel="stylesheet" href="StylesCustomer/customer.css">
 
     <title>Customer</title>
 </head>
 
 <body>
-    <?php include("navbar.php");?>
+    <?php require("../navbar.php"); ?>
     <h1>Customer HomePage</h1>
     <?php
 

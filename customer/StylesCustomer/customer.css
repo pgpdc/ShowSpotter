@@ -4,6 +4,7 @@ body{
      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
      font-size: 40px;
 }
+
 button{
      background-color: orange;
      font-family: fantasy;
@@ -15,6 +16,7 @@ button{
      width: 40%;
      margin:20px;
 }
+
 button:hover{
      color:yellow;
      background-color: darkgoldenrod;
