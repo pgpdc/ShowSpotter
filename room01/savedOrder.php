@@ -11,12 +11,16 @@
 sessionStorage.clear();
 </script>
 
-<?php require("../navbar.php") ?>
+<?php 
+include "databaseConnect.php";
+require("../navbar.php"); 
+
+?>
 
 <h1>Thank You For Your Order!</h1>
 <h2>You can view your order history in your account</h2>
     <?php
-        include "databaseConnect.php";
+        
 
         //Gets time and date for Order
         $dateFound = time();
