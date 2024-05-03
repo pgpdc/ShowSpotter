@@ -17,6 +17,7 @@ h1{
 h2{
     text-decoration: underline;
 }
+
 select{
     width:80px;
     border-radius:40px;
@@ -38,6 +39,7 @@ input[type=submit]{
     background-color: rgb(245, 245, 245);
     padding: 15px 20px;
 }
+
 input[type=submit]:hover{
     color:rgb(164, 214, 164);
 }
