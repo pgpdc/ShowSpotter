@@ -23,22 +23,24 @@ h2{
     text-decoration: underline;
     
 }
+
 h3{
     position:relative;
     left:15px;
 }
+
 h4{
     font-size: 30px;
     position:relative;
     left:15px;
 }
+
 p{
     position:relative;
     left:25px;
 }
 
 select{
-    /*Position ob button*/
     position:relative;
     left:75%;
     border: 3px solid black;
@@ -52,14 +54,10 @@ select{
 }
 
 input[type=submit]{
-    /* Moves Button to the left */
     position:relative;
     left:90%;
-    /*Moves button up some */
     top:15%;
-    /* Width of the button */
     width:150px;
-    
     padding:16px 32px;
     margin: 4px 2px;
     font-size: 25px;
@@ -68,6 +66,7 @@ input[type=submit]{
     background-color: rgb(245, 245, 245);
     padding: 15px 20px;
 }
+
 input[type=submit]:hover{
     color:rgb(5, 104, 5);
 }

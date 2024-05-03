@@ -5,9 +5,9 @@ body{
     font-size: 25px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     position:relative;
-    font-weight:bold;
-    
+    font-weight:bold; 
 }
+
 h1{
     color:rgb(216, 143, 8);
     background-color: black;
@@ -16,12 +16,6 @@ h1{
     font-size: 65pt;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-/*
-h1{
-    text-align: center;
-    color:rgb(249, 215, 153);
-    background-color: black;
-}*/
 
 h2{
     text-decoration: underline;
@@ -36,15 +30,12 @@ select{
     background-color: rgb(245, 245, 245);
     padding: 15px 20px;
 }
+
 input[type=submit]{
-    /* Moves Button to the left */
     position:relative;
     left:90%;
-    /*Moves button up some */
     top:15%;
-    /* Width of the button */
     width:150px;
-
     padding:16px 32px;
     margin: 4px 2px;
     font-size: 25px;
@@ -53,6 +44,7 @@ input[type=submit]{
     background-color: rgb(245, 245, 245);
     padding: 15px 20px;
 }
+
 input[type=submit]:hover{
     color:rgb(5, 104, 5);
 }
