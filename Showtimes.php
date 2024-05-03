@@ -111,16 +111,6 @@ function formatDate(date) {
 }
     </script>
     
-    <script>
-        /*
-        function updateTheater() {
-            var updatedTheater = document.getElementById('theater-dropdown').value;
-            var updatedDate = document.getElementById('DateSelection').value;
-
-            //window.location.href="Showtimes.php?theater=" + updatedTheater + "&date=" + updatedDate;
-            window.location.href = "Showtimes.php?theater=indiana" + "&date=" + updatedDate;
-        } */
-    </script>
 
 
     <!--Movie Listings-->
