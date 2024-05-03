@@ -22,7 +22,9 @@
     <?php if (isset($_SESSION['admin'])) : ?>
         <a href="/ShowSpotter/admin/admin.php">Admin Hub</a>
     <?php elseif (isset($_SESSION['loggedin'])) : ?>
-        <a href="/ShowSpotter/customer/customer.php">Account Hub</a>
+        <?php if ($_SERVER['PHP_SELF'] !== '/ShowSpotter/index.php'): ?>
+            <a href="/ShowSpotter/customer/customer.php">Account Hub</a>
+            <?php endif; ?>
     <?php endif; ?>
     <div class="dropdown">
         <?php if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) : ?>
