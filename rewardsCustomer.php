@@ -4,7 +4,7 @@
 </head>
 <body>
 <?php
-//include_once("navbar.php");
+
 session_start();
 
 include_once("navbar.php");
@@ -29,7 +29,7 @@ if(mysqli_num_rows($queryPointsResult)>0){
 }
 }else{
     ?>
-<h1>Points account created:</h1>
+<h2>Points account created:</h2>
 <?php
 echo "User:".$user."<br>";
 $valNot = 0;

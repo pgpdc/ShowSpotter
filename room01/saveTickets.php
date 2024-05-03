@@ -1,8 +1,6 @@
-<?php 
-session_start()
-?>
 
-<DOCTYPE html>
+
+<!DOCTYPE html>
     <html>
 
     <head>
@@ -30,11 +28,16 @@ session_start()
     </head>
 
     <body>
-        <?php require("../navbar.php"); ?>
+        <?php require("../navbar.php"); 
+       
+        
+        ?>
         <form action="FinalPayment.php" method="post">
             <?php
 
 
+
+            
             $i = 0;
 
             //Array for final cost
@@ -77,7 +80,7 @@ session_start()
             $arrQuantity = array();
             ?>
             <section>
-                <h1>Tickets</h1>
+                <h1>Edit Cart</h1>
                 </table>
                 <br>
                 <label for="ItemO"></label>
@@ -137,9 +140,9 @@ session_start()
                     //Database Array for Item Name and Price
                     //Database Item Name Array
 
-                    const itemNames = sessionStorage.getItem('itemName');
-                    const finalItemNames = JSON.parse(itemNames);
-                    console.log("Database Names" + finalItemNames);
+                    const itemNames = sessionStorage.getItem('itemNameDatabase');
+                    const databaseFoodNames = JSON.parse(itemNames);
+                    console.log("Database Names" + databaseFoodNames);
 
                     //Database Item Cost
                     const itemsValue = sessionStorage.getItem('value');
@@ -172,7 +175,7 @@ session_start()
                     //Calculate Costs
                     const finalItemsArray = [];
                     //DatabASE Count
-                    let lengthDatavalue = finalItemNames.length;
+                    let lengthDatavalue = databaseFoodNames.length;
                     //Cusotmer Count
                     let multiplyDataCustomer = customerFinalARRAYS.length;
                     console.log("LENGTH:" + multiplyDataCustomer + " Database " + lengthDatavalue);
@@ -181,13 +184,14 @@ session_start()
                     var a = 0;
                     var i = 0;
                     for (var loop = 0; loop <= looping; loop++) {
-                        console.log("LOOP FOR THE DATA BASE ITEM Name:" + finalItemNames[i]);
+                        console.log("LOOP FOR THE DATA BASE ITEM Name:" + databaseFoodNames[i]);
                         console.log("LOOP FOR THE DATA BASE ITEM VAL:" + customerFinalARRAYS[i]);
                         console.log("LOOP FOR THE ITEM VAL:" + finalItemValue[a]);
-                        if (finalItemNames[i] == customerFinalARRAYS[a]) {
+                        if (databaseFoodNames[i] == customerFinalARRAYS[a]) {
                             console.log("IF LOOP DATABASE name val" + finalItemValue[i]);
                             console.log("IF LOOP CUSTOMER name val" + customerFinalARRAYS[a]);
                             finalItemsArray.push(finalItemValue[i]);
+                            
                         }
                         i = i + 1;
                         if (i == lengthDatavalue) {
@@ -255,6 +259,17 @@ session_start()
 
                     }
 
+
+
+                    /*
+                    for (var i = 0; i < CticketType.length; i++){
+                        console.log("display final cost"+finalItemsArray[i]);
+                    }*/
+
+
+
+
+
                     function displayChart() {
 
                         var finalItemCost = 0;
@@ -262,6 +277,7 @@ session_start()
                         setTimeout(() => {
                             html += "<thread>";
                             html += "<tr>";
+
                             html += "<td>" + "Quantity/Ticket Type" + "</td>";
                             html += "<td>" + "Item/Seat Number" + "</td>";
                             html += "<td>" + "Delete Row" + "</td>";
@@ -510,6 +526,11 @@ session_start()
                         const itemNamed = sessionStorage.getItem('foodName');
                         const finalItemNames = JSON.parse(itemNamed);
                         console.log(finalItemNames);
+
+                        //Set datbase reading item names
+                        const itemNames = sessionStorage.getItem('itemNameDatabase');
+                        const databaseFoodNames = JSON.parse(itemNames);
+                        console.log("Database Names" + databaseFoodNames);
 
                     }
                 </script>

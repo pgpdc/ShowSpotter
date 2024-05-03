@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+
 
 <!DOCTYPE html>
 <html>
@@ -84,6 +82,18 @@ if(mysqli_num_rows($queryPointsResult)>0){
 
         ?>
         <script>
+
+        const itemNames = sessionStorage.getItem('itemNameDatabase');
+        const finalItemNames = JSON.parse(itemNames);
+        console.log("Database Names" + finalItemNames);
+
+
+
+
+
+
+
+
         //Array for Database item and price
         var money = <?php echo json_encode($money); ?>;
         console.log("Current moeny amount"+money);
@@ -106,7 +116,7 @@ if(mysqli_num_rows($queryPointsResult)>0){
         //Customers Item Name
         const nameItem = sessionStorage.getItem('foodName');
         const ItemNames = JSON.parse(nameItem);
-        console.log(ItemNames);
+        console.log("LINE 119 DUPLICATE ItemNames"+ItemNames);
 
 
 
@@ -127,7 +137,7 @@ if(mysqli_num_rows($queryPointsResult)>0){
         //Setting Database item cost
         const itemValues = JSON.stringify(value);
         sessionStorage.setItem('value', itemValues);
-        console.log("DATA FROM DATABASE itemname"+value);
+        console.log("DATA FROM DATABASE itemname line 140 reading itemName"+itemName);
 
         //Database food price
         var valPrice = <?php echo json_encode($arrFoodPrice); ?>;
@@ -317,12 +327,14 @@ if(mysqli_num_rows($queryPointsResult)>0){
         displayChart();
         var finalC = 0;
         //Had to repeat looping inorder to get final cost to store in another variable
+        if(CticketType != nullTicket){
         for (var i = 0; i < CticketType.length;i++){
             
             finalTicket = Number(finalTicket) + Number(ticketCostArray[i]);
             finalC = Number(finalC) + Number(ticketCostArray[i]);
             console.log("IN LOOP REPEAT:"+finalC);
         }
+    }
         for(var i = 0; i < itemQuantitys.length;i++){
                     if (itemQuantitys[i] != 0){
                     
@@ -347,7 +359,12 @@ if(mysqli_num_rows($queryPointsResult)>0){
         </script>
         <p id="discount"></p>
         <p id="total"></p>
+
+        
+
         <button onclick="addPoints()">Add Points</button>
+
+        <p id="nodiscount"></p>
         <p id="points"></p>
         <p id="pointsLeft"></p>
 
@@ -362,11 +379,16 @@ var points = <?php echo json_encode($points); ?>;
 console.log("Current moeny points"+points);
 discount();
 total();
+
 function discount(){
+
 document.getElementById("discount").innerHTML = "<b>Discount:</b> $"+discountFinal.toFixed(2);
+
+
 }
 function discountA(){
 document.getElementById("discount").innerHTML = "<b>Discount:</b> $"+discountFinal.toFixed(2);
+
 }
 
 function total(){
@@ -374,6 +396,7 @@ document.getElementById("total").innerHTML = "<b>Total Cost:</b> $"+finalC.toFix
 }
 var i = 0;
 function addPoints(){
+    if (Number(finalC) >= 20){
     if (points >= 3){
         var pointsused = 0;
         //var discount = 0;
@@ -395,6 +418,9 @@ function addPoints(){
     }
     var FinalCOSTS = finalC;
     //var remainderMoney = points % 3;
+}else{
+    document.getElementById("nodiscount").innerHTML = "No discount for orders under $20.00"; 
+}
     console.log("Points After Loop:"+points);
     //console.log("Remainder:"+remainderMoney);
     //money = Number(money) + Number(remainderMoney);
@@ -447,7 +473,7 @@ function addPoints(){
         
         require_once('seatreservelib.php');
         //require_once('checkoutForm.php');
-        $user = $_SESSION['userid'];
+        //$user = $_SESSION['userid'];
 
         //SET UP CONNECTION FOR DATABASE
         $servername = "localhost";

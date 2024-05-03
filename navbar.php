@@ -17,7 +17,7 @@
     <?php endif; ?>
     <?php if ($_SERVER['PHP_SELF'] !== '/ShowSpotter/index.php' && isset($_SESSION['theater'])) : ?>
         <a href="/ShowSpotter/room01/concessions.php">Concessions</a>
-        <a href="/ShowSpotter/room01/checkout.php">Checkout</a>
+        <a href="/ShowSpotter/room01/saveTickets.php">Checkout</a>
     <?php endif; ?>
     <?php if (isset($_SESSION['admin'])) : ?>
         <a href="/ShowSpotter/admin/admin.php">Admin Hub</a>

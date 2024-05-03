@@ -78,7 +78,7 @@ if (isset($_POST["submit"])){
 
 <?php
 //Read in database table for items
-$sqlI="SELECT timeV,dateV FROM ordereditems WHERE userid='test8'";
+$sqlI="SELECT timeV,dateV FROM ordereditems WHERE userid='$user'";
 
 $customerItems ="";
 $queryA = $conn->query($sqlI);
@@ -87,7 +87,7 @@ $i = 0;
 foreach($queryA as $row){
   
   $customerItems .= "<option name='{$row["dateV"]}'>{$row["dateV"]}</option>";
-  
+ 
     
 }
 ?>
@@ -144,6 +144,7 @@ foreach($queryPayment as $row){
   
     
 }
+
 ?>
 <!doctype html>
 <!--Shows concession date options-->

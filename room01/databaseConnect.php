@@ -1,4 +1,8 @@
 <?php
+
+    //Add session_start
+    session_start();
+    
     $user = $_SESSION['name'];
     $DATABASE_HOST ='localhost';
     $DATABASE_USER = 'root';

@@ -46,6 +46,9 @@ select{
     margin:20px;
     height:5%;
 }
+select[name='customerTime']{
+    color:blue;
+}
 input[type='submit']{
     background-color: rgb(184, 128, 23);
     font-family: fantasy;

@@ -93,14 +93,9 @@ echo "<table>";
 
 <script>
 
-<<<<<<< HEAD
   function passHide(){
     var a = document.getElementById("hidden");
     console.log("YES");
-=======
-  function passHide() {
-    var a = document.getElementBy("hidden");
->>>>>>> a97f4381c06a13b65d9e9f97464d1a1b6d6ddcac
     if (a.style.display === "none"){
         a.style.display = "block";
     } else {
@@ -231,7 +226,7 @@ function updateBillingInfo(){
     
         $sql = "UPDATE paymentinfo SET name='$name',address='$address',city='$city',state='$state',zipCode='$zipCode',billSame='$billSame' WHERE username='$user'";
         if ($conn->query($sql)===TRUE){
-            echo "yes";
+            //echo "yes";
         }else{
             echo "no";
         }

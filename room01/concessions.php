@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 
 ?>
 
@@ -12,7 +12,9 @@ session_start();
     <title>Checkout Form</title>
     <link rel="stylesheet" href="concessions.css">
     <?php 
-    require("../navbar.php"); ?>
+    require("../navbar.php"); 
+    include "databaseConnect.php";
+    ?>
     <h1>Concessions</h1>
 </head>
 
@@ -283,11 +285,11 @@ session_start();
             //Array for Database item and price
             var foodPrice = <?php echo json_encode($foodPrice); ?>;
             //Seperating to item and price
-            let itemName = Object.keys(foodPrice);
+            let itemNameDatabase = Object.keys(foodPrice);
             let value = Object.values(foodPrice);
             //Setting Database item name
-            const itemNameFinal = JSON.stringify(itemName);
-            sessionStorage.setItem('itemName', itemNameFinal);
+            const itemNameFinal = JSON.stringify(itemNameDatabase);
+            sessionStorage.setItem('itemNameDatabase', itemNameFinal);
             //Setting Database item cost
             const itemValues = JSON.stringify(value);
             sessionStorage.setItem('value', itemValues);
