@@ -112,7 +112,6 @@ unset($_SESSION['theater']); //Leave here to unset the session everytime a user 
         });
         sessionStorage.setItem('addresses', JSON.stringify(addresses));
     } else {
-        // Handle case where 'places' is empty or not found
         console.log('No places found or data is malformed.');
     }
     })
@@ -200,35 +199,5 @@ unset($_SESSION['theater']); //Leave here to unset the session everytime a user 
 
 </script>
 
-
-   <!-- <h2>Choose a theater: </h2>
-    <div class="theater">
-        <h1>
-            <select id="theater-dropdown">
-                <option value="Indiana">Indiana</option>
-                <option value="testing">Testing</option>
-                <option value="option3">Option 3</option>
-                <option value="option4">Option 4</option>
-            </select>
-            <button type="button" id="myButton" onclick="changeTheater()">Submit</button>
-            <script>
-                var web = "ShowTimes.php?theater=indiana";
-                //Default set to Indiana;
-                document.getElementById('theater-dropdown').addEventListener('change', function() {
-                    if (this.value == "Indiana") {
-                        web = "ShowTimes.php?theater=indiana";
-                    }
-                    else if (this.value == "testing") {
-                        web = "ShowTimes.php?theater=testing";
-                    }
-                    else {
-                        alert('Waiting for database');
-                    }
-                });
-
-            </script>
-        </h1>
-
-            -->
 </body>
 </html>
