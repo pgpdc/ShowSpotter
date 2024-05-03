@@ -18,6 +18,10 @@ h2{
     text-decoration: underline;
 }
 
+p{
+    text-align:center;
+    font-size: 30pt;
+}
 select{
     width:80px;
     border-radius:40px;

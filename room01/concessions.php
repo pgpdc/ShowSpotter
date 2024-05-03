@@ -107,6 +107,7 @@
                 //For popcorn
                 $popcorn = "Popcorn";
 
+
                 $stringPrint = $f;
                 $splitCapital = preg_split('/(?=[A-Z])/', $stringPrint);
                 $capital = implode(' ', $splitCapital);
@@ -172,6 +173,45 @@
                     $a = $a + 1;
                 }
             }
+            ?>
+            <h4>Other Items Menu:</h4>
+            <p><?php
+            
+            foreach ($foodPrice as $f => $c) {
+
+                //For drinks
+                $drink = "Drink";
+                //For popcorn
+                $popcorn = "Popcorn";
+
+                $stringPrint = $f;
+                $splitCapital = preg_split('/(?=[A-Z])/', $stringPrint);
+                $capital = implode(' ', $splitCapital);
+                //echo $f;
+                
+                if (!(strpos($stringPrint, $popcorn) !== false) && !(strpos($stringPrint, $drink) !== false)) {
+                    echo "<label for='$f'>How may <b>$f(s)</b>:<br></label>";
+                    echo "<br>";
+                    echo "<b>Cost:</b>$ {$c}";
+                    echo "<br>";
+
+                    echo "<select name='foodVal[$f]'>
+              <option value='0'></option>
+              <option value='1'>1</option>
+              <option value='2'>2</option>
+              <option value='3'>3</option>
+              <option value='4'>4</option>
+              <option value='5'>5</option>
+              <option value='6'>6</option>
+              <option value='7'>7</option>
+              <option value='8'>8</option>
+              <option value='9'>9</option>
+              <option value='10'>10</option>
+                            </select><br>";
+                    $a = $a + 1;
+                }
+            }
+            
 
             ?></p>
  

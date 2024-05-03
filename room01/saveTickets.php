@@ -31,6 +31,7 @@
         <?php 
         require("../navbar.php"); 
         ?>
+        
         <form action="FinalPayment.php" method="post">
         <?php
             $i = 0;
@@ -55,6 +56,7 @@
             ?>
             <section>
                 <h1>Edit Cart</h1>
+                <p id="Empty"></p>
                 <br>
                 <label for="ItemO"></label>
                 <label for="Num"></label>
@@ -102,6 +104,41 @@
                     const finalItemValue = JSON.parse(itemsValue);
                     //finalItemValue.reverse();
                     console.log("DATABASE COST" + finalItemValue);
+
+
+                    //Check and reads file as empty if no items
+                    function readEmpty(){
+                        
+                        document.getElementById("Empty").innerHTML = "Empty Cart";
+                        document.getElementById("Empty").style.textAlign="center";
+                        document.getElementById("Empty").style.fontSize="Large";
+                        window.stop();
+
+                    }
+                    checkEmpty();
+                    function checkEmpty(){
+                    var numTicketCheck = 1;
+                    console.log("Reading to set as null food"+foodName);
+                    console.log("Reading to set as null ticket"+CticketType);
+                    var numFoodCheck = foodName.length;
+                    if(CticketNumber != null){
+                    var numTicketCheck = CticketType.length;
+                    }
+                    console.log("Reading to set as null check"+numFoodCheck);
+                    if((numFoodCheck == 0)&&((CticketNumber==null)||(numTicketCheck == 0))){
+                        readEmpty();
+                        document.getElementById("submit").style.display = "none";
+
+                    
+                   
+                    }
+                }
+
+                    
+
+
+
+
 
                     var a = 0;
                     var count = 0;
@@ -262,7 +299,7 @@
                         costOfItem.splice(i, 1);
                         console.log(itemQ);
                         console.log(foodName);
-
+                        checkEmpty();
                         displayChart();
                     }
 
@@ -327,7 +364,7 @@
                         //Removes Number
                         delete CticketNumber["removeYes"];
                         sessionStorage.setItem('ticketName', JSON.stringify(CticketNumber));
-
+                        checkEmpty();
                         displayChart();
                     }
 
@@ -388,7 +425,7 @@
                 </script>
 
             </section>
-            <input type="submit" onclick="save()" value="Submit">
+            <input id="submit" type="submit" onclick="save()" value="Submit">
         </form>
     </body>
 
