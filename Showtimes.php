@@ -101,6 +101,61 @@ function populateDateDropdown(dropdown, selectedDate) {
         option.selected = true;
     }
     dropdown.appendChild(option);
+
+    var twoDate = new Date(currentDate.getTime() + (2 * 24 * 60 * 60 * 1000));
+    var twoDateString = formatDate(twoDate);
+
+    option = document.createElement('option');
+    option.value = twoDateString;
+    option.textContent = 'Overmorrow (' + twoDateString + ')';
+    if (twoDateString === selectedDate) {
+        option.selected = true;
+    }
+    dropdown.appendChild(option);
+
+    var threeDate = new Date(currentDate.getTime() + (3 * 24 * 60 * 60 * 1000));
+    var threeDateString = formatDate(threeDate);
+
+    option = document.createElement('option');
+    option.value = threeDateString;
+    option.textContent = threeDateString;
+    if (threeDateString === selectedDate) {
+        option.selected = true;
+    }
+    dropdown.appendChild(option);
+
+    var fourDate = new Date(currentDate.getTime() + (4 * 24 * 60 * 60 * 1000));
+    var fourDateString = formatDate(fourDate);
+
+    option = document.createElement('option');
+    option.value = fourDateString;
+    option.textContent = fourDateString;
+    if (fourDateString === selectedDate) {
+        option.selected = true;
+    }
+    dropdown.appendChild(option);
+
+    var fiveDate = new Date(currentDate.getTime() + (5 * 24 * 60 * 60 * 1000));
+    var fiveDateString = formatDate(fiveDate);
+
+    option = document.createElement('option');
+    option.value = fiveDateString;
+    option.textContent = fiveDateString;
+    if (fiveDateString === selectedDate) {
+        option.selected = true;
+    }
+    dropdown.appendChild(option);
+
+    var sixDate = new Date(currentDate.getTime() + (6 * 24 * 60 * 60 * 1000));
+    var sixDateString = formatDate(sixDate);
+
+    option = document.createElement('option');
+    option.value = sixDateString;
+    option.textContent = sixDateString;
+    if (sixDateString === selectedDate) {
+        option.selected = true;
+    }
+    dropdown.appendChild(option);
 }
 
 function formatDate(date) {

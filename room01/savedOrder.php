@@ -11,19 +11,16 @@
 sessionStorage.clear();
 </script>
 
-<nav>
-<div class="brand">ShowSpotter</div>
-<div class="links">
-    <a href="/ShowSpotter/">Home</a>
-    <a href="concessions.php">Concessions</a>
-    <a href="saveTickets.php">Checkout</a>
-</div>
-</nav>
+<?php 
+include "databaseConnect.php";
+require("../navbar.php"); 
+
+?>
 
 <h1>Thank You For Your Order!</h1>
 <h2>You can view your order history in your account</h2>
     <?php
-        include "databaseConnect.php";
+        
 
         //Gets time and date for Order
         $dateFound = time();
