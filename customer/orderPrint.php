@@ -27,7 +27,7 @@
         }
         if ($conn->query($sqlNew)===TRUE){
         }else{
-          echo "ERROR";
+          //echo "ERROR";
         $conn->close();}
            
   ?>

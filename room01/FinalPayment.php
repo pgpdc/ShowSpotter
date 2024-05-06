@@ -373,7 +373,7 @@ if(mysqli_num_rows($queryPointsResult)>0){
 
                 function recordPayment(){
                     ?>
-                    <a href="/ShowSpotter/customerInfo.php">Account Details<a>
+                    <a href="/ShowSpotter/customer/customerInfo.php">Account Details<a>
                     <?php
                 }
                 ?>
